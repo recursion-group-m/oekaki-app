@@ -11,6 +11,7 @@ type lineType = {
 };
 
 const Canvas = () => {
+    // eslint-disable-next-line
     const [tool, setTool] = useState<toolType>("pen");
     const [lines, setLines] = useState<lineType[]>([]);
     const isDrawing = useRef<boolean>(false);
