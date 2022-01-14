@@ -24,12 +24,10 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-        working-directory: app
 
       - name: Build
         run: |
           npm build
-        working-directory: app
 
       # - name: Test
       #   run: |
