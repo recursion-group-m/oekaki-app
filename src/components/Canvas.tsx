@@ -3,6 +3,9 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 
+import IconButton from '@mui/material/IconButton';
+import BrushIcon from '@mui/icons-material/Brush';
+
 type toolType = "pen" | "eraser";
 
 type lineType = {
@@ -47,6 +50,10 @@ const Canvas = () => {
         isDrawing.current = false;
     };
 
+    const handleChangeToolType = (type: toolType) => {
+        setTool(type);
+    }
+
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
             <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
@@ -75,6 +82,12 @@ const Canvas = () => {
                     </Stage>
                 </div>
             </div>
+            <IconButton 
+                aria-label="pen"
+                onClick={() => handleChangeToolType("pen")}
+            >
+                <BrushIcon />
+            </IconButton>
         </div>
     );
 };
