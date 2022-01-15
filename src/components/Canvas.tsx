@@ -23,6 +23,7 @@ const Canvas: React.VFC<Props> = (props) => {
   const { stageRef } = props;
   const [tool, setTool] = useState<toolType>("pen");
   const [lines, setLines] = useState<lineType[]>([]);
+  const [lineWidth, setLineWidth] = useState(5);
   const isDrawing = useRef<boolean>(false);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
@@ -79,7 +80,7 @@ const Canvas: React.VFC<Props> = (props) => {
                   key={shortid.generate()}
                   points={line.points}
                   stroke="#df4b26"
-                  strokeWidth={5}
+                  strokeWidth={lineWidth}
                   tension={0.5}
                   lineCap="round"
                   globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
