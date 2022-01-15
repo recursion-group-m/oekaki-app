@@ -9,46 +9,46 @@ import BrushIcon from '@mui/icons-material/Brush';
 type toolType = "pen" | "eraser";
 
 type lineType = {
-    tool: toolType;
-    points: number[];
+  tool: toolType;
+  points: number[];
 };
 
 const Canvas = () => {
-    // eslint-disable-next-line
-    const [tool, setTool] = useState<toolType>("pen");
-    const [lines, setLines] = useState<lineType[]>([]);
-    const isDrawing = useRef<boolean>(false);
+  // eslint-disable-next-line
+  const [tool, setTool] = useState<toolType>("pen");
+  const [lines, setLines] = useState<lineType[]>([]);
+  const isDrawing = useRef<boolean>(false);
 
-    const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
-        isDrawing.current = true;
-        const stage = event.target.getStage();
-        const point = stage?.getPointerPosition();
-        if (point !== null && point !== undefined) {
-            setLines([...lines, { tool, points: [point.x, point.y] }]);
-        }
-    };
+  const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    isDrawing.current = true;
+    const stage = event.target.getStage();
+    const point = stage?.getPointerPosition();
+    if (point !== null && point !== undefined) {
+      setLines([...lines, { tool, points: [point.x, point.y] }]);
+    }
+  };
 
-    const handleMouseMove = (event: Konva.KonvaEventObject<MouseEvent>) => {
-        // no drawing - skipping
-        if (!isDrawing.current) {
-            return;
-        }
-        const stage = event.target.getStage();
-        const point = stage?.getPointerPosition();
-        const lastLine = lines[lines.length - 1];
-        // add point
-        if (point !== null && point !== undefined) {
-            lastLine.points = lastLine.points.concat([point.x, point.y]);
-        }
+  const handleMouseMove = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    // no drawing - skipping
+    if (!isDrawing.current) {
+      return;
+    }
+    const stage = event.target.getStage();
+    const point = stage?.getPointerPosition();
+    const lastLine = lines[lines.length - 1];
+    // add point
+    if (point !== null && point !== undefined) {
+      lastLine.points = lastLine.points.concat([point.x, point.y]);
+    }
 
-        // replace last
-        lines.splice(lines.length - 1, 1, lastLine);
-        setLines(lines.concat());
-    };
+    // replace last
+    lines.splice(lines.length - 1, 1, lastLine);
+    setLines(lines.concat());
+  };
 
-    const handleMouseUp = () => {
-        isDrawing.current = false;
-    };
+  const handleMouseUp = () => {
+    isDrawing.current = false;
+  };
 
     const handleChangeToolType = (type: toolType) => {
         setTool(type);
