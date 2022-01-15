@@ -50,6 +50,10 @@ const Canvas = () => {
         isDrawing.current = false;
     };
 
+    const handleChangeToolType = (type: toolType) => {
+        setTool(type);
+    }
+
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
             <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
@@ -80,7 +84,7 @@ const Canvas = () => {
             </div>
             <IconButton 
                 aria-label="pen"
-                
+                onClick={() => handleChangeToolType("pen")}
             >
                 <BrushIcon />
             </IconButton>
