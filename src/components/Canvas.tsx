@@ -3,6 +3,9 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 
+import IconButton from '@mui/material/IconButton';
+import BrushIcon from '@mui/icons-material/Brush';
+
 type toolType = "pen" | "eraser";
 
 type lineType = {
@@ -47,30 +50,46 @@ const Canvas = () => {
     isDrawing.current = false;
   };
 
-  return (
-    <Stage
-      onMouseDown={handleMouseDown}
-      onMousemove={handleMouseMove}
-      onMouseup={handleMouseUp}
-      width={720}
-      height={600}
-      style={{ boxShadow: "10px 5px 5px gray" }}
-    >
-      <Layer>
-        {lines.map((line) => (
-          <Line
-            key={shortid.generate()}
-            points={line.points}
-            stroke="#df4b26"
-            strokeWidth={5}
-            tension={0.5}
-            lineCap="round"
-            globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
-          />
-        ))}
-      </Layer>
-    </Stage>
-  );
+    const handleChangeToolType = (type: toolType) => {
+        setTool(type);
+    }
+
+    return (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
+                <div style={{ width: "90%", height: "80%" }}>
+                    <Stage
+                        onMouseDown={handleMouseDown}
+                        onMousemove={handleMouseMove}
+                        onMouseup={handleMouseUp}
+                        width={720}
+                        height={600}
+                        style={{ boxShadow: "10px 5px 5px gray" }}
+                    >
+                        <Layer>
+                            {lines.map((line) => (
+                                <Line
+                                    key={shortid.generate()}
+                                    points={line.points}
+                                    stroke="#df4b26"
+                                    strokeWidth={5}
+                                    tension={0.5}
+                                    lineCap="round"
+                                    globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+                                />
+                            ))}
+                        </Layer>
+                    </Stage>
+                </div>
+            </div>
+            <IconButton 
+                aria-label="pen"
+                onClick={() => handleChangeToolType("pen")}
+            >
+                <BrushIcon />
+            </IconButton>
+        </div>
+    );
 };
 
 export default Canvas;
