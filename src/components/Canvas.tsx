@@ -32,6 +32,7 @@ const Canvas = ({ stageRef }: Props) => {
     }
   };
 
+
   const handleMouseMove = (event: Konva.KonvaEventObject<MouseEvent>) => {
     // no drawing - skipping
     if (!isDrawing.current) {
@@ -50,6 +51,9 @@ const Canvas = ({ stageRef }: Props) => {
     setLines(lines.concat());
   };
 
+  const handleMouseUp = () => {
+    isDrawing.current = false;
+  };
 
     const handleChangeToolType = (type: toolType) => {
         setTool(type);
