@@ -3,6 +3,9 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 type toolType = "pen" | "eraser";
 
 type lineType = {
@@ -75,6 +78,9 @@ const Canvas = () => {
                     </Stage>
                 </div>
             </div>
+            <IconButton aria-label="delete">
+                <DeleteIcon />
+            </IconButton>
         </div>
     );
 };
