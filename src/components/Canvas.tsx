@@ -2,9 +2,11 @@ import Konva from "konva";
 import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
+import Eraser from "./Eraser";
 
 import IconButton from '@mui/material/IconButton';
 import BrushIcon from '@mui/icons-material/Brush';
+import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
 
 type toolType = "pen" | "eraser";
 
@@ -88,6 +90,9 @@ const Canvas = () => {
             >
                 <BrushIcon />
             </IconButton>
+            <Eraser 
+                onClick={() => {handleChangeToolType("eraser")}}
+            />
         </div>
     );
 };
