@@ -10,7 +10,11 @@ type lineType = {
   points: number[];
 };
 
-const Canvas = () => {
+interface Props {
+  stageRef: React.RefObject<Konva.Stage>;
+}
+
+const Canvas = ({ stageRef }: Props) => {
   // eslint-disable-next-line
   const [tool, setTool] = useState<toolType>("pen");
   const [lines, setLines] = useState<lineType[]>([]);
@@ -49,6 +53,7 @@ const Canvas = () => {
 
   return (
     <Stage
+      ref={stageRef}
       onMouseDown={handleMouseDown}
       onMousemove={handleMouseMove}
       onMouseup={handleMouseUp}
