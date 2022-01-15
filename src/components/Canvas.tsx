@@ -91,6 +91,7 @@ const Canvas = () => {
                 <BrushIcon />
             </IconButton>
             <Eraser 
+                aria-label="eraser"
                 onClick={() => {handleChangeToolType("eraser")}}
             />
         </div>
