@@ -2,11 +2,12 @@ import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@m
 import Konva from "konva";
 import React, { useState } from "react";
 
-interface Props {
+type Props = {
   stageRef: React.RefObject<Konva.Stage>;
-}
+};
 
-const FileComboBox = ({ stageRef }: Props) => {
+const FileComboBox: React.VFC<Props> = (props) => {
+  const { stageRef } = props;
   const [comboState, setComboState] = useState<string>("");
   const handleChange = (event: SelectChangeEvent) => {
     setComboState(event.target.value.toString());
