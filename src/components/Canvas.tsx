@@ -100,12 +100,16 @@ const Canvas: React.VFC<Props> = (props) => {
         }}
       />
       <div>
-        <input 
-            type="range" min="1" max="50" step="1" value={lineWidth}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const width = e.target.value;
-                setLineWidth(Number(width));
-            }}
+        <input
+          type="range"
+          min="1"
+          max="50"
+          step="1"
+          value={lineWidth}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const width = e.target.value;
+            setLineWidth(Number(width));
+          }}
         />
       </div>
     </div>
