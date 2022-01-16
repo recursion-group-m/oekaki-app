@@ -99,6 +99,15 @@ const Canvas: React.VFC<Props> = (props) => {
           handleChangeToolType("eraser");
         }}
       />
+      <div>
+        <input 
+            type="range" min="1" max="50" step="1" value={lineWidth}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const width = e.target.value;
+                setLineWidth(Number(width));
+            }}
+        />
+      </div>
     </div>
   );
 };
