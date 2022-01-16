@@ -6,7 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import BrushIcon from "@mui/icons-material/Brush";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
 import Eraser from "./Eraser";
+
 import { LineType, ToolType } from "../types";
+
 
 type Props = {
   stageRef: React.RefObject<Konva.Stage>;
@@ -17,6 +19,7 @@ type Props = {
 const Canvas: React.VFC<Props> = (props) => {
   const { stageRef, lines, setLines } = props;
   const [lineWidth, setLineWidth] = useState(5);
+  const [lineColor, setLineColor] = useState("#000000");
   const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
 
@@ -25,7 +28,7 @@ const Canvas: React.VFC<Props> = (props) => {
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
     if (point !== null && point !== undefined) {
-      setLines([...lines, { tool, points: [point.x, point.y] }]);
+      setLines([...lines, { tool, points: [point.x, point.y], color: lineColor }]);
     }
   };
 
@@ -73,7 +76,7 @@ const Canvas: React.VFC<Props> = (props) => {
                 <Line
                   key={shortid.generate()}
                   points={line.points}
-                  stroke="#df4b26"
+                  stroke={line.color}
                   strokeWidth={lineWidth}
                   tension={0.5}
                   lineCap="round"
@@ -104,6 +107,13 @@ const Canvas: React.VFC<Props> = (props) => {
             const width = e.target.value;
             setLineWidth(Number(width));
           }}
+        />
+      </div>
+      <div>
+        <input
+          type="color"
+          value={lineColor}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
         />
       </div>
     </div>
