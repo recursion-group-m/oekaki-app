@@ -2,28 +2,22 @@ import Konva from "konva";
 import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
-
 import IconButton from "@mui/material/IconButton";
 import BrushIcon from "@mui/icons-material/Brush";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
 import Eraser from "./Eraser";
-
-type toolType = "pen" | "eraser";
-
-type lineType = {
-  tool: toolType;
-  points: number[];
-};
+import { LineType, ToolType } from "../types";
 
 type Props = {
   stageRef: React.RefObject<Konva.Stage>;
+  lines: LineType[];
+  setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
 };
 
 const Canvas: React.VFC<Props> = (props) => {
-  const { stageRef } = props;
-  const [tool, setTool] = useState<toolType>("pen");
-  const [lines, setLines] = useState<lineType[]>([]);
+  const { stageRef, lines, setLines } = props;
   const [lineWidth, setLineWidth] = useState(5);
+  const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
@@ -57,7 +51,7 @@ const Canvas: React.VFC<Props> = (props) => {
     isDrawing.current = false;
   };
 
-  const handleChangeToolType = (type: toolType) => {
+  const handleChangeToolType = (type: ToolType) => {
     setTool(type);
   };
 
