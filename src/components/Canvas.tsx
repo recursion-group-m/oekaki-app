@@ -13,6 +13,7 @@ type toolType = "pen" | "eraser";
 type lineType = {
   tool: toolType;
   points: number[];
+  color: string;
 };
 
 type Props = {
@@ -24,6 +25,7 @@ const Canvas: React.VFC<Props> = (props) => {
   const [tool, setTool] = useState<toolType>("pen");
   const [lines, setLines] = useState<lineType[]>([]);
   const [lineWidth, setLineWidth] = useState(5);
+  const [lineColor, setLineColor] = useState("black");
   const isDrawing = useRef<boolean>(false);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
@@ -31,7 +33,7 @@ const Canvas: React.VFC<Props> = (props) => {
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
     if (point !== null && point !== undefined) {
-      setLines([...lines, { tool, points: [point.x, point.y] }]);
+      setLines([...lines, { tool, points: [point.x, point.y], color: lineColor }]);
     }
   };
 
@@ -79,7 +81,7 @@ const Canvas: React.VFC<Props> = (props) => {
                 <Line
                   key={shortid.generate()}
                   points={line.points}
-                  stroke="#df4b26"
+                  stroke={line.color}
                   strokeWidth={lineWidth}
                   tension={0.5}
                   lineCap="round"
@@ -110,6 +112,13 @@ const Canvas: React.VFC<Props> = (props) => {
             const width = e.target.value;
             setLineWidth(Number(width));
           }}
+        />
+      </div>
+      <div>
+        <input
+          type="color"
+          value={lineColor}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
         />
       </div>
     </div>
