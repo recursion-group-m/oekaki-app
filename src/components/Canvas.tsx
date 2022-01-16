@@ -2,13 +2,11 @@ import Konva from "konva";
 import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
+
+import IconButton from "@mui/material/IconButton";
+import BrushIcon from "@mui/icons-material/Brush";
+// import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
 import Eraser from "./Eraser";
-
-
-import IconButton from '@mui/material/IconButton';
-import BrushIcon from '@mui/icons-material/Brush';
-import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
-
 
 type toolType = "pen" | "eraser";
 
@@ -62,7 +60,6 @@ const Canvas: React.VFC<Props> = (props) => {
     setTool(type);
   };
 
-  
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
       <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
@@ -95,7 +92,12 @@ const Canvas: React.VFC<Props> = (props) => {
       <IconButton aria-label="pen" onClick={() => handleChangeToolType("pen")}>
         <BrushIcon />
       </IconButton>
-      <Eraser aria-label="eraser" onClick={() => {handleChangeToolType("eraser")}}/>
+      <Eraser
+        aria-label="eraser"
+        onClick={() => {
+          handleChangeToolType("eraser");
+        }}
+      />
     </div>
   );
 };
