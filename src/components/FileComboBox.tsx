@@ -1,9 +1,11 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import Konva from "konva";
 import React, { useState } from "react";
+import { LineType } from "../types";
 
 type Props = {
   stageRef: React.RefObject<Konva.Stage>;
+  lines: LineType[];
 };
 
 const FileComboBox: React.VFC<Props> = (props) => {
