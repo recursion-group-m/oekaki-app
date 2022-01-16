@@ -19,7 +19,7 @@ type Props = {
 const Canvas: React.VFC<Props> = (props) => {
   const { stageRef, lines, setLines } = props;
   const [lineWidth, setLineWidth] = useState(5);
-  const [lineColor, setLineColor] = useState("black");
+  const [lineColor, setLineColor] = useState("#000000");
   const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
 
