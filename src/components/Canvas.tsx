@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+import Undo from "./Undo";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
 import LineWidth from "./LineWidth";
@@ -61,6 +62,9 @@ const Canvas: React.VFC<Props> = (props) => {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
       <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
+        <div style={{display: "flex", paddingBottom: "3rem" }}>
+          <Undo />
+        </div>
         <div style={{ width: "90%", height: "80%" }}>
           <Stage
             ref={stageRef}
