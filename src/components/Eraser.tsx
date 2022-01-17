@@ -2,11 +2,11 @@ import IconButton from "@mui/material/IconButton";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import React from "react";
 
-type EraserProps = {
+type Props = {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Eraser: React.VFC<EraserProps> = ({ onClick }) => (
+const Eraser: React.VFC<Props> = ({ onClick }) => (
   <IconButton aria-label="eraser" onClick={onClick}>
     <AutoFixNormalIcon />
   </IconButton>
