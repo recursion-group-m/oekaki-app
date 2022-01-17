@@ -1,10 +1,7 @@
+import React from "react";
 import "./App.css";
-import AppBar from "./components/AppBar";
+import Main from "./pages/Main";
 
-const App = () => (
-    <div>
-        <AppBar />
-    </div>
-);
+const App = () => <Main />;
 
 export default App;

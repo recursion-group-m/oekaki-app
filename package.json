@@ -1,6 +1,7 @@
 {
   "name": "oekaki-app",
   "version": "0.1.0",
+  "homepage": "https://recursion-group-m.github.io/oekaki-app/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -10,17 +11,19 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/eslint": "^8.2.2",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "@types/shortid": "^0.0.29",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "konva": "^8.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-konva": "^17.0.2-5",
     "react-scripts": "5.0.0",
+    "shortid": "^2.2.16",
     "typescript": "^4.5.4",
     "web-vitals": "^2.1.3"
   },
@@ -29,38 +32,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "eslint --ext .js,.ts,.jsx,.tsx --ignore-path .gitignore . && prettier '**/*.{js,jsx,ts,tsx}' --write"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "format": "eslint --ext .js,.ts,.jsx,.tsx --ignore-path .gitignore . && prettier '**/*.{js,jsx,ts,tsx}' --write",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.ts": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.jsx": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.tsx": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.json": [
-      "prettier --write"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "npm run format"
     ]
   },
   "browserslist": {
@@ -76,7 +54,13 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^7.0.4",
