@@ -6,6 +6,7 @@ import shortid from "shortid";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
 import LineWidth from "./LineWidth";
+import ColorPalette from "./ColorPalette";
 
 import { LineType, ToolType } from "../types";
 
@@ -103,9 +104,8 @@ const Canvas: React.VFC<Props> = (props) => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
       />
       <div>
-        <input
-          type="color"
-          value={lineColor}
+        <ColorPalette
+          lineColor={lineColor}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
         />
       </div>
