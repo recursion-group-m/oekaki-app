@@ -2,13 +2,12 @@ import Konva from "konva";
 import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
-import IconButton from "@mui/material/IconButton";
-import BrushIcon from "@mui/icons-material/Brush";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+import Pen from "./Pen";
 import Eraser from "./Eraser";
+import LineWidth from "./LineWidth";
 
 import { LineType, ToolType } from "../types";
-
 
 type Props = {
   stageRef: React.RefObject<Konva.Stage>;
@@ -28,7 +27,7 @@ const Canvas: React.VFC<Props> = (props) => {
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
     if (point !== null && point !== undefined) {
-      setLines([...lines, { tool, points: [point.x, point.y], color: lineColor }]);
+      setLines([...lines, { tool, points: [point.x, point.y], color: lineColor, width: lineWidth }]);
     }
   };
 
@@ -77,7 +76,7 @@ const Canvas: React.VFC<Props> = (props) => {
                   key={shortid.generate()}
                   points={line.points}
                   stroke={line.color}
-                  strokeWidth={lineWidth}
+                  strokeWidth={line.width}
                   tension={0.5}
                   lineCap="round"
                   globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
@@ -87,28 +86,22 @@ const Canvas: React.VFC<Props> = (props) => {
           </Stage>
         </div>
       </div>
-      <IconButton aria-label="pen" onClick={() => handleChangeToolType("pen")}>
-        <BrushIcon />
-      </IconButton>
+      <Pen
+        aria-label="pen"
+        onClick={() => {
+          handleChangeToolType("pen");
+        }}
+      />
       <Eraser
         aria-label="eraser"
         onClick={() => {
           handleChangeToolType("eraser");
         }}
       />
-      <div>
-        <input
-          type="range"
-          min="1"
-          max="50"
-          step="1"
-          value={lineWidth}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const width = e.target.value;
-            setLineWidth(Number(width));
-          }}
-        />
-      </div>
+      <LineWidth
+        width={lineWidth}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
+      />
       <div>
         <input
           type="color"
