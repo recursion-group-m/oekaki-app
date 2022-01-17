@@ -27,7 +27,7 @@ const Canvas: React.VFC<Props> = (props) => {
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
     if (point !== null && point !== undefined) {
-      setLines([...lines, { tool, points: [point.x, point.y], color: lineColor }]);
+      setLines([...lines, { tool, points: [point.x, point.y], color: lineColor, width: lineWidth }]);
     }
   };
 
@@ -76,7 +76,7 @@ const Canvas: React.VFC<Props> = (props) => {
                   key={shortid.generate()}
                   points={line.points}
                   stroke={line.color}
-                  strokeWidth={lineWidth}
+                  strokeWidth={line.width}
                   tension={0.5}
                   lineCap="round"
                   globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
@@ -106,8 +106,8 @@ const Canvas: React.VFC<Props> = (props) => {
           step="1"
           value={lineWidth}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const width = e.target.value;
-            setLineWidth(Number(width));
+            const width = +e.target.value;
+            setLineWidth(width);
           }}
         />
       </div>
