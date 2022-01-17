@@ -5,6 +5,7 @@ import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
 import Pen from "./Pen";
 import Eraser from "./Eraser";
+import LineWidth from "./LineWidth";
 
 import { LineType, ToolType } from "../types";
 
@@ -97,19 +98,10 @@ const Canvas: React.VFC<Props> = (props) => {
           handleChangeToolType("eraser");
         }}
       />
-      <div>
-        <input
-          type="range"
-          min="1"
-          max="50"
-          step="1"
-          value={lineWidth}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const width = +e.target.value;
-            setLineWidth(width);
-          }}
-        />
-      </div>
+      <LineWidth
+        width={lineWidth}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
+      />
       <div>
         <input
           type="color"
