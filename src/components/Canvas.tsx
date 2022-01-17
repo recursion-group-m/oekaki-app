@@ -8,7 +8,6 @@ import Eraser from "./Eraser";
 
 import { LineType, ToolType } from "../types";
 
-
 type Props = {
   stageRef: React.RefObject<Konva.Stage>;
   lines: LineType[];
@@ -86,7 +85,7 @@ const Canvas: React.VFC<Props> = (props) => {
           </Stage>
         </div>
       </div>
-      <Pen 
+      <Pen
         aria-label="pen"
         onClick={() => {
           handleChangeToolType("pen");
