@@ -23,6 +23,8 @@ const Canvas: React.VFC<Props> = (props) => {
   const [lineColor, setLineColor] = useState("#000000");
   const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
+  const [history, setHistory] = useState<LineType[]>([]);
+  const [historyStep, setHistoryStep] = useState(0);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
     isDrawing.current = true;
@@ -53,6 +55,9 @@ const Canvas: React.VFC<Props> = (props) => {
 
   const handleMouseUp = () => {
     isDrawing.current = false;
+    setHistory(lines.slice(0, historyStep + 1));
+    setLines(lines.slice(0, historyStep + 1));
+    setHistoryStep(historyStep + 1);
   };
 
   const handleChangeToolType = (type: ToolType) => {
@@ -60,10 +65,11 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   const handleUndo = () => {
-    if (lines.length === 0) {
+    if (historyStep === 0) {
       return;
     }
-    setLines(lines.slice(0, lines.length - 1));
+    setHistoryStep(historyStep - 1);
+    setLines(lines.slice(0, historyStep - 1));
   };
 
   return (
