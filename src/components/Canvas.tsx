@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+import { ConstructionOutlined } from "@mui/icons-material";
 import Undo from "./Undo";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
@@ -59,11 +60,18 @@ const Canvas: React.VFC<Props> = (props) => {
     setTool(type);
   };
 
+  const handleUndo = () => {
+    if (lines.length === 0) {
+      return;
+    }
+    setLines(lines.slice(0, lines.length - 1));
+  };
+
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
       <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
-        <div style={{display: "flex", paddingBottom: "3rem" }}>
-          <Undo />
+        <div style={{ display: "flex", alignItems: "center", paddingBottom: "3rem" }}>
+          <Undo onClick={handleUndo} />
         </div>
         <div style={{ width: "90%", height: "80%" }}>
           <Stage
