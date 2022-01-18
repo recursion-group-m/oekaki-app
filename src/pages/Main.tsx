@@ -1,9 +1,9 @@
-import { Modal, Box, Typography, Button } from "@mui/material";
 import Konva from "konva";
 import React, { useEffect, useRef, useState } from "react";
 import AppBar from "../components/AppBar";
 import Canvas from "../components/Canvas";
 import FileComboBox from "../components/FileComboBox";
+import ResumeModal from "../components/ResumeModal";
 import { LineType } from "../types";
 
 type stageType = Konva.Stage;
@@ -21,6 +21,10 @@ const Main = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const onClick = () => {
+    setLines(JSON.parse(savedJsonStringData) as LineType[]);
+    setConfirmationState(false);
+  };
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -30,64 +34,11 @@ const Main = () => {
           <FileComboBox stageRef={stageRef} lines={lines} />
           <div style={{ width: "90%", height: "80%" }}>
             <Canvas stageRef={stageRef} lines={lines} setLines={setLines} />
-            <Modal
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              open={confirmationState}
-              onClose={() => setConfirmationState(false)}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "white",
-                  margin: 3,
-                  padding: 3,
-                }}
-              >
-                <Typography variant="h5" component="h5">
-                  前回保存した状態から再開しますか?
-                </Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "50%",
-                    margin: 3,
-                    padding: 3,
-                  }}
-                >
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      setLines(JSON.parse(savedJsonStringData) as LineType[]);
-                      setConfirmationState(false);
-                    }}
-                  >
-                    はい
-                  </Button>
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      localStorage.removeItem("Oekaki App");
-                      setConfirmationState(false);
-                    }}
-                  >
-                    いいえ
-                  </Button>
-                </Box>
-              </Box>
-            </Modal>
+            <ResumeModal
+              confirmationState={confirmationState}
+              setConfirmationState={setConfirmationState}
+              onClick={onClick}
+            />
           </div>
         </div>
       </div>
