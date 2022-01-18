@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
-import { ConstructionOutlined } from "@mui/icons-material";
 import Undo from "./Undo";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
