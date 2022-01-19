@@ -4,6 +4,7 @@ import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
 import Undo from "./Undo";
+import Redo from "./Redo";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
 import LineWidth from "./LineWidth";
@@ -60,9 +61,7 @@ const Canvas: React.VFC<Props> = (props) => {
     setHistoryStep(historyStep + 1);
   };
 
-  const handleChangeToolType = (type: ToolType) => {
-    setTool(type);
-  };
+  const handleChangeToolType = (type: ToolType) => setTool(type);
 
   const handleUndo = () => {
     if (historyStep === 0) {
@@ -72,11 +71,19 @@ const Canvas: React.VFC<Props> = (props) => {
     setLines(history[historyStep - 1]);
   };
 
+  const handleRedo = () => {
+    if (historyStep === history.length - 1) return;
+
+    setHistoryStep(historyStep + 1);
+    setLines(history[historyStep + 1]);
+  };
+
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
       <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
         <div style={{ display: "flex", alignItems: "center", paddingBottom: "3rem" }}>
           <Undo onClick={handleUndo} />
+          <Redo onClick={handleRedo} />
         </div>
         <div style={{ width: "90%", height: "80%" }}>
           <Stage
