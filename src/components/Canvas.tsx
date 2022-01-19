@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+import Undo from "./Undo";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
 import LineWidth from "./LineWidth";
@@ -22,6 +23,8 @@ const Canvas: React.VFC<Props> = (props) => {
   const [lineColor, setLineColor] = useState("#000000");
   const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
+  const [history, setHistory] = useState<LineType[][]>([[]]);
+  const [historyStep, setHistoryStep] = useState(0);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
     isDrawing.current = true;
@@ -52,15 +55,29 @@ const Canvas: React.VFC<Props> = (props) => {
 
   const handleMouseUp = () => {
     isDrawing.current = false;
+    setLines(lines.slice(0, historyStep + 1));
+    setHistory(history.slice(0, historyStep + 1).concat([lines.slice()]));
+    setHistoryStep(historyStep + 1);
   };
 
   const handleChangeToolType = (type: ToolType) => {
     setTool(type);
   };
 
+  const handleUndo = () => {
+    if (historyStep === 0) {
+      return;
+    }
+    setHistoryStep(historyStep - 1);
+    setLines(history[historyStep - 1]);
+  };
+
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
       <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
+        <div style={{ display: "flex", alignItems: "center", paddingBottom: "3rem" }}>
+          <Undo onClick={handleUndo} />
+        </div>
         <div style={{ width: "90%", height: "80%" }}>
           <Stage
             ref={stageRef}
