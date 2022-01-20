@@ -123,7 +123,12 @@ const Canvas: React.VFC<Props> = (props) => {
           handleChangeToolType("eraser");
         }}
       />
-      <Dropper aria-label="dropper" />
+      <Dropper
+        aria-label="dropper"
+        onClick={() => {
+          handleChangeToolType("dropper");
+        }}
+      />
       <LineWidth
         width={lineWidth}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
