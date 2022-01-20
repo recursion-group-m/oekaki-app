@@ -29,6 +29,7 @@ const Canvas: React.VFC<Props> = (props) => {
   const [historyStep, setHistoryStep] = useState(0);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    if (tool === "dropper") return;
     isDrawing.current = true;
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
@@ -78,6 +79,12 @@ const Canvas: React.VFC<Props> = (props) => {
     setLines(history[historyStep + 1]);
   };
 
+  const handleChangePalette = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    if (tool !== "dropper") return;
+    const stroke = String(event.target.getAttr("stroke"));
+    setLineColor(stroke);
+  };
+
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
       <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
@@ -105,6 +112,7 @@ const Canvas: React.VFC<Props> = (props) => {
                   tension={0.5}
                   lineCap="round"
                   globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+                  onMouseDown={handleChangePalette}
                 />
               ))}
             </Layer>
