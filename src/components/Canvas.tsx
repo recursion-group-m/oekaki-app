@@ -7,6 +7,7 @@ import Undo from "./Undo";
 import Redo from "./Redo";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
+import Dropper from "./Dropper";
 import LineWidth from "./LineWidth";
 import ColorPalette from "./ColorPalette";
 
@@ -122,6 +123,7 @@ const Canvas: React.VFC<Props> = (props) => {
           handleChangeToolType("eraser");
         }}
       />
+      <Dropper aria-label="dropper" />
       <LineWidth
         width={lineWidth}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
