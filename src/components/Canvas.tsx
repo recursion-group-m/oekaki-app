@@ -64,9 +64,8 @@ const Canvas: React.VFC<Props> = (props) => {
   const handleChangeToolType = (type: ToolType) => setTool(type);
 
   const handleUndo = () => {
-    if (historyStep === 0) {
-      return;
-    }
+    if (historyStep === 0) return;
+
     setHistoryStep(historyStep - 1);
     setLines(history[historyStep - 1]);
   };
