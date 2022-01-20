@@ -57,6 +57,7 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   const handleMouseUp = () => {
+    if (tool === "dropper") return;
     isDrawing.current = false;
     setLines(lines.slice(0, historyStep + 1));
     setHistory(history.slice(0, historyStep + 1).concat([lines.slice()]));
