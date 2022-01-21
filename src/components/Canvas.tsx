@@ -7,6 +7,7 @@ import Undo from "./Undo";
 import Redo from "./Redo";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
+import Dropper from "./Dropper";
 import LineWidth from "./LineWidth";
 import ColorPalette from "./ColorPalette";
 
@@ -28,6 +29,9 @@ const Canvas: React.VFC<Props> = (props) => {
   const [historyStep, setHistoryStep] = useState(0);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    if (tool === "dropper") {
+      return;
+    }
     isDrawing.current = true;
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
@@ -55,6 +59,9 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   const handleMouseUp = () => {
+    if (tool === "dropper") {
+      return;
+    }
     isDrawing.current = false;
     setLines(lines.slice(0, historyStep + 1));
     setHistory(history.slice(0, historyStep + 1).concat([lines.slice()]));
@@ -67,15 +74,26 @@ const Canvas: React.VFC<Props> = (props) => {
     if (historyStep === 0) {
       return;
     }
+
     setHistoryStep(historyStep - 1);
     setLines(history[historyStep - 1]);
   };
 
   const handleRedo = () => {
-    if (historyStep === history.length - 1) return;
+    if (historyStep === history.length - 1) {
+      return;
+    }
 
     setHistoryStep(historyStep + 1);
     setLines(history[historyStep + 1]);
+  };
+
+  const handleChangePalette = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    if (tool !== "dropper") {
+      return;
+    }
+    const stroke = String(event.target.getAttr("stroke"));
+    setLineColor(stroke);
   };
 
   return (
@@ -105,6 +123,7 @@ const Canvas: React.VFC<Props> = (props) => {
                   tension={0.5}
                   lineCap="round"
                   globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+                  onMouseDown={handleChangePalette}
                 />
               ))}
             </Layer>
@@ -112,15 +131,18 @@ const Canvas: React.VFC<Props> = (props) => {
         </div>
       </div>
       <Pen
-        aria-label="pen"
         onClick={() => {
           handleChangeToolType("pen");
         }}
       />
       <Eraser
-        aria-label="eraser"
         onClick={() => {
           handleChangeToolType("eraser");
+        }}
+      />
+      <Dropper
+        onClick={() => {
+          handleChangeToolType("dropper");
         }}
       />
       <LineWidth
