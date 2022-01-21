@@ -131,19 +131,16 @@ const Canvas: React.VFC<Props> = (props) => {
         </div>
       </div>
       <Pen
-        aria-label="pen"
         onClick={() => {
           handleChangeToolType("pen");
         }}
       />
       <Eraser
-        aria-label="eraser"
         onClick={() => {
           handleChangeToolType("eraser");
         }}
       />
       <Dropper
-        aria-label="dropper"
         onClick={() => {
           handleChangeToolType("dropper");
         }}
