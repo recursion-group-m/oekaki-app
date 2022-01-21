@@ -29,7 +29,9 @@ const Canvas: React.VFC<Props> = (props) => {
   const [historyStep, setHistoryStep] = useState(0);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
-    if (tool === "dropper") return;
+    if (tool === "dropper") {
+      return;
+    }
     isDrawing.current = true;
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
@@ -57,7 +59,9 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   const handleMouseUp = () => {
-    if (tool === "dropper") return;
+    if (tool === "dropper") {
+      return;
+    }
     isDrawing.current = false;
     setLines(lines.slice(0, historyStep + 1));
     setHistory(history.slice(0, historyStep + 1).concat([lines.slice()]));
@@ -67,21 +71,27 @@ const Canvas: React.VFC<Props> = (props) => {
   const handleChangeToolType = (type: ToolType) => setTool(type);
 
   const handleUndo = () => {
-    if (historyStep === 0) return;
+    if (historyStep === 0) {
+      return;
+    }
 
     setHistoryStep(historyStep - 1);
     setLines(history[historyStep - 1]);
   };
 
   const handleRedo = () => {
-    if (historyStep === history.length - 1) return;
+    if (historyStep === history.length - 1) {
+      return;
+    }
 
     setHistoryStep(historyStep + 1);
     setLines(history[historyStep + 1]);
   };
 
   const handleChangePalette = (event: Konva.KonvaEventObject<MouseEvent>) => {
-    if (tool !== "dropper") return;
+    if (tool !== "dropper") {
+      return;
+    }
     const stroke = String(event.target.getAttr("stroke"));
     setLineColor(stroke);
   };
