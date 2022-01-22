@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import Konva from "konva";
+import moment from "moment";
 import React, { useState } from "react";
 import { LineType } from "../types";
 
@@ -19,7 +20,7 @@ const FileComboBox: React.VFC<Props> = (props) => {
         if (url !== undefined) {
           const a = document.createElement("a");
           a.href = url;
-          a.download = "image.png";
+          a.download = `image_${moment().format("YYYYMMDDhhmmss")}.png`;
           a.click();
           setComboState("");
         }

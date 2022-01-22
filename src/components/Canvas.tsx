@@ -3,8 +3,11 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+import Undo from "./Undo";
+import Redo from "./Redo";
 import Pen from "./Pen";
 import Eraser from "./Eraser";
+import Dropper from "./Dropper";
 import LineWidth from "./LineWidth";
 import ColorPalette from "./ColorPalette";
 
@@ -22,8 +25,13 @@ const Canvas: React.VFC<Props> = (props) => {
   const [lineColor, setLineColor] = useState("#000000");
   const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
+  const [history, setHistory] = useState<LineType[][]>([[]]);
+  const [historyStep, setHistoryStep] = useState(0);
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    if (tool === "dropper") {
+      return;
+    }
     isDrawing.current = true;
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
@@ -51,16 +59,50 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   const handleMouseUp = () => {
+    if (tool === "dropper") {
+      return;
+    }
     isDrawing.current = false;
+    setLines(lines.slice(0, historyStep + 1));
+    setHistory(history.slice(0, historyStep + 1).concat([lines.slice()]));
+    setHistoryStep(historyStep + 1);
   };
 
-  const handleChangeToolType = (type: ToolType) => {
-    setTool(type);
+  const handleChangeToolType = (type: ToolType) => setTool(type);
+
+  const handleUndo = () => {
+    if (historyStep === 0) {
+      return;
+    }
+
+    setHistoryStep(historyStep - 1);
+    setLines(history[historyStep - 1]);
+  };
+
+  const handleRedo = () => {
+    if (historyStep === history.length - 1) {
+      return;
+    }
+
+    setHistoryStep(historyStep + 1);
+    setLines(history[historyStep + 1]);
+  };
+
+  const handleChangePalette = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    if (tool !== "dropper") {
+      return;
+    }
+    const stroke = String(event.target.getAttr("stroke"));
+    setLineColor(stroke);
   };
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
       <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
+        <div style={{ display: "flex", alignItems: "center", paddingBottom: "3rem" }}>
+          <Undo onClick={handleUndo} />
+          <Redo onClick={handleRedo} />
+        </div>
         <div style={{ width: "90%", height: "80%" }}>
           <Stage
             ref={stageRef}
@@ -81,6 +123,7 @@ const Canvas: React.VFC<Props> = (props) => {
                   tension={0.5}
                   lineCap="round"
                   globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+                  onMouseDown={handleChangePalette}
                 />
               ))}
             </Layer>
@@ -88,15 +131,18 @@ const Canvas: React.VFC<Props> = (props) => {
         </div>
       </div>
       <Pen
-        aria-label="pen"
         onClick={() => {
           handleChangeToolType("pen");
         }}
       />
       <Eraser
-        aria-label="eraser"
         onClick={() => {
           handleChangeToolType("eraser");
+        }}
+      />
+      <Dropper
+        onClick={() => {
+          handleChangeToolType("dropper");
         }}
       />
       <LineWidth
