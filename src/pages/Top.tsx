@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import PaintImage from "../images/drawing.svg";
 
 const theme = createTheme({
   typography: {
@@ -37,8 +38,7 @@ const Top = () => (
       <Grid
         item
         xs={12}
-        sm={8}
-        md={5}
+        sm={6}
         sx={{
           height: "100%",
         }}
@@ -67,12 +67,12 @@ const Top = () => (
               },
             }}
           >
-            はじめる
+            はじめる！
           </Button>
         </Box>
       </Grid>
-      <Grid item xs={false} sm={4} md={7}>
-        imgおくところ
+      <Grid item sx={{ display: { xs: "none", sm: "block" } }} sm={6}>
+        <img style={{ width: "100%", height: "100%" }} src={PaintImage} alt="making art" />
       </Grid>
     </Grid>
   </ThemeProvider>
