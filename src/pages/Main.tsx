@@ -1,11 +1,7 @@
 import Konva from "konva";
 import React, { useEffect, useRef, useState } from "react";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import AppBar from "../components/AppBar";
 import Canvas from "../components/Canvas";
-import FileComboBox from "../components/FileComboBox";
-import ResumeModal from "../components/ResumeModal";
 import { LineType } from "../types";
 
 type stageType = Konva.Stage;
