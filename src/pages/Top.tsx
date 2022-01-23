@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
 
 const theme = createTheme({
   typography: {
@@ -15,6 +16,7 @@ const theme = createTheme({
     },
     secondary: {
       main: "#6c63ff",
+      dark: "#6a5acd",
     },
   },
 });
@@ -54,7 +56,19 @@ const Top = () => (
             <Typography variant="h2">Oekaki App</Typography>
             <Typography>みんなで遊ぼう！お絵かきアプリ！</Typography>
           </Box>
-          <Button>はじめる</Button>
+          <Button
+            variant="contained"
+            size="large"
+            endIcon={<SendIcon />}
+            sx={{
+              background: theme.palette.secondary.main,
+              "&:hover": {
+                background: theme.palette.secondary.dark,
+              },
+            }}
+          >
+            はじめる
+          </Button>
         </Box>
       </Grid>
       <Grid item xs={false} sm={4} md={7}>
