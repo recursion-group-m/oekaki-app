@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -42,19 +43,21 @@ const Top = () => (
             <Typography variant="h2">Oekaki App</Typography>
             <Typography>みんなで遊ぼう！お絵かきアプリ！</Typography>
           </Box>
-          <Button
-            variant="contained"
-            size="large"
-            endIcon={<SendIcon />}
-            sx={{
-              background: theme.palette.secondary.main,
-              "&:hover": {
-                background: theme.palette.secondary.dark,
-              },
-            }}
-          >
-            はじめる！
-          </Button>
+          <Link to="/main" style={{ textDecoration: "none" }}>
+            <Button
+              variant="contained"
+              size="large"
+              endIcon={<SendIcon />}
+              sx={{
+                background: theme.palette.secondary.main,
+                "&:hover": {
+                  background: theme.palette.secondary.dark,
+                },
+              }}
+            >
+              はじめる！
+            </Button>
+          </Link>
         </Box>
       </Grid>
       <Grid item sm={6}>
