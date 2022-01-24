@@ -5,7 +5,6 @@ import Main from "./pages/Main";
 
 const App = () => (
   <div style={{ textAlign: "center", height: "100%" }}>
-    <Top />
     <Routes>
       <Route path="/" element={<Top />} />
       <Route path="/main" element={<Main />} />
