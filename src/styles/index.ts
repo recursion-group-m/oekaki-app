@@ -5,8 +5,8 @@ const theme = createTheme({
     fontFamily: ["Neonderthaw", "cursive"].join(","),
   },
   palette: {
-    success: {
-      main: "#eafdb4",
+    background: {
+      default: "#eafdb4",
     },
     secondary: {
       main: "#6c63ff",

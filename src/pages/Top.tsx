@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
+import CssBaseLine from "@mui/material/CssBaseline";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -11,6 +12,7 @@ import theme from "../styles";
 
 const Top = () => (
   <ThemeProvider theme={theme}>
+    <CssBaseLine />
     <Grid
       container
       component="main"
@@ -19,7 +21,6 @@ const Top = () => (
         alignItems: { sm: "center" },
         height: "100vh",
         p: 3,
-        background: theme.palette.success.main,
       }}
     >
       <Grid
