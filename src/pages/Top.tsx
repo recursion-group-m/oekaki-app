@@ -28,8 +28,8 @@ const Top = () => (
       container
       component="main"
       display="flex"
-      alignItems="center"
       sx={{
+        alignItems: { sm: "center" },
         height: "100vh",
         p: 3,
         background: theme.palette.warning.main,
@@ -40,14 +40,14 @@ const Top = () => (
         xs={12}
         sm={6}
         sx={{
-          height: "100%",
+          height: { xs: "50%", sm: "100%" },
         }}
       >
         <Box
           sx={{
             height: "100%",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: { xs: "flex-end", sm: "center" },
             flexDirection: "column",
             alignItems: "center",
           }}
@@ -71,8 +71,8 @@ const Top = () => (
           </Button>
         </Box>
       </Grid>
-      <Grid item sx={{ display: { xs: "none", sm: "block" } }} sm={6}>
-        <img style={{ width: "100%", height: "100%" }} src={PaintImage} alt="making art" />
+      <Grid item sm={6}>
+        <img style={{ width: "100%", height: "100%" }} src={PaintImage} alt="drawing img" />
       </Grid>
     </Grid>
   </ThemeProvider>
