@@ -29,6 +29,11 @@ type Props = {
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
 };
 
+function getScreenSize() {
+  const s = window.parent.screen.width;
+  return s;
+}
+
 const Canvas: React.VFC<Props> = (props) => {
   const { stageRef, lines, setLines } = props;
   const [lineWidth, setLineWidth] = useState(5);
@@ -37,6 +42,7 @@ const Canvas: React.VFC<Props> = (props) => {
   const isDrawing = useRef<boolean>(false);
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
+  const screen = getScreenSize();
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool === "dropper") {
@@ -108,98 +114,102 @@ const Canvas: React.VFC<Props> = (props) => {
 
   return (
     <Stack direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
-      <Grid sm={8} sx={{ borderRight: 1, height: "100%", justifyContent: "center", alignItems: "center" }} container>
-        <Grid item>
-          <Stage
-            ref={stageRef}
-            onMouseDown={handleMouseDown}
-            onMousemove={handleMouseMove}
-            onMouseup={handleMouseUp}
-            width={1000}
-            height={600}
-            style={{ boxShadow: "10px 5px 5px gray", border: "1px solid" }}
-          >
-            <Layer>
-              {lines.map((line) => (
-                <Line
-                  key={shortid.generate()}
-                  points={line.points}
-                  stroke={line.color}
-                  strokeWidth={line.width}
-                  tension={0.5}
-                  lineCap="round"
-                  globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
-                  onMouseDown={handleChangePalette}
+      <Grid sm={8} item>
+        <Grid sx={{ borderRight: 1, height: "100%", justifyContent: "center", alignItems: "center" }} container>
+          <Grid item>
+            <Stage
+              ref={stageRef}
+              onMouseDown={handleMouseDown}
+              onMousemove={handleMouseMove}
+              onMouseup={handleMouseUp}
+              width={1000}
+              height={600}
+              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid" }}
+            >
+              <Layer>
+                {lines.map((line) => (
+                  <Line
+                    key={shortid.generate()}
+                    points={line.points}
+                    stroke={line.color}
+                    strokeWidth={line.width}
+                    tension={0.5}
+                    lineCap="round"
+                    globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+                    onMouseDown={handleChangePalette}
+                  />
+                ))}
+              </Layer>
+            </Stage>
+          </Grid>
+          <Grid sm={10} sx={{ border: 1 }} item>
+            <Grid sx={{ justifyContent: "space-evenly", alignItems: "center" }} container>
+              <Grid item>
+                <Pen
+                  onClick={() => {
+                    handleChangeToolType("pen");
+                  }}
                 />
-              ))}
-            </Layer>
-          </Stage>
-        </Grid>
-        <Grid sm={10} sx={{ border: 1 }} item>
-          <Grid sx={{ justifyContent: "space-evenly", alignItems: "center" }} container>
-            <Grid item>
-              <Pen
-                onClick={() => {
-                  handleChangeToolType("pen");
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <Eraser
-                onClick={() => {
-                  handleChangeToolType("eraser");
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <Dropper
-                onClick={() => {
-                  handleChangeToolType("dropper");
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <LineWidth
-                width={lineWidth}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
-              />
-            </Grid>
+              </Grid>
+              <Grid item>
+                <Eraser
+                  onClick={() => {
+                    handleChangeToolType("eraser");
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <Dropper
+                  onClick={() => {
+                    handleChangeToolType("dropper");
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <LineWidth
+                  width={lineWidth}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
+                />
+              </Grid>
 
-            <Grid item>
-              <div>
-                <ColorPalette
-                  lineColor={lineColor}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-                />
-              </div>
-            </Grid>
-            <Grid item>
-              <div>
-                <Undo onClick={handleUndo} />
-                <Redo onClick={handleRedo} />
-              </div>
+              <Grid item>
+                <div>
+                  <ColorPalette
+                    lineColor={lineColor}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
+                  />
+                </div>
+              </Grid>
+              <Grid item>
+                <div>
+                  <Undo onClick={handleUndo} />
+                  <Redo onClick={handleRedo} />
+                </div>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
 
-      <Grid sm={3} sx={{ borderLeft: 1, justifyContent: "center", height: "100%" }} container>
-        <Grid sm={12} sx={{ height: "100%" }} item>
-          <Paper elevation={3} sx={{ bgcolor: "#FFFBD5", color: "#5D639E" }}>
-            <h1>??????</h1>
-          </Paper>
+      <Grid sm={3} item>
+        <Grid sx={{ borderLeft: 1, justifyContent: "center", height: "100%" }} container>
+          <Grid sm={12} sx={{ height: "100%" }} item>
+            <Paper elevation={3} sx={{ bgcolor: "#FFFBD5", color: "#5D639E" }}>
+              <h1>??????</h1>
+            </Paper>
 
-          <Grid sx={{ height: "90%", justifyContent: "start", px: "2rem" }} container>
-            <Grid sm={8} sx={{ height: "90%" }} item>
-              <Paper elevation={2} sx={{ borderRadius: "10%", height: "3rem" }}>
-                <h3>answers</h3>
-              </Paper>
-            </Grid>
-            <Grid sm={12} item>
-              <Input style={{ color: "#5D639E" }} placeholder="答えは6文字" sx={{ px: "1rem" }} />
-              <Fab color="secondary">
-                <NavigationIcon />
-              </Fab>
+            <Grid sx={{ height: "90%", justifyContent: "start", px: "2rem" }} container>
+              <Grid sm={8} sx={{ height: "90%" }} item>
+                <Paper elevation={2} sx={{ borderRadius: "10%", height: "3rem" }}>
+                  <h3>answers</h3>
+                </Paper>
+              </Grid>
+              <Grid sm={12} item>
+                <Input style={{ color: "#5D639E" }} placeholder="答えは6文字" sx={{ px: "1rem" }} />
+                <Fab color="secondary">
+                  <NavigationIcon />
+                </Fab>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
