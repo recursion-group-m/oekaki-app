@@ -19,7 +19,7 @@ const Top = () => (
         alignItems: { sm: "center" },
         height: "100vh",
         p: 3,
-        background: theme.palette.warning.main,
+        background: theme.palette.success.main,
       }}
     >
       <Grid
