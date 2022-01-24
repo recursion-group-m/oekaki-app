@@ -29,11 +29,6 @@ type Props = {
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
 };
 
-function getScreenSize() {
-  const s = window.parent.screen.width;
-  return s;
-}
-
 const Canvas: React.VFC<Props> = (props) => {
   const { stageRef, lines, setLines } = props;
   const [lineWidth, setLineWidth] = useState(5);
@@ -42,7 +37,6 @@ const Canvas: React.VFC<Props> = (props) => {
   const isDrawing = useRef<boolean>(false);
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
-  const screen = getScreenSize();
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool === "dropper") {
