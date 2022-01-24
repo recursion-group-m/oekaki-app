@@ -1,26 +1,12 @@
 import React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import PaintImage from "../images/drawing.svg";
-
-const theme = createTheme({
-  typography: {
-    fontFamily: ["Neonderthaw", "cursive"].join(","),
-  },
-  palette: {
-    warning: {
-      main: "#eafdb4",
-    },
-    secondary: {
-      main: "#6c63ff",
-      dark: "#6a5acd",
-    },
-  },
-});
+import theme from "../styles";
 
 const Top = () => (
   <ThemeProvider theme={theme}>
