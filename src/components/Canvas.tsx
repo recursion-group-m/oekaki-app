@@ -1,5 +1,5 @@
 import Konva from "konva";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
@@ -9,6 +9,7 @@ import Input from "@mui/material/Input";
 import Paper from "@mui/material/Paper";
 import Fab from "@mui/material/Fab";
 import NavigationIcon from "@mui/icons-material/Navigation";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 import Undo from "./Undo";
 import Redo from "./Redo";
@@ -102,6 +103,15 @@ const Canvas: React.VFC<Props> = (props) => {
     const stroke = String(event.target.getAttr("stroke"));
     setLineColor(stroke);
   };
+
+  // const client = new W3CWebSocket("ws://127.0.0.1:8000/api/ws/6d29cf32-6268-44fb-a9df-7d017bca5706/");
+  const client = new W3CWebSocket("ws://127.0.0.1:8000/ws/room2");
+
+  useEffect(() => {
+    client.onopen = () => {
+      console.log("WebSocket Client Connected");
+    };
+  }, []);
 
   return (
     <Stack direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
