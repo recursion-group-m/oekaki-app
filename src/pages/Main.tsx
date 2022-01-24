@@ -2,8 +2,6 @@ import Konva from "konva";
 import React, { useEffect, useRef, useState } from "react";
 import AppBar from "../components/AppBar";
 import Canvas from "../components/Canvas";
-import FileComboBox from "../components/FileComboBox";
-import ResumeModal from "../components/ResumeModal";
 import { LineType } from "../types";
 
 type stageType = Konva.Stage;
@@ -29,19 +27,14 @@ const Main = () => {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <AppBar />
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
-        <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
-          <FileComboBox stageRef={stageRef} lines={lines} />
-          <div style={{ width: "90%", height: "80%" }}>
-            <Canvas stageRef={stageRef} lines={lines} setLines={setLines} />
-            <ResumeModal
-              confirmationState={confirmationState}
-              setConfirmationState={setConfirmationState}
-              onClick={onClick}
-            />
-          </div>
-        </div>
-      </div>
+      {/* <FileComboBox stageRef={stageRef} lines={lines} /> */}
+      <Canvas stageRef={stageRef} lines={lines} setLines={setLines} />
+      {/* <ResumeModal
+          confirmationState={confirmationState}
+          setConfirmationState={setConfirmationState}
+          onClick={onClick}
+        />
+      */}
     </div>
   );
 };
