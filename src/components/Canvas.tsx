@@ -196,7 +196,7 @@ const Canvas: React.VFC<Props> = (props) => {
               </Paper>
             </Grid>
             <Grid sm={12} item>
-              <Input style={{ color: "#5D639E" }} placeholder="答えは6文字" />
+              <Input style={{ color: "#5D639E" }} placeholder="答えは6文字" sx={{ px: "1rem" }} />
               <Fab color="secondary">
                 <NavigationIcon />
               </Fab>
