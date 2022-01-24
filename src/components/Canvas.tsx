@@ -29,18 +29,21 @@ type Props = {
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
 };
 
-function getScreenSize() {
-  const s = window.parent.screen;
-  const w = s.width;
-  const result = { height: s.height, width: s.width };
+function getStageWidth() {
+  const w = window.parent.screen.width;
   if (w < 600) {
-    result.height *= 0.7;
-    result.width *= 0.95;
-    return result;
+    return w * 0.95;
   }
-  result.height *= 0.6;
-  result.width *= 0.6;
-  return result;
+  return w * 0.6;
+}
+
+function getStageHeight() {
+  const w = window.parent.screen.width;
+  const h = window.parent.screen.height;
+  if (w < 600) {
+    return h * 0.7;
+  }
+  return h * 0.6;
 }
 
 const Canvas: React.VFC<Props> = (props) => {
@@ -51,9 +54,8 @@ const Canvas: React.VFC<Props> = (props) => {
   const isDrawing = useRef<boolean>(false);
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
-  const sHeight = getScreenSize().height;
-  const sWidth = getScreenSize().width;
-  console.log({ sHeight, sWidth });
+  const stageWidth = getStageWidth();
+  const stageHeight = getStageHeight();
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool === "dropper") {
@@ -125,17 +127,26 @@ const Canvas: React.VFC<Props> = (props) => {
 
   return (
     <Stack direction={{ xs: "column", sm: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
-      <Grid sm={8} item>
-        <Grid sx={{ borderRight: 1, height: "100%", justifyContent: "center", alignItems: "center" }} container>
+      <Grid sm={9} item>
+        <Grid
+          sx={{
+            borderRight: 1,
+            borderColor: "grey.400",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          container
+        >
           <Grid item>
             <Stage
               ref={stageRef}
               onMouseDown={handleMouseDown}
               onMousemove={handleMouseMove}
               onMouseup={handleMouseUp}
-              width={sWidth}
-              height={sHeight}
-              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid" }}
+              width={stageWidth}
+              height={stageHeight}
+              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5" }}
             >
               <Layer>
                 {lines.map((line) => (
@@ -153,7 +164,7 @@ const Canvas: React.VFC<Props> = (props) => {
               </Layer>
             </Stage>
           </Grid>
-          <Grid sm={10} sx={{ border: 1 }} item>
+          <Grid sm={10} item>
             <Grid sx={{ justifyContent: "space-evenly", alignItems: "center" }} container>
               <Grid item>
                 <Pen
@@ -203,7 +214,7 @@ const Canvas: React.VFC<Props> = (props) => {
       </Grid>
 
       <Grid sm={3} item>
-        <Grid sx={{ borderLeft: 1, justifyContent: "center", height: "100%" }} container>
+        <Grid sx={{ justifyContent: "center", height: "100%" }} container>
           <Grid sm={12} sx={{ height: "100%" }} item>
             <Paper elevation={3} sx={{ bgcolor: "#FFFBD5", color: "#5D639E" }}>
               <h1>??????</h1>
