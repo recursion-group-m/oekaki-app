@@ -30,8 +30,17 @@ type Props = {
 };
 
 function getScreenSize() {
-  const s = window.parent.screen.width;
-  return s;
+  const s = window.parent.screen;
+  const w = s.width;
+  const result = { height: s.height, width: s.width };
+  if (w < 600) {
+    result.height *= 0.7;
+    result.width *= 0.95;
+    return result;
+  }
+  result.height *= 0.6;
+  result.width *= 0.6;
+  return result;
 }
 
 const Canvas: React.VFC<Props> = (props) => {
@@ -42,7 +51,9 @@ const Canvas: React.VFC<Props> = (props) => {
   const isDrawing = useRef<boolean>(false);
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
-  const screen = getScreenSize();
+  const sHeight = getScreenSize().height;
+  const sWidth = getScreenSize().width;
+  console.log({ sHeight, sWidth });
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool === "dropper") {
@@ -113,7 +124,7 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Stack direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
+    <Stack direction={{ xs: "column", sm: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
       <Grid sm={8} item>
         <Grid sx={{ borderRight: 1, height: "100%", justifyContent: "center", alignItems: "center" }} container>
           <Grid item>
@@ -122,8 +133,8 @@ const Canvas: React.VFC<Props> = (props) => {
               onMouseDown={handleMouseDown}
               onMousemove={handleMouseMove}
               onMouseup={handleMouseUp}
-              width={1000}
-              height={600}
+              width={sWidth}
+              height={sHeight}
               style={{ boxShadow: "10px 5px 5px gray", border: "1px solid" }}
             >
               <Layer>
