@@ -105,7 +105,7 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   // const client = new W3CWebSocket("ws://127.0.0.1:8000/api/ws/6d29cf32-6268-44fb-a9df-7d017bca5706/");
-  const client = new W3CWebSocket("ws://127.0.0.1:8000/ws/room2");
+  const client = new W3CWebSocket("ws://127.0.0.1:8000/ws/fb6c42a5-cf8b-498f-8a75-721531930807");
 
   useEffect(() => {
     client.onopen = () => {
