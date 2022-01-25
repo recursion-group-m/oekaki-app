@@ -5,11 +5,9 @@ import App from "./App";
 
 import "./index.css";
 
-const ROUTER_BASENAME = process.env.NODE_ENV === "development" ? "/" : "/oekaki-app";
-
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename={ROUTER_BASENAME}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <App />
     </BrowserRouter>
   </React.StrictMode>,

@@ -26,6 +26,23 @@ type Props = {
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
 };
 
+function getStageWidth(): number {
+  const w = window.parent.screen.width;
+  if (w < 600) {
+    return w * 0.95;
+  }
+  return w * 0.6;
+}
+
+function getStageHeight(): number {
+  const w = window.parent.screen.width;
+  const h = window.parent.screen.height;
+  if (w < 600) {
+    return h * 0.7;
+  }
+  return h * 0.6;
+}
+
 const Canvas: React.VFC<Props> = (props) => {
   const { stageRef, lines, setLines } = props;
   const [lineWidth, setLineWidth] = useState(5);
@@ -34,6 +51,8 @@ const Canvas: React.VFC<Props> = (props) => {
   const isDrawing = useRef<boolean>(false);
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
+  const stageWidth = getStageWidth();
+  const stageHeight = getStageHeight();
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool === "dropper") {
@@ -104,18 +123,27 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Stack direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
-      <Grid sm={8} item>
-        <Grid sx={{ borderRight: 1, height: "100%", justifyContent: "center", alignItems: "center" }} container>
+    <Stack direction={{ xs: "column", sm: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
+      <Grid sm={9} item>
+        <Grid
+          sx={{
+            borderRight: 1,
+            borderColor: "grey.400",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          container
+        >
           <Grid item>
             <Stage
               ref={stageRef}
               onMouseDown={handleMouseDown}
               onMousemove={handleMouseMove}
               onMouseup={handleMouseUp}
-              width={1000}
-              height={600}
-              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid" }}
+              width={stageWidth}
+              height={stageHeight}
+              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5" }}
             >
               <Layer>
                 {lines.map((line) => (
@@ -133,7 +161,7 @@ const Canvas: React.VFC<Props> = (props) => {
               </Layer>
             </Stage>
           </Grid>
-          <Grid sm={10} sx={{ border: 1 }} item>
+          <Grid sm={10} item>
             <Grid sx={{ justifyContent: "space-evenly", alignItems: "center" }} container>
               <Grid item>
                 <Pen
@@ -183,13 +211,13 @@ const Canvas: React.VFC<Props> = (props) => {
       </Grid>
 
       <Grid sm={3} item>
-        <Grid sx={{ borderLeft: 1, justifyContent: "center", height: "100%" }} container>
+        <Grid sx={{ justifyContent: "center", height: "100%" }} container>
           <Grid sm={12} sx={{ height: "100%" }} item>
             <Paper elevation={3} sx={{ bgcolor: "#FFFBD5", color: "#5D639E" }}>
               <h1>??????</h1>
             </Paper>
 
-            <Grid sx={{ height: "90%", justifyContent: "start", px: "2rem" }} container>
+            <Grid sx={{ height: "90%", justifyContent: "center", px: "2rem" }} container>
               <Grid sm={8} sx={{ height: "90%" }} item>
                 <Paper elevation={2} sx={{ borderRadius: "10%", height: "3rem" }}>
                   <h3>answers</h3>
