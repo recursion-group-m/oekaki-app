@@ -1,6 +1,5 @@
 import Konva from "konva";
 import React, { useRef, useState } from "react";
-import AppBar from "../components/AppBar";
 import Canvas from "../components/Canvas";
 import { LineType } from "../types";
 
@@ -26,7 +25,6 @@ const Main = () => {
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <AppBar />
       {/* <FileComboBox stageRef={stageRef} lines={lines} /> */}
       <Canvas stageRef={stageRef} lines={lines} setLines={setLines} />
       {/* <ResumeModal
