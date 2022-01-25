@@ -9,7 +9,15 @@ const AppBar = () => (
     <Box sx={{ flexGrow: 1 }}>
       <MuiAppBar position="static" style={{ backgroundColor: theme.palette.success.main }}>
         <Toolbar>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1, color: "black" }}>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              color: "black",
+              display: "flex",
+            }}
+          >
             Oekaki App
           </Typography>
         </Toolbar>
