@@ -26,7 +26,7 @@ type Props = {
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
 };
 
-function getStageWidth() {
+function getStageWidth(): number {
   const w = window.parent.screen.width;
   if (w < 600) {
     return w * 0.95;
@@ -34,7 +34,7 @@ function getStageWidth() {
   return w * 0.6;
 }
 
-function getStageHeight() {
+function getStageHeight(): number {
   const w = window.parent.screen.width;
   const h = window.parent.screen.height;
   if (w < 600) {
@@ -217,7 +217,7 @@ const Canvas: React.VFC<Props> = (props) => {
               <h1>??????</h1>
             </Paper>
 
-            <Grid sx={{ height: "90%", justifyContent: "start", px: "2rem" }} container>
+            <Grid sx={{ height: "90%", justifyContent: "center", px: "2rem" }} container>
               <Grid sm={8} sx={{ height: "90%" }} item>
                 <Paper elevation={2} sx={{ borderRadius: "10%", height: "3rem" }}>
                   <h3>answers</h3>
