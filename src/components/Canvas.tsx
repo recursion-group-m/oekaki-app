@@ -3,6 +3,13 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
+import Input from "@mui/material/Input";
+import Paper from "@mui/material/Paper";
+import Fab from "@mui/material/Fab";
+import NavigationIcon from "@mui/icons-material/Navigation";
+
 import Undo from "./Undo";
 import Redo from "./Redo";
 import Pen from "./Pen";
@@ -19,6 +26,23 @@ type Props = {
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
 };
 
+function getStageWidth(): number {
+  const w = window.parent.screen.width;
+  if (w < 600) {
+    return w * 0.95;
+  }
+  return w * 0.6;
+}
+
+function getStageHeight(): number {
+  const w = window.parent.screen.width;
+  const h = window.parent.screen.height;
+  if (w < 600) {
+    return h * 0.7;
+  }
+  return h * 0.6;
+}
+
 const Canvas: React.VFC<Props> = (props) => {
   const { stageRef, lines, setLines } = props;
   const [lineWidth, setLineWidth] = useState(5);
@@ -27,6 +51,8 @@ const Canvas: React.VFC<Props> = (props) => {
   const isDrawing = useRef<boolean>(false);
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
+  const stageWidth = getStageWidth();
+  const stageHeight = getStageHeight();
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool === "dropper") {
@@ -97,65 +123,117 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: 1000, height: 800 }}>
-      <div style={{ display: "flex", flexDirection: "column", width: "80%", height: "80%" }}>
-        <div style={{ display: "flex", alignItems: "center", paddingBottom: "3rem" }}>
-          <Undo onClick={handleUndo} />
-          <Redo onClick={handleRedo} />
-        </div>
-        <div style={{ width: "90%", height: "80%" }}>
-          <Stage
-            ref={stageRef}
-            onMouseDown={handleMouseDown}
-            onMousemove={handleMouseMove}
-            onMouseup={handleMouseUp}
-            width={720}
-            height={600}
-            style={{ boxShadow: "10px 5px 5px gray" }}
-          >
-            <Layer>
-              {lines.map((line) => (
-                <Line
-                  key={shortid.generate()}
-                  points={line.points}
-                  stroke={line.color}
-                  strokeWidth={line.width}
-                  tension={0.5}
-                  lineCap="round"
-                  globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
-                  onMouseDown={handleChangePalette}
+    <Stack direction={{ xs: "column", sm: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
+      <Grid sm={9} item>
+        <Grid
+          sx={{
+            borderRight: 1,
+            borderColor: "grey.400",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          container
+        >
+          <Grid item>
+            <Stage
+              ref={stageRef}
+              onMouseDown={handleMouseDown}
+              onMousemove={handleMouseMove}
+              onMouseup={handleMouseUp}
+              width={stageWidth}
+              height={stageHeight}
+              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5" }}
+            >
+              <Layer>
+                {lines.map((line) => (
+                  <Line
+                    key={shortid.generate()}
+                    points={line.points}
+                    stroke={line.color}
+                    strokeWidth={line.width}
+                    tension={0.5}
+                    lineCap="round"
+                    globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+                    onMouseDown={handleChangePalette}
+                  />
+                ))}
+              </Layer>
+            </Stage>
+          </Grid>
+          <Grid sm={10} item>
+            <Grid sx={{ justifyContent: "space-evenly", alignItems: "center" }} container>
+              <Grid item>
+                <Pen
+                  onClick={() => {
+                    handleChangeToolType("pen");
+                  }}
                 />
-              ))}
-            </Layer>
-          </Stage>
-        </div>
-      </div>
-      <Pen
-        onClick={() => {
-          handleChangeToolType("pen");
-        }}
-      />
-      <Eraser
-        onClick={() => {
-          handleChangeToolType("eraser");
-        }}
-      />
-      <Dropper
-        onClick={() => {
-          handleChangeToolType("dropper");
-        }}
-      />
-      <LineWidth
-        width={lineWidth}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
-      />
-      <div>
-        <ColorPalette
-          lineColor={lineColor}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-        />
-      </div>
-    </div>
+              </Grid>
+              <Grid item>
+                <Eraser
+                  onClick={() => {
+                    handleChangeToolType("eraser");
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <Dropper
+                  onClick={() => {
+                    handleChangeToolType("dropper");
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <LineWidth
+                  width={lineWidth}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
+                />
+              </Grid>
+
+              <Grid item>
+                <div>
+                  <ColorPalette
+                    lineColor={lineColor}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
+                  />
+                </div>
+              </Grid>
+              <Grid item>
+                <div>
+                  <Undo onClick={handleUndo} />
+                  <Redo onClick={handleRedo} />
+                </div>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Grid sm={3} item>
+        <Grid sx={{ justifyContent: "center", height: "100%" }} container>
+          <Grid sm={12} sx={{ height: "100%" }} item>
+            <Paper elevation={3} sx={{ bgcolor: "#FFFBD5", color: "#5D639E" }}>
+              <h1>??????</h1>
+            </Paper>
+
+            <Grid sx={{ height: "90%", justifyContent: "center", px: "2rem" }} container>
+              <Grid sm={8} sx={{ height: "90%" }} item>
+                <Paper elevation={2} sx={{ borderRadius: "10%", height: "3rem" }}>
+                  <h3>answers</h3>
+                </Paper>
+              </Grid>
+              <Grid sm={12} item>
+                <Input style={{ color: "#5D639E" }} placeholder="答えは6文字" sx={{ px: "1rem" }} />
+                <Fab color="secondary">
+                  <NavigationIcon />
+                </Fab>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Stack>
   );
 };
 
