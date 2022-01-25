@@ -9,9 +9,11 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import PaintImage from "../images/drawing.svg";
 import theme from "../styles";
+import AppBar from "../components/AppBar";
 
 const Top = () => (
   <ThemeProvider theme={theme}>
+    <AppBar />
     <CssBaseLine />
     <Grid
       container

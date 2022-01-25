@@ -7,7 +7,7 @@ import theme from "../styles";
 const AppBar = () => (
   <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
-      <MuiAppBar position="static" style={{ backgroundColor: theme.palette.success.main }}>
+      <MuiAppBar position="fixed" style={{ backgroundColor: theme.palette.success.main }}>
         <Toolbar>
           <Typography
             variant="h5"
