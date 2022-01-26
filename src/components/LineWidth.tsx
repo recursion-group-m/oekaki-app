@@ -7,7 +7,7 @@ type Props = {
 };
 
 const LineWidth: React.VFC<Props> = ({ width, onChange }) => (
-  <Slider value={width} defaultValue={20} min={1} max={100} step={1} valueLabelDisplay="auto" onChange={onChange} />
+  <Slider value={width} min={1} max={40} step={1} valueLabelDisplay="auto" onChange={onChange} />
 );
 
 export default LineWidth;
