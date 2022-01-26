@@ -219,41 +219,42 @@ const Canvas: React.VFC<Props> = (props) => {
       </Grid>
 
       <Grid sm={3} item>
-        <Grid sx={{ justifyContent: "center", height: "100%" }} container>
-          <Grid sm={12} sx={{ height: "100%" }} item>
+        <Stack sx={{ height: "100%", pr: "2rem" }}>
+          <Box>
             <Paper sx={{ bgcolor: theme.palette.background.default, color: "#5D639E" }}>
               <h1>??????</h1>
             </Paper>
-
-            <Grid sx={{ height: "90%", justifyContent: "center", px: "2rem" }} container>
-              <Grid sm={12} sx={{ height: "90%", overflow: "auto", bgcolor: "white" }} item>
-                <Paper elevation={3} sx={{ height: "3rem" }}>
-                  <h3>answers</h3>
-                </Paper>
-              </Grid>
-              <Stack direction="row">
-                <FormControl>
-                  <InputLabel>ひらがな６文字</InputLabel>
-                  <Input id="my-input" aria-describedby="my-helper-text" />
-                  <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
-                </FormControl>
-                <Box sx={{ display: "flex", alignItems: "center", pl: "1rem" }}>
-                  <Button
-                    sx={{
-                      bgcolor: theme.palette.secondary.main,
-                      color: "white",
-                      "&:hover": { color: theme.palette.secondary.dark },
-                    }}
-                    variant="outlined"
-                    startIcon={<SendIcon />}
-                  >
-                    Send
-                  </Button>
-                </Box>
-              </Stack>
-            </Grid>
-          </Grid>
-        </Grid>
+          </Box>
+          <Box sx={{ height: "70%", overflow: "auto", bgcolor: "white", mt: "2rem", display: "flex", p: "1rem" }}>
+            <Box>
+              <Paper elevation={1} sx={{ px: "1rem", py: "1px" }}>
+                <h3>answers</h3>
+              </Paper>
+            </Box>
+          </Box>
+          <Box sx={{ pt: "2rem", display: "flex", justifyContent: "center" }}>
+            <Stack direction="row">
+              <FormControl>
+                <InputLabel>ひらがな６文字</InputLabel>
+                <Input id="my-input" aria-describedby="my-helper-text" />
+                <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
+              </FormControl>
+              <Box sx={{ display: "flex", alignItems: "center", pl: "1rem" }}>
+                <Button
+                  sx={{
+                    bgcolor: theme.palette.secondary.main,
+                    color: "white",
+                    "&:hover": { color: theme.palette.secondary.dark },
+                  }}
+                  variant="outlined"
+                  startIcon={<SendIcon />}
+                >
+                  Send
+                </Button>
+              </Box>
+            </Stack>
+          </Box>
+        </Stack>
       </Grid>
     </Stack>
   );
