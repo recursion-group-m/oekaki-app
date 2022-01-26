@@ -137,8 +137,6 @@ const Canvas: React.VFC<Props> = (props) => {
       <Grid sm={9} item>
         <Grid
           sx={{
-            borderRight: 1,
-            borderColor: "grey.400",
             height: "100%",
             justifyContent: "center",
             alignItems: "center",
@@ -223,12 +221,12 @@ const Canvas: React.VFC<Props> = (props) => {
       <Grid sm={3} item>
         <Grid sx={{ justifyContent: "center", height: "100%" }} container>
           <Grid sm={12} sx={{ height: "100%" }} item>
-            <Paper elevation={3} sx={{ bgcolor: theme.palette.background.default, color: "#5D639E" }}>
+            <Paper sx={{ bgcolor: theme.palette.background.default, color: "#5D639E" }}>
               <h1>??????</h1>
             </Paper>
 
             <Grid sx={{ height: "90%", justifyContent: "center", px: "2rem" }} container>
-              <Grid sm={8} sx={{ height: "90%", overflow: "auto" }} item>
+              <Grid sm={12} sx={{ height: "90%", overflow: "auto", bgcolor: "white" }} item>
                 <Paper elevation={3} sx={{ height: "3rem" }}>
                   <h3>answers</h3>
                 </Paper>
