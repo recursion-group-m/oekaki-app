@@ -28,7 +28,7 @@ const Lobby = () => (
         xs={12}
         sm={6}
         sx={{
-          height: { xs: "75%", sm: "100%" },
+          height: { xs: "80%", sm: "100%" },
         }}
       >
         <Box
@@ -37,8 +37,17 @@ const Lobby = () => (
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection: "column",
           }}
         >
+          <Box
+            sx={{
+              pb: 2,
+              display: { xs: "block", sm: "none" },
+            }}
+          >
+            <Typography variant="h5">Oekaki App</Typography>
+          </Box>
           <UserList />
         </Box>
       </Grid>
@@ -50,7 +59,7 @@ const Lobby = () => (
         alignItems="center"
         flexDirection="column"
         sx={{
-          height: { xs: "25%", sm: "100%" },
+          height: { xs: "20%", sm: "100%" },
           width: "100%",
         }}
       >

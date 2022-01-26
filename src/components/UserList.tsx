@@ -7,7 +7,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 const UserList = () => (
   <List
     sx={{
-      height: "100%",
+      height: { xs: "90%", sm: "100%" },
       width: "90%",
       borderRadius: "1rem",
       bgcolor: "background.paper",
