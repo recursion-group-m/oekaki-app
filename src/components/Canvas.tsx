@@ -3,12 +3,21 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
-import Paper from "@mui/material/Paper";
-import Fab from "@mui/material/Fab";
-import NavigationIcon from "@mui/icons-material/Navigation";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+
+import theme from "../styles";
 
 import Undo from "./Undo";
 import Redo from "./Redo";
@@ -123,13 +132,14 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Stack direction={{ xs: "column", sm: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
+    <Stack
+      direction={{ xs: "column", sm: "row" }}
+      sx={{ justifyContent: "space-between", minHeight: "100%", bgcolor: theme.palette.background.default }}
+    >
       <Grid sm={9} item>
         <Grid
           sx={{
-            borderRight: 1,
-            borderColor: "grey.400",
-            height: "100%",
+            minHeight: "100%",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -143,7 +153,7 @@ const Canvas: React.VFC<Props> = (props) => {
               onMouseup={handleMouseUp}
               width={stageWidth}
               height={stageHeight}
-              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5" }}
+              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
             >
               <Layer>
                 {lines.map((line) => (
@@ -210,28 +220,60 @@ const Canvas: React.VFC<Props> = (props) => {
         </Grid>
       </Grid>
 
-      <Grid sm={3} item>
-        <Grid sx={{ justifyContent: "center", height: "100%" }} container>
-          <Grid sm={12} sx={{ height: "100%" }} item>
-            <Paper elevation={3} sx={{ bgcolor: "#FFFBD5", color: "#5D639E" }}>
-              <h1>??????</h1>
-            </Paper>
-
-            <Grid sx={{ height: "90%", justifyContent: "center", px: "2rem" }} container>
-              <Grid sm={8} sx={{ height: "90%" }} item>
-                <Paper elevation={2} sx={{ borderRadius: "10%", height: "3rem" }}>
-                  <h3>answers</h3>
-                </Paper>
-              </Grid>
-              <Grid sm={12} item>
-                <Input style={{ color: "#5D639E" }} placeholder="答えは6文字" sx={{ px: "1rem" }} />
-                <Fab color="secondary">
-                  <NavigationIcon />
-                </Fab>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+      <Grid sm={3} sx={{ minHeight: "100%", pt: "1rem" }} item>
+        <Stack sx={{ height: "100%", px: "2rem" }}>
+          <Box>
+            <Typography variant="h2" color={theme.palette.secondary.main}>
+              ??????
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              height: "70%",
+              overflow: "auto",
+              bgcolor: "white",
+              mt: "2rem",
+              display: "flex",
+              p: "1rem",
+              borderRadius: "2%",
+            }}
+          >
+            <Box>
+              <Card sx={{ border: 1, borderColor: theme.palette.secondary.main }}>
+                <CardContent>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    koky
+                  </Typography>
+                  <Typography variant="h5" component="div">
+                    answer
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+          </Box>
+          <Box sx={{ pt: "2rem", display: "flex", justifyContent: "center" }}>
+            <Stack direction="row">
+              <FormControl>
+                <InputLabel>ひらがな６文字</InputLabel>
+                <Input id="my-input" aria-describedby="my-helper-text" />
+                <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
+              </FormControl>
+              <Box sx={{ display: "flex", alignItems: "center", pl: "1rem" }}>
+                <Button
+                  sx={{
+                    bgcolor: theme.palette.secondary.main,
+                    color: "white",
+                    "&:hover": { color: theme.palette.secondary.dark },
+                  }}
+                  variant="outlined"
+                  startIcon={<SendIcon />}
+                >
+                  Send
+                </Button>
+              </Box>
+            </Stack>
+          </Box>
+        </Stack>
       </Grid>
     </Stack>
   );
