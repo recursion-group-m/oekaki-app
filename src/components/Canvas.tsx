@@ -164,44 +164,49 @@ const Canvas: React.VFC<Props> = (props) => {
               </Layer>
             </Stage>
           </Box>
-          <Box sx={{ pt: 5 }}>
-            <Stack direction="row">
-              <Box>
-                <Pen
-                  onClick={() => {
-                    handleChangeToolType("pen");
-                  }}
-                />
-              </Box>
-              <Box>
-                <Eraser
-                  onClick={() => {
-                    handleChangeToolType("eraser");
-                  }}
-                />
-              </Box>
-              <Box>
-                <Dropper
-                  onClick={() => {
-                    handleChangeToolType("dropper");
-                  }}
-                />
-              </Box>
-              <Box>
+          <Box sx={{ pt: 5, width: "70%" }}>
+            <Stack>
+              <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
+                <Box>
+                  <Pen
+                    onClick={() => {
+                      handleChangeToolType("pen");
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Eraser
+                    onClick={() => {
+                      handleChangeToolType("eraser");
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Dropper
+                    onClick={() => {
+                      handleChangeToolType("dropper");
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <ColorPalette
+                    lineColor={lineColor}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
+                  />
+                </Box>
+                <Box>
+                  <Undo onClick={handleUndo} />
+                  <Redo onClick={handleRedo} />
+                </Box>
+              </Stack>
+              <Box sx={{ width: "30%" }}>
                 <LineWidth
                   width={lineWidth}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
+                  onChange={(event: Event, value: number | number[], activeThumb: number) => {
+                    const currValue = (event.target as HTMLInputElement).value;
+                    setLineWidth(Number(currValue));
+                  }}
                 />
-              </Box>
-              <Box>
-                <ColorPalette
-                  lineColor={lineColor}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-                />
-              </Box>
-              <Box>
-                <Undo onClick={handleUndo} />
-                <Redo onClick={handleRedo} />
               </Box>
             </Stack>
           </Box>
