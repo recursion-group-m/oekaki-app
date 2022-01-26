@@ -130,7 +130,10 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Stack direction={{ xs: "column", sm: "row" }} sx={{ justifyContent: "space-between", height: "95%" }}>
+    <Stack
+      direction={{ xs: "column", sm: "row" }}
+      sx={{ justifyContent: "space-between", height: "100%", bgcolor: theme.palette.background.default }}
+    >
       <Grid sm={9} item>
         <Grid
           sx={{
@@ -150,7 +153,7 @@ const Canvas: React.VFC<Props> = (props) => {
               onMouseup={handleMouseUp}
               width={stageWidth}
               height={stageHeight}
-              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5" }}
+              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
             >
               <Layer>
                 {lines.map((line) => (
