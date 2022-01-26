@@ -202,10 +202,9 @@ const Canvas: React.VFC<Props> = (props) => {
               <Box sx={{ width: "30%" }}>
                 <LineWidth
                   width={lineWidth}
-                  onChange={(event: Event, value: number | number[], activeThumb: number) => {
-                    const currValue = (event.target as HTMLInputElement).value;
-                    setLineWidth(Number(currValue));
-                  }}
+                  onChange={(event: Event, value: number | number[], activeThumb: number) =>
+                    setLineWidth(Number(value))
+                  }
                 />
               </Box>
             </Stack>
