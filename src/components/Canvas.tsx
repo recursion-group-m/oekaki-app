@@ -136,16 +136,9 @@ const Canvas: React.VFC<Props> = (props) => {
       direction={{ xs: "column", sm: "row" }}
       sx={{ justifyContent: "space-between", minHeight: "100%", bgcolor: theme.palette.background.default }}
     >
-      <Grid sm={9} item>
-        <Grid
-          sx={{
-            minHeight: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          container
-        >
-          <Grid item>
+      <Grid sm={9} sx={{ pt: "3rem" }} item>
+        <Stack sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex" }}>
             <Stage
               ref={stageRef}
               onMouseDown={handleMouseDown}
@@ -170,58 +163,53 @@ const Canvas: React.VFC<Props> = (props) => {
                 ))}
               </Layer>
             </Stage>
-          </Grid>
-          <Grid sm={10} item>
-            <Grid sx={{ justifyContent: "space-evenly", alignItems: "center" }} container>
-              <Grid item>
+          </Box>
+          <Box sx={{ pt: 5 }}>
+            <Stack direction="row">
+              <Box>
                 <Pen
                   onClick={() => {
                     handleChangeToolType("pen");
                   }}
                 />
-              </Grid>
-              <Grid item>
+              </Box>
+              <Box>
                 <Eraser
                   onClick={() => {
                     handleChangeToolType("eraser");
                   }}
                 />
-              </Grid>
-              <Grid item>
+              </Box>
+              <Box>
                 <Dropper
                   onClick={() => {
                     handleChangeToolType("dropper");
                   }}
                 />
-              </Grid>
-              <Grid item>
+              </Box>
+              <Box>
                 <LineWidth
                   width={lineWidth}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
                 />
-              </Grid>
-
-              <Grid item>
-                <div>
-                  <ColorPalette
-                    lineColor={lineColor}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-                  />
-                </div>
-              </Grid>
-              <Grid item>
-                <div>
-                  <Undo onClick={handleUndo} />
-                  <Redo onClick={handleRedo} />
-                </div>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+              </Box>
+              <Box>
+                <ColorPalette
+                  lineColor={lineColor}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
+                />
+              </Box>
+              <Box>
+                <Undo onClick={handleUndo} />
+                <Redo onClick={handleRedo} />
+              </Box>
+            </Stack>
+          </Box>
+        </Stack>
       </Grid>
 
-      <Grid sm={3} sx={{ minHeight: "100%", pt: "1rem" }} item>
-        <Stack sx={{ height: "100%", px: "2rem" }}>
+      <Grid sm={3} sx={{ minHeight: "100%", pt: 2 }} item>
+        <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
           <Box>
             <Typography variant="h2" color={theme.palette.secondary.main}>
               ??????
@@ -251,14 +239,14 @@ const Canvas: React.VFC<Props> = (props) => {
               </Card>
             </Box>
           </Box>
-          <Box sx={{ pt: "2rem", display: "flex", justifyContent: "center" }}>
+          <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
             <Stack direction="row">
               <FormControl>
                 <InputLabel>ひらがな６文字</InputLabel>
                 <Input id="my-input" aria-describedby="my-helper-text" />
                 <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
               </FormControl>
-              <Box sx={{ display: "flex", alignItems: "center", pl: "1rem" }}>
+              <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
                 <Button
                   sx={{
                     bgcolor: theme.palette.secondary.main,
