@@ -14,6 +14,9 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 import theme from "../styles";
 
@@ -225,11 +228,28 @@ const Canvas: React.VFC<Props> = (props) => {
               <h1>??????</h1>
             </Paper>
           </Box>
-          <Box sx={{ height: "70%", overflow: "auto", bgcolor: "white", mt: "2rem", display: "flex", p: "1rem" }}>
+          <Box
+            sx={{
+              height: "70%",
+              overflow: "auto",
+              bgcolor: "white",
+              mt: "2rem",
+              display: "flex",
+              p: "1rem",
+              borderRadius: "2%",
+            }}
+          >
             <Box>
-              <Paper elevation={1} sx={{ px: "1rem", py: "1px" }}>
-                <h3>answers</h3>
-              </Paper>
+              <Card sx={{ minWidth: 200, border: 1, borderColor: theme.palette.secondary.main }}>
+                <CardContent>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    koky
+                  </Typography>
+                  <Typography variant="h5" component="div">
+                    answer
+                  </Typography>
+                </CardContent>
+              </Card>
             </Box>
           </Box>
           <Box sx={{ pt: "2rem", display: "flex", justifyContent: "center" }}>
