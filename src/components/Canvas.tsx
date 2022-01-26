@@ -135,12 +135,12 @@ const Canvas: React.VFC<Props> = (props) => {
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
-      sx={{ justifyContent: "space-between", height: "100%", bgcolor: theme.palette.background.default }}
+      sx={{ justifyContent: "space-between", minHeight: "100%", bgcolor: theme.palette.background.default }}
     >
       <Grid sm={9} item>
         <Grid
           sx={{
-            height: "100%",
+            minHeight: "100%",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -221,12 +221,12 @@ const Canvas: React.VFC<Props> = (props) => {
         </Grid>
       </Grid>
 
-      <Grid sm={3} item>
-        <Stack sx={{ height: "100%", pr: "2rem" }}>
+      <Grid sm={3} sx={{ minHeight: "100%", pt: "1rem" }} item>
+        <Stack sx={{ height: "100%", px: "2rem" }}>
           <Box>
-            <Paper sx={{ bgcolor: theme.palette.background.default, color: "#5D639E" }}>
-              <h1>??????</h1>
-            </Paper>
+            <Typography variant="h2" color={theme.palette.secondary.main}>
+              ??????
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -240,7 +240,7 @@ const Canvas: React.VFC<Props> = (props) => {
             }}
           >
             <Box>
-              <Card sx={{ minWidth: 200, border: 1, borderColor: theme.palette.secondary.main }}>
+              <Card sx={{ border: 1, borderColor: theme.palette.secondary.main }}>
                 <CardContent>
                   <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     koky
