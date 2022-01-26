@@ -3,15 +3,19 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
-import Fab from "@mui/material/Fab";
-import NavigationIcon from "@mui/icons-material/Navigation";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import Box from "@mui/material/Box";
+
+import theme from "../styles";
 
 import Undo from "./Undo";
 import Redo from "./Redo";
@@ -216,7 +220,7 @@ const Canvas: React.VFC<Props> = (props) => {
       <Grid sm={3} item>
         <Grid sx={{ justifyContent: "center", height: "100%" }} container>
           <Grid sm={12} sx={{ height: "100%" }} item>
-            <Paper elevation={3} sx={{ bgcolor: "#FFFBD5", color: "#5D639E" }}>
+            <Paper elevation={3} sx={{ bgcolor: theme.palette.background.default, color: "#5D639E" }}>
               <h1>??????</h1>
             </Paper>
 
@@ -226,17 +230,26 @@ const Canvas: React.VFC<Props> = (props) => {
                   <h3>answers</h3>
                 </Paper>
               </Grid>
-              <Grid sm={12} item>
+              <Stack direction="row">
                 <FormControl>
-                  <InputLabel htmlFor="my-input">ひらがな６文字</InputLabel>
+                  <InputLabel>ひらがな６文字</InputLabel>
                   <Input id="my-input" aria-describedby="my-helper-text" />
                   <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
                 </FormControl>
-
-                <Fab color="secondary">
-                  <NavigationIcon />
-                </Fab>
-              </Grid>
+                <Box sx={{ display: "flex", alignItems: "center", pl: "1rem" }}>
+                  <Button
+                    sx={{
+                      bgcolor: theme.palette.secondary.main,
+                      color: "white",
+                      "&:hover": { color: theme.palette.secondary.dark },
+                    }}
+                    variant="outlined"
+                    startIcon={<SendIcon />}
+                  >
+                    Send
+                  </Button>
+                </Box>
+              </Stack>
             </Grid>
           </Grid>
         </Grid>
