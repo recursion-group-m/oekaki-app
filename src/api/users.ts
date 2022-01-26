@@ -12,7 +12,8 @@ export const GetUserId = async (sub: string): Promise<Response> => {
   }).then((response) => response);
 
   if (!res.ok) {
-    const result = PostUserId(sub);
+    // eslint-disable-next-line no-console
+    PostUserId(sub).catch((e) => console.log(e));
   }
   return res;
 };
