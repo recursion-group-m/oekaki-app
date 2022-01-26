@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
-
+import { ThemeProvider } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
@@ -147,6 +147,7 @@ const Canvas: React.VFC<Props> = (props) => {
               width={stageWidth}
               height={stageHeight}
               style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
+              sx={{ position: "relative", zIndex: "tooltip" }}
             >
               <Layer>
                 {lines.map((line) => (
@@ -163,6 +164,20 @@ const Canvas: React.VFC<Props> = (props) => {
                 ))}
               </Layer>
             </Stage>
+            <ThemeProvider theme={theme}>
+              <Typography
+                variant="h3"
+                sx={{
+                  zIndex: "modal",
+                  position: "absolute",
+                  top: "5%",
+                  left: "8%",
+                  color: theme.palette.secondary.main,
+                }}
+              >
+                Oekaki App
+              </Typography>
+            </ThemeProvider>
           </Box>
           <Box sx={{ pt: 5, width: "70%" }}>
             <Stack>
