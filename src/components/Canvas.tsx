@@ -6,9 +6,12 @@ import shortid from "shortid";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
 import Fab from "@mui/material/Fab";
 import NavigationIcon from "@mui/icons-material/Navigation";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 
 import Undo from "./Undo";
 import Redo from "./Redo";
@@ -218,13 +221,18 @@ const Canvas: React.VFC<Props> = (props) => {
             </Paper>
 
             <Grid sx={{ height: "90%", justifyContent: "center", px: "2rem" }} container>
-              <Grid sm={8} sx={{ height: "90%" }} item>
-                <Paper elevation={2} sx={{ borderRadius: "10%", height: "3rem" }}>
+              <Grid sm={8} sx={{ height: "90%", overflow: "auto" }} item>
+                <Paper elevation={3} sx={{ height: "3rem" }}>
                   <h3>answers</h3>
                 </Paper>
               </Grid>
               <Grid sm={12} item>
-                <Input style={{ color: "#5D639E" }} placeholder="答えは6文字" sx={{ px: "1rem" }} />
+                <FormControl>
+                  <InputLabel htmlFor="my-input">ひらがな６文字</InputLabel>
+                  <Input id="my-input" aria-describedby="my-helper-text" />
+                  <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
+                </FormControl>
+
                 <Fab color="secondary">
                   <NavigationIcon />
                 </Fab>
