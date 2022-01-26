@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -87,21 +88,23 @@ const Lobby = () => (
               招待
             </Button>
           </Box>
-          <Box sx={{ pl: 1 }}>
-            <Button
-              variant="contained"
-              size="large"
-              endIcon={<SendIcon />}
-              sx={{
-                background: theme.palette.secondary.main,
-                "&:hover": {
-                  background: theme.palette.secondary.dark,
-                },
-              }}
-            >
-              スタート
-            </Button>
-          </Box>
+          <Link to="/main" style={{ textDecoration: "none" }}>
+            <Box sx={{ pl: 1 }}>
+              <Button
+                variant="contained"
+                size="large"
+                endIcon={<SendIcon />}
+                sx={{
+                  background: theme.palette.secondary.main,
+                  "&:hover": {
+                    background: theme.palette.secondary.dark,
+                  },
+                }}
+              >
+                スタート
+              </Button>
+            </Box>
+          </Link>
         </Box>
       </Grid>
     </Grid>
