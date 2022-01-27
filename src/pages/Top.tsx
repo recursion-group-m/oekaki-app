@@ -44,7 +44,7 @@ const Top = () => (
             <Typography variant="h2">Oekaki App</Typography>
             <Typography>みんなで遊ぼう！お絵かきアプリ！</Typography>
           </Box>
-          <Link to="/main" style={{ textDecoration: "none" }}>
+          <Link to="/lobby" style={{ textDecoration: "none" }}>
             <Button
               variant="contained"
               size="large"
