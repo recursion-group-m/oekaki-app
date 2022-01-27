@@ -6,3 +6,14 @@ export type LineType = {
   color: string;
   width: number;
 };
+
+export type MessageType = {
+  text: string;
+  name: string;
+};
+
+export type DataTypeFromServer = {
+  type: string;
+  message: string;
+  user: string;
+};

@@ -33,6 +33,9 @@ type Props = {
   stageRef: React.RefObject<Konva.Stage>;
   lines: LineType[];
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
+  messageText: string;
+  setMessageText: React.Dispatch<React.SetStateAction<string>>;
+  handleTextMessage: () => void;
 };
 
 function getStageWidth(): number {
@@ -53,7 +56,7 @@ function getStageHeight(): number {
 }
 
 const Canvas: React.VFC<Props> = (props) => {
-  const { stageRef, lines, setLines } = props;
+  const { stageRef, lines, setLines, messageText, setMessageText, handleTextMessage } = props;
   const [lineWidth, setLineWidth] = useState(5);
   const [lineColor, setLineColor] = useState("#000000");
   const [tool, setTool] = useState<ToolType>("pen");
@@ -262,7 +265,12 @@ const Canvas: React.VFC<Props> = (props) => {
             <Stack direction="row">
               <FormControl>
                 <InputLabel>ひらがな６文字</InputLabel>
-                <Input id="my-input" aria-describedby="my-helper-text" />
+                <Input
+                  id="my-input"
+                  aria-describedby="my-helper-text"
+                  value={messageText}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
+                />
                 <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
               </FormControl>
               <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
@@ -274,6 +282,7 @@ const Canvas: React.VFC<Props> = (props) => {
                   }}
                   variant="outlined"
                   startIcon={<SendIcon />}
+                  onClick={handleTextMessage}
                 >
                   Send
                 </Button>
