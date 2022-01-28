@@ -13,9 +13,8 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
 
 import theme from "../styles";
 
@@ -137,7 +136,11 @@ const Canvas: React.VFC<Props> = (props) => {
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
-      sx={{ justifyContent: "space-between", minHeight: "100%", bgcolor: theme.palette.background.default }}
+      sx={{
+        justifyContent: "space-between",
+        height: { sx: "100%", sm: "100vh" },
+        bgcolor: theme.palette.background.default,
+      }}
     >
       <Grid sm={9} sx={{ pt: "3rem" }} item>
         <Stack sx={{ display: "flex", alignItems: "center" }}>
@@ -230,7 +233,7 @@ const Canvas: React.VFC<Props> = (props) => {
         </Stack>
       </Grid>
 
-      <Grid sm={3} sx={{ minHeight: "100%", pt: 2 }} item>
+      <Grid sm={3} sx={{ pt: 2 }} item>
         <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
           <Box>
             <Typography variant="h2" color={theme.palette.secondary.main}>
@@ -240,26 +243,129 @@ const Canvas: React.VFC<Props> = (props) => {
           <Box
             sx={{
               height: "70%",
-              overflow: "auto",
+              overflow: "scroll",
               bgcolor: "white",
               mt: "2rem",
               display: "flex",
+              flexDirection: "column",
               p: "1rem",
-              borderRadius: "2%",
+              borderRadius: 5,
             }}
           >
-            <Box>
-              <Card sx={{ border: 1, borderColor: theme.palette.secondary.main }}>
-                <CardContent>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    koky
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                    answer
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Box>
+            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
+              <Avatar>H</Avatar>
+              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
+                <Box
+                  sx={{
+                    maxWidth: "70%",
+                    borderRadius: 16,
+                    bgcolor: theme.palette.background.default,
+                    textAlign: "start",
+                    p: 3,
+                    display: "flex",
+                    alignItems: "center",
+                    wordBreak: "break-all",
+                  }}
+                >
+                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
+                </Box>
+              </Box>
+            </Stack>
+            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
+              <Avatar>H</Avatar>
+              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
+                <Box
+                  sx={{
+                    maxWidth: "70%",
+                    borderRadius: 16,
+                    bgcolor: theme.palette.background.default,
+                    textAlign: "start",
+                    p: 3,
+                    display: "flex",
+                    alignItems: "center",
+                    wordBreak: "break-all",
+                  }}
+                >
+                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
+                </Box>
+              </Box>
+            </Stack>
+            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
+              <Avatar>H</Avatar>
+              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
+                <Box
+                  sx={{
+                    maxWidth: "70%",
+                    borderRadius: 16,
+                    bgcolor: theme.palette.background.default,
+                    textAlign: "start",
+                    p: 3,
+                    display: "flex",
+                    alignItems: "center",
+                    wordBreak: "break-all",
+                  }}
+                >
+                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
+                </Box>
+              </Box>
+            </Stack>
+            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
+              <Avatar>H</Avatar>
+              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
+                <Box
+                  sx={{
+                    maxWidth: "70%",
+                    borderRadius: 16,
+                    bgcolor: theme.palette.background.default,
+                    textAlign: "start",
+                    p: 3,
+                    display: "flex",
+                    alignItems: "center",
+                    wordBreak: "break-all",
+                  }}
+                >
+                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
+                </Box>
+              </Box>
+            </Stack>
+            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
+              <Avatar>H</Avatar>
+              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
+                <Box
+                  sx={{
+                    maxWidth: "70%",
+                    borderRadius: 16,
+                    bgcolor: theme.palette.background.default,
+                    textAlign: "start",
+                    p: 3,
+                    display: "flex",
+                    alignItems: "center",
+                    wordBreak: "break-all",
+                  }}
+                >
+                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
+                </Box>
+              </Box>
+            </Stack>
+            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
+              <Avatar>H</Avatar>
+              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
+                <Box
+                  sx={{
+                    maxWidth: "70%",
+                    borderRadius: 16,
+                    bgcolor: theme.palette.background.default,
+                    textAlign: "start",
+                    p: 3,
+                    display: "flex",
+                    alignItems: "center",
+                    wordBreak: "break-all",
+                  }}
+                >
+                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
+                </Box>
+              </Box>
+            </Stack>
           </Box>
           <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
             <Stack direction="row">
