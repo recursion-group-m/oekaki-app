@@ -24,6 +24,7 @@ import Eraser from "./Eraser";
 import Dropper from "./Dropper";
 import LineWidth from "./LineWidth";
 import ColorPalette from "./ColorPalette";
+import CommentLeft from "./CommentLeft";
 import CommentRight from "./CommentRight";
 
 import { LineType, ToolType } from "../types";
@@ -252,8 +253,10 @@ const Canvas: React.VFC<Props> = (props) => {
               borderRadius: 5,
             }}
           >
-            <CommentRight />
-            <CommentRight />
+            <CommentLeft />
+            <CommentLeft />
+            <CommentLeft />
+            <CommentLeft />
             <CommentRight />
           </Box>
           <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
