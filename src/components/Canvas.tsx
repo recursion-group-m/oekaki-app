@@ -237,7 +237,7 @@ const Canvas: React.VFC<Props> = (props) => {
       <Grid sm={3} sx={{ pt: 2 }} item>
         <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
           <Box>
-            <Typography variant="h2" color={theme.palette.secondary.main}>
+            <Typography variant="h3" color={theme.palette.secondary.main}>
               ??????
             </Typography>
           </Box>
@@ -251,6 +251,7 @@ const Canvas: React.VFC<Props> = (props) => {
               flexDirection: "column",
               p: "1rem",
               borderRadius: 5,
+              boxShadow: 3,
             }}
           >
             <CommentLeft />
