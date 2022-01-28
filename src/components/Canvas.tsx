@@ -242,7 +242,7 @@ const Canvas: React.VFC<Props> = (props) => {
           </Box>
           <Box
             sx={{
-              height: "65%",
+              height: { xs: "300px", sm: "65%" },
               overflow: "scroll",
               bgcolor: "white",
               mt: "2rem",
