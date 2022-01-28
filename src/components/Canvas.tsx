@@ -14,7 +14,6 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
 import theme from "../styles";
 
 import Undo from "./Undo";
@@ -186,7 +185,7 @@ const Canvas: React.VFC<Props> = (props) => {
               </Typography>
             </ThemeProvider>
           </Box>
-          <Box sx={{ pt: 5, width: "70%" }}>
+          <Box sx={{ pt: 5, width: "75%" }}>
             <Stack>
               <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
                 <Box>
@@ -221,7 +220,7 @@ const Canvas: React.VFC<Props> = (props) => {
                   <Redo onClick={handleRedo} />
                 </Box>
               </Stack>
-              <Box sx={{ width: "30%" }}>
+              <Box sx={{ width: "30%", pt: 3 }}>
                 <LineWidth
                   width={lineWidth}
                   onChange={(event: Event, value: number | number[], activeThumb: number) =>
