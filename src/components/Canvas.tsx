@@ -6,12 +6,6 @@ import shortid from "shortid";
 import { ThemeProvider } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import theme from "../styles";
@@ -23,8 +17,6 @@ import Eraser from "./Eraser";
 import Dropper from "./Dropper";
 import LineWidth from "./LineWidth";
 import ColorPalette from "./ColorPalette";
-import CommentLeft from "./CommentLeft";
-import CommentRight from "./CommentRight";
 
 import { LineType, ToolType } from "../types";
 
@@ -134,162 +126,94 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Stack
-      direction={{ xs: "column", sm: "row" }}
-      sx={{
-        justifyContent: "space-between",
-        height: { sx: "100%", sm: "100vh" },
-        bgcolor: theme.palette.background.default,
-      }}
-    >
-      <Grid sm={9} sx={{ pt: "3rem" }} item>
-        <Stack sx={{ display: "flex", alignItems: "center" }}>
-          <Box sx={{ display: "flex" }}>
-            <Stage
-              ref={stageRef}
-              onMouseDown={handleMouseDown}
-              onMousemove={handleMouseMove}
-              onMouseup={handleMouseUp}
-              width={stageWidth}
-              height={stageHeight}
-              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
-              sx={{ position: "relative", zIndex: "tooltip" }}
-            >
-              <Layer>
-                {lines.map((line) => (
-                  <Line
-                    key={shortid.generate()}
-                    points={line.points}
-                    stroke={line.color}
-                    strokeWidth={line.width}
-                    tension={0.5}
-                    lineCap="round"
-                    globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
-                    onMouseDown={handleChangePalette}
-                  />
-                ))}
-              </Layer>
-            </Stage>
-            <ThemeProvider theme={theme}>
-              <Typography
-                variant="h3"
-                sx={{
-                  zIndex: "modal",
-                  position: "absolute",
-                  top: "5%",
-                  left: "8%",
-                  color: theme.palette.secondary.main,
-                }}
-              >
-                Oekaki App
-              </Typography>
-            </ThemeProvider>
-          </Box>
-          <Box sx={{ pt: 5, width: "75%" }}>
-            <Stack>
-              <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-                <Box>
-                  <Pen
-                    onClick={() => {
-                      handleChangeToolType("pen");
-                    }}
-                  />
-                </Box>
-                <Box>
-                  <Eraser
-                    onClick={() => {
-                      handleChangeToolType("eraser");
-                    }}
-                  />
-                </Box>
-                <Box>
-                  <Dropper
-                    onClick={() => {
-                      handleChangeToolType("dropper");
-                    }}
-                  />
-                </Box>
-                <Box>
-                  <ColorPalette
-                    lineColor={lineColor}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-                  />
-                </Box>
-                <Box>
-                  <Undo onClick={handleUndo} />
-                  <Redo onClick={handleRedo} />
-                </Box>
-              </Stack>
-              <Box sx={{ width: "30%", pt: 3 }}>
-                <LineWidth
-                  width={lineWidth}
-                  onChange={(event: Event, value: number | number[], activeThumb: number) =>
-                    setLineWidth(Number(value))
-                  }
-                />
-              </Box>
-            </Stack>
-          </Box>
-        </Stack>
-      </Grid>
-
-      <Grid sm={3} sx={{ pt: 2 }} item>
-        <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
-          <Box>
-            <Typography variant="h3" color={theme.palette.secondary.main}>
-              ??????
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              height: { xs: "300px", sm: "65%" },
-              overflow: "scroll",
-              bgcolor: "white",
-              mt: "2rem",
-              display: "flex",
-              flexDirection: "column",
-              p: "1rem",
-              borderRadius: 5,
-              boxShadow: 3,
-            }}
+    <Grid sm={9} sx={{ pt: "3rem" }} item>
+      <Stack sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex" }}>
+          <Stage
+            ref={stageRef}
+            onMouseDown={handleMouseDown}
+            onMousemove={handleMouseMove}
+            onMouseup={handleMouseUp}
+            width={stageWidth}
+            height={stageHeight}
+            style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
+            sx={{ position: "relative", zIndex: "tooltip" }}
           >
-            <CommentLeft />
-            <CommentLeft />
-            <CommentLeft />
-            <CommentLeft />
-            <CommentRight />
-          </Box>
-          <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
-            <Stack direction="row">
-              <FormControl>
-                <InputLabel>ひらがな６文字</InputLabel>
-                <Input
-                  id="my-input"
-                  aria-describedby="my-helper-text"
-                  value={messageText}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
+            <Layer>
+              {lines.map((line) => (
+                <Line
+                  key={shortid.generate()}
+                  points={line.points}
+                  stroke={line.color}
+                  strokeWidth={line.width}
+                  tension={0.5}
+                  lineCap="round"
+                  globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+                  onMouseDown={handleChangePalette}
                 />
-                <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
-              </FormControl>
-              <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
-                <Button
-                  sx={{
-                    bgcolor: theme.palette.secondary.main,
-                    color: "white",
-                    "&:hover": { color: theme.palette.secondary.dark },
+              ))}
+            </Layer>
+          </Stage>
+          <ThemeProvider theme={theme}>
+            <Typography
+              variant="h3"
+              sx={{
+                zIndex: "modal",
+                position: "absolute",
+                top: "5%",
+                left: "8%",
+                color: theme.palette.secondary.main,
+              }}
+            >
+              Oekaki App
+            </Typography>
+          </ThemeProvider>
+        </Box>
+        <Box sx={{ pt: 5, width: "75%" }}>
+          <Stack>
+            <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
+              <Box>
+                <Pen
+                  onClick={() => {
+                    handleChangeToolType("pen");
                   }}
-                  variant="outlined"
-                  startIcon={<SendIcon />}
-                  onClick={handleTextMessage}
-                >
-                  Send
-                </Button>
+                />
+              </Box>
+              <Box>
+                <Eraser
+                  onClick={() => {
+                    handleChangeToolType("eraser");
+                  }}
+                />
+              </Box>
+              <Box>
+                <Dropper
+                  onClick={() => {
+                    handleChangeToolType("dropper");
+                  }}
+                />
+              </Box>
+              <Box>
+                <ColorPalette
+                  lineColor={lineColor}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
+                />
+              </Box>
+              <Box>
+                <Undo onClick={handleUndo} />
+                <Redo onClick={handleRedo} />
               </Box>
             </Stack>
-          </Box>
-        </Stack>
-      </Grid>
-    </Stack>
+            <Box sx={{ width: "30%", pt: 3 }}>
+              <LineWidth
+                width={lineWidth}
+                onChange={(event: Event, value: number | number[], activeThumb: number) => setLineWidth(Number(value))}
+              />
+            </Box>
+          </Stack>
+        </Box>
+      </Stack>
+    </Grid>
   );
 };
 

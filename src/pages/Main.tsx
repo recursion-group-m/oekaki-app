@@ -1,10 +1,24 @@
 import Konva from "konva";
 import React, { useEffect, useRef, useState } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import InputLabel from "@mui/material/InputLabel";
+import Button from "@mui/material/Button";
+import Input from "@mui/material/Input";
+import SendIcon from "@mui/icons-material/Send";
+
 import PostRoomId from "../api/rooms";
 import { GetUserId } from "../api/users";
 import Canvas from "../components/Canvas";
 import { DataTypeFromServer, LineType, MessageType } from "../types";
+import CommentLeft from "../components/CommentLeft";
+import CommentRight from "../components/CommentRight";
+import theme from "../styles";
 
 type stageType = Konva.Stage;
 
@@ -90,20 +104,85 @@ const Main = () => {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       {/* <FileComboBox stageRef={stageRef} lines={lines} /> */}
-      <Canvas
-        stageRef={stageRef}
-        lines={lines}
-        setLines={setLines}
-        messageText={messageText}
-        setMessageText={setMessageText}
-        handleTextMessage={handleTextMessage}
-      />
-      {/* <ResumeModal
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        sx={{
+          justifyContent: "space-between",
+          height: { sx: "100%", sm: "100vh" },
+          bgcolor: theme.palette.background.default,
+        }}
+      >
+        <Canvas
+          stageRef={stageRef}
+          lines={lines}
+          setLines={setLines}
+          messageText={messageText}
+          setMessageText={setMessageText}
+          handleTextMessage={handleTextMessage}
+        />
+        {/* <ResumeModal
           confirmationState={confirmationState}
           setConfirmationState={setConfirmationState}
           onClick={onClick}
         />
       */}
+        <Grid sm={3} sx={{ pt: 2 }} item>
+          <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
+            <Box>
+              <Typography variant="h3" color={theme.palette.secondary.main}>
+                ??????
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                height: { xs: "300px", sm: "65%" },
+                overflow: "scroll",
+                bgcolor: "white",
+                mt: "2rem",
+                display: "flex",
+                flexDirection: "column",
+                p: "1rem",
+                borderRadius: 5,
+                boxShadow: 3,
+              }}
+            >
+              <CommentLeft />
+              <CommentLeft />
+              <CommentLeft />
+              <CommentLeft />
+              <CommentRight />
+            </Box>
+            <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
+              <Stack direction="row">
+                <FormControl>
+                  <InputLabel>ひらがな６文字</InputLabel>
+                  <Input
+                    id="my-input"
+                    aria-describedby="my-helper-text"
+                    value={messageText}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
+                  />
+                  <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
+                </FormControl>
+                <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
+                  <Button
+                    sx={{
+                      bgcolor: theme.palette.secondary.main,
+                      color: "white",
+                      "&:hover": { color: theme.palette.secondary.dark },
+                    }}
+                    variant="outlined"
+                    startIcon={<SendIcon />}
+                    onClick={handleTextMessage}
+                  >
+                    Send
+                  </Button>
+                </Box>
+              </Stack>
+            </Box>
+          </Stack>
+        </Grid>
+      </Stack>
     </div>
   );
 };
