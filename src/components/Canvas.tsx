@@ -14,7 +14,6 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
 
 import theme from "../styles";
 
@@ -25,6 +24,7 @@ import Eraser from "./Eraser";
 import Dropper from "./Dropper";
 import LineWidth from "./LineWidth";
 import ColorPalette from "./ColorPalette";
+import CommentRight from "./CommentRight";
 
 import { LineType, ToolType } from "../types";
 
@@ -242,7 +242,7 @@ const Canvas: React.VFC<Props> = (props) => {
           </Box>
           <Box
             sx={{
-              height: "70%",
+              height: "65%",
               overflow: "scroll",
               bgcolor: "white",
               mt: "2rem",
@@ -252,120 +252,9 @@ const Canvas: React.VFC<Props> = (props) => {
               borderRadius: 5,
             }}
           >
-            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
-              <Avatar>H</Avatar>
-              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
-                <Box
-                  sx={{
-                    maxWidth: "70%",
-                    borderRadius: 16,
-                    bgcolor: theme.palette.background.default,
-                    textAlign: "start",
-                    p: 3,
-                    display: "flex",
-                    alignItems: "center",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
-                </Box>
-              </Box>
-            </Stack>
-            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
-              <Avatar>H</Avatar>
-              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
-                <Box
-                  sx={{
-                    maxWidth: "70%",
-                    borderRadius: 16,
-                    bgcolor: theme.palette.background.default,
-                    textAlign: "start",
-                    p: 3,
-                    display: "flex",
-                    alignItems: "center",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
-                </Box>
-              </Box>
-            </Stack>
-            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
-              <Avatar>H</Avatar>
-              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
-                <Box
-                  sx={{
-                    maxWidth: "70%",
-                    borderRadius: 16,
-                    bgcolor: theme.palette.background.default,
-                    textAlign: "start",
-                    p: 3,
-                    display: "flex",
-                    alignItems: "center",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
-                </Box>
-              </Box>
-            </Stack>
-            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
-              <Avatar>H</Avatar>
-              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
-                <Box
-                  sx={{
-                    maxWidth: "70%",
-                    borderRadius: 16,
-                    bgcolor: theme.palette.background.default,
-                    textAlign: "start",
-                    p: 3,
-                    display: "flex",
-                    alignItems: "center",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
-                </Box>
-              </Box>
-            </Stack>
-            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
-              <Avatar>H</Avatar>
-              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
-                <Box
-                  sx={{
-                    maxWidth: "70%",
-                    borderRadius: 16,
-                    bgcolor: theme.palette.background.default,
-                    textAlign: "start",
-                    p: 3,
-                    display: "flex",
-                    alignItems: "center",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
-                </Box>
-              </Box>
-            </Stack>
-            <Stack direction="row" sx={{ width: "100%", py: 2 }}>
-              <Avatar>H</Avatar>
-              <Box sx={{ width: "100%", pt: 2, pl: 2, display: "flex" }}>
-                <Box
-                  sx={{
-                    maxWidth: "70%",
-                    borderRadius: 16,
-                    bgcolor: theme.palette.background.default,
-                    textAlign: "start",
-                    p: 3,
-                    display: "flex",
-                    alignItems: "center",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  sfdsddddddddddddddddddddddddddddddddddddsssssssssssssss
-                </Box>
-              </Box>
-            </Stack>
+            <CommentRight />
+            <CommentRight />
+            <CommentRight />
           </Box>
           <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
             <Stack direction="row">
