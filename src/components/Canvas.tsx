@@ -27,6 +27,7 @@ type Props = {
   messageText: string;
   setMessageText: React.Dispatch<React.SetStateAction<string>>;
   handleTextMessage: () => void;
+  tool: ToolType;
 };
 
 function getStageWidth(): number {
@@ -47,10 +48,10 @@ function getStageHeight(): number {
 }
 
 const Canvas: React.VFC<Props> = (props) => {
-  const { stageRef, lines, setLines, messageText, setMessageText, handleTextMessage } = props;
+  const { stageRef, lines, setLines, messageText, setMessageText, handleTextMessage, tool } = props;
   const [lineWidth, setLineWidth] = useState(5);
   const [lineColor, setLineColor] = useState("#000000");
-  const [tool, setTool] = useState<ToolType>("pen");
+  // const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
@@ -97,7 +98,7 @@ const Canvas: React.VFC<Props> = (props) => {
     setHistoryStep(historyStep + 1);
   };
 
-  const handleChangeToolType = (type: ToolType) => setTool(type);
+  // const handleChangeToolType = (type: ToolType) => setTool(type);
 
   const handleUndo = () => {
     if (historyStep === 0) {
@@ -172,7 +173,7 @@ const Canvas: React.VFC<Props> = (props) => {
         <Box sx={{ pt: 5, width: "75%" }}>
           <Stack>
             <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-              <Box>
+              {/* <Box>
                 <Pen
                   onClick={() => {
                     handleChangeToolType("pen");
@@ -192,7 +193,7 @@ const Canvas: React.VFC<Props> = (props) => {
                     handleChangeToolType("dropper");
                   }}
                 />
-              </Box>
+              </Box> */}
               <Box>
                 <ColorPalette
                   lineColor={lineColor}

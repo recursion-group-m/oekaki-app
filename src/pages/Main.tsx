@@ -15,10 +15,14 @@ import SendIcon from "@mui/icons-material/Send";
 import PostRoomId from "../api/rooms";
 import { GetUserId } from "../api/users";
 import Canvas from "../components/Canvas";
-import { DataTypeFromServer, LineType, MessageType } from "../types";
+import { DataTypeFromServer, LineType, MessageType, ToolType } from "../types";
 import CommentLeft from "../components/CommentLeft";
 import CommentRight from "../components/CommentRight";
 import theme from "../styles";
+
+import Pen from "../components/Pen";
+import Eraser from "../components/Eraser";
+import Dropper from "../components/Dropper";
 
 type stageType = Konva.Stage;
 
@@ -29,6 +33,8 @@ const info = {
 const Main = () => {
   const stageRef = useRef<stageType>(null);
   const [lines, setLines] = useState<LineType[]>([]);
+  const [tool, setTool] = useState<ToolType>("pen");
+
   // const [confirmationState, setConfirmationState] = useState<boolean>(false);
   // const [savedJsonStringData, setSavedJsonStringData] = useState<string>("");
   // useEffect(() => {
@@ -101,6 +107,8 @@ const Main = () => {
     console.log(messages);
   }, [messages]);
 
+  const handleChangeToolType = (type: ToolType) => setTool(type);
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       {/* <FileComboBox stageRef={stageRef} lines={lines} /> */}
@@ -119,6 +127,7 @@ const Main = () => {
           messageText={messageText}
           setMessageText={setMessageText}
           handleTextMessage={handleTextMessage}
+          tool={tool}
         />
         {/* <ResumeModal
           confirmationState={confirmationState}
@@ -126,6 +135,26 @@ const Main = () => {
           onClick={onClick}
         />
       */}
+        <Pen
+          onClick={() => {
+            handleChangeToolType("pen");
+          }}
+        />
+        <Box>
+          <Eraser
+            onClick={() => {
+              handleChangeToolType("eraser");
+            }}
+          />
+        </Box>
+        <Box>
+          <Dropper
+            onClick={() => {
+              handleChangeToolType("dropper");
+            }}
+          />
+        </Box>
+
         <Grid sm={3} sx={{ pt: 2 }} item>
           <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
             <Box>
