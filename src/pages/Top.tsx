@@ -1,14 +1,12 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseLine from "@mui/material/CssBaseline";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
 import PaintImage from "../images/drawing.svg";
 import theme from "../styles";
+import LoginButton from "../components/LoginButton";
 
 const Top = () => (
   <ThemeProvider theme={theme}>
@@ -44,21 +42,7 @@ const Top = () => (
             <Typography variant="h2">Oekaki App</Typography>
             <Typography>みんなで遊ぼう！お絵かきアプリ！</Typography>
           </Box>
-          <Link to="/lobby" style={{ textDecoration: "none" }}>
-            <Button
-              variant="contained"
-              size="large"
-              endIcon={<SendIcon />}
-              sx={{
-                background: theme.palette.secondary.main,
-                "&:hover": {
-                  background: theme.palette.secondary.dark,
-                },
-              }}
-            >
-              はじめる！
-            </Button>
-          </Link>
+          <LoginButton />
         </Box>
       </Grid>
       <Grid item sm={6}>
