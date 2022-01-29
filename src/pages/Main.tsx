@@ -26,6 +26,7 @@ import Dropper from "../components/Dropper";
 import Undo from "../components/Undo";
 import Redo from "../components/Redo";
 import ColorPalette from "../components/ColorPalette";
+import LineWidth from "../components/LineWidth";
 
 type stageType = Konva.Stage;
 
@@ -42,6 +43,8 @@ const Main = () => {
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
   const [lineColor, setLineColor] = useState("#000000");
+  const [lineWidth, setLineWidth] = useState(5);
+
   // const [confirmationState, setConfirmationState] = useState<boolean>(false);
   // const [savedJsonStringData, setSavedJsonStringData] = useState<string>("");
   // useEffect(() => {
@@ -157,6 +160,7 @@ const Main = () => {
           setHistoryStep={setHistoryStep}
           lineColor={lineColor}
           setLineColor={setLineColor}
+          lineWidth={lineWidth}
         />
         {/* <ResumeModal
           confirmationState={confirmationState}
@@ -193,7 +197,10 @@ const Main = () => {
           <Undo onClick={handleUndo} />
           <Redo onClick={handleRedo} />
         </Box>
-
+        <LineWidth
+          width={lineWidth}
+          onChange={(event: Event, value: number | number[], activeThumb: number) => setLineWidth(Number(value))}
+        />
         <Grid sm={3} sx={{ pt: 2 }} item>
           <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
             <Box>

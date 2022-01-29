@@ -34,6 +34,7 @@ type Props = {
   setHistoryStep: React.Dispatch<React.SetStateAction<number>>;
   lineColor: string;
   setLineColor: React.Dispatch<React.SetStateAction<string>>;
+  lineWidth: number;
 };
 
 function getStageWidth(): number {
@@ -68,8 +69,9 @@ const Canvas: React.VFC<Props> = (props) => {
     setHistoryStep,
     lineColor,
     setLineColor,
+    lineWidth,
   } = props;
-  const [lineWidth, setLineWidth] = useState(5);
+  // const [lineWidth, setLineWidth] = useState(5);
   // const [lineColor, setLineColor] = useState("#000000");
   // const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
@@ -189,9 +191,9 @@ const Canvas: React.VFC<Props> = (props) => {
           </ThemeProvider>
         </Box>
         <Box sx={{ pt: 5, width: "75%" }}>
-          <Stack>
+          {/* <Stack>
             <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-              {/* <Box>
+              <Box>
                 <Pen
                   onClick={() => {
                     handleChangeToolType("pen");
@@ -211,17 +213,17 @@ const Canvas: React.VFC<Props> = (props) => {
                     handleChangeToolType("dropper");
                   }}
                 />
-              </Box> */}
-              {/* <Box>
+              </Box>
+              <Box>
                 <ColorPalette
                   lineColor={lineColor}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
                 />
-              </Box> */}
-              {/* <Box>
+              </Box>
+              <Box>
                 <Undo onClick={handleUndo} />
                 <Redo onClick={handleRedo} />
-              </Box> */}
+              </Box>
             </Stack>
             <Box sx={{ width: "30%", pt: 3 }}>
               <LineWidth
@@ -229,7 +231,7 @@ const Canvas: React.VFC<Props> = (props) => {
                 onChange={(event: Event, value: number | number[], activeThumb: number) => setLineWidth(Number(value))}
               />
             </Box>
-          </Stack>
+          </Stack> */}
         </Box>
       </Stack>
     </Grid>
