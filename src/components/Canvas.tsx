@@ -10,11 +10,11 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import theme from "../styles";
 
-import Undo from "./Undo";
-import Redo from "./Redo";
-import Pen from "./Pen";
-import Eraser from "./Eraser";
-import Dropper from "./Dropper";
+// import Undo from "./Undo";
+// import Redo from "./Redo";
+// import Pen from "./Pen";
+// import Eraser from "./Eraser";
+// import Dropper from "./Dropper";
 import LineWidth from "./LineWidth";
 import ColorPalette from "./ColorPalette";
 
@@ -32,6 +32,8 @@ type Props = {
   setHistory: React.Dispatch<React.SetStateAction<LineType[][]>>;
   historyStep: number;
   setHistoryStep: React.Dispatch<React.SetStateAction<number>>;
+  lineColor: string;
+  setLineColor: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function getStageWidth(): number {
@@ -64,9 +66,11 @@ const Canvas: React.VFC<Props> = (props) => {
     setHistory,
     historyStep,
     setHistoryStep,
+    lineColor,
+    setLineColor,
   } = props;
   const [lineWidth, setLineWidth] = useState(5);
-  const [lineColor, setLineColor] = useState("#000000");
+  // const [lineColor, setLineColor] = useState("#000000");
   // const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
   // const [history, setHistory] = useState<LineType[][]>([[]]);
@@ -208,12 +212,12 @@ const Canvas: React.VFC<Props> = (props) => {
                   }}
                 />
               </Box> */}
-              <Box>
+              {/* <Box>
                 <ColorPalette
                   lineColor={lineColor}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
                 />
-              </Box>
+              </Box> */}
               {/* <Box>
                 <Undo onClick={handleUndo} />
                 <Redo onClick={handleRedo} />

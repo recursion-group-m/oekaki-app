@@ -25,6 +25,7 @@ import Eraser from "../components/Eraser";
 import Dropper from "../components/Dropper";
 import Undo from "../components/Undo";
 import Redo from "../components/Redo";
+import ColorPalette from "../components/ColorPalette";
 
 type stageType = Konva.Stage;
 
@@ -36,7 +37,11 @@ const Main = () => {
   const stageRef = useRef<stageType>(null);
   const [lines, setLines] = useState<LineType[]>([]);
   const [tool, setTool] = useState<ToolType>("pen");
-
+  const [messages, setMessages] = useState<MessageType[]>([]);
+  const [messageText, setMessageText] = useState<string>("");
+  const [history, setHistory] = useState<LineType[][]>([[]]);
+  const [historyStep, setHistoryStep] = useState(0);
+  const [lineColor, setLineColor] = useState("#000000");
   // const [confirmationState, setConfirmationState] = useState<boolean>(false);
   // const [savedJsonStringData, setSavedJsonStringData] = useState<string>("");
   // useEffect(() => {
@@ -51,10 +56,6 @@ const Main = () => {
   //   setLines(JSON.parse(savedJsonStringData) as LineType[]);
   //   setConfirmationState(false);
   // };
-  const [messages, setMessages] = useState<MessageType[]>([]);
-  const [messageText, setMessageText] = useState<string>("");
-  const [history, setHistory] = useState<LineType[][]>([[]]);
-  const [historyStep, setHistoryStep] = useState(0);
 
   const client = useRef<W3CWebSocket>();
 
@@ -154,6 +155,8 @@ const Main = () => {
           setHistory={setHistory}
           historyStep={historyStep}
           setHistoryStep={setHistoryStep}
+          lineColor={lineColor}
+          setLineColor={setLineColor}
         />
         {/* <ResumeModal
           confirmationState={confirmationState}
@@ -178,6 +181,12 @@ const Main = () => {
             onClick={() => {
               handleChangeToolType("dropper");
             }}
+          />
+        </Box>
+        <Box>
+          <ColorPalette
+            lineColor={lineColor}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
           />
         </Box>
         <Box>
