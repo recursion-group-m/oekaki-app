@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Link } from "react-router-dom";
@@ -8,92 +8,95 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import Typography from "@mui/material/Typography";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import theme from "../styles";
 import UserList from "../components/UserList";
 
-const Lobby = () => (
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Grid
-      container
-      component="main"
-      display="flex"
-      sx={{
-        alignItems: { sm: "center" },
-        height: "100vh",
-        p: 3,
-      }}
-    >
+const Lobby = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Grid
-        item
-        xs={12}
-        sm={6}
+        container
+        component="main"
+        display="flex"
         sx={{
-          height: { xs: "80%", sm: "100%" },
+          alignItems: { sm: "center" },
+          height: "100vh",
+          p: 3,
         }}
       >
-        <Box
+        <Grid
+          item
+          xs={12}
+          sm={6}
           sx={{
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
+            height: { xs: "80%", sm: "100%" },
           }}
         >
           <Box
             sx={{
-              pb: 2,
-              display: { xs: "block", sm: "none" },
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
             }}
           >
-            <Typography variant="h5">Oekaki App</Typography>
-          </Box>
-          <UserList />
-        </Box>
-      </Grid>
-      <Grid
-        item
-        sm={6}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-        sx={{
-          height: { xs: "20%", sm: "100%" },
-          width: "100%",
-        }}
-      >
-        <Box
-          sx={{
-            pb: 5,
-            display: { xs: "none", sm: "block" },
-          }}
-        >
-          <Typography variant="h3">Oekaki App</Typography>
-        </Box>
-        <Box display="flex">
-          <Box sx={{ pr: 1 }}>
-            <Button
-              variant="contained"
-              size="large"
-              endIcon={<PersonAddAlt1Icon />}
+            <Box
               sx={{
-                background: theme.palette.secondary.main,
-                "&:hover": {
-                  background: theme.palette.secondary.dark,
-                },
+                pb: 2,
+                display: { xs: "block", sm: "none" },
               }}
             >
-              招待
-            </Button>
+              <Typography variant="h5">Oekaki App</Typography>
+            </Box>
+            <UserList />
           </Box>
-          <Link to="/main" style={{ textDecoration: "none" }}>
-            <Box sx={{ pl: 1 }}>
+        </Grid>
+        <Grid
+          item
+          sm={6}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          sx={{
+            height: { xs: "20%", sm: "100%" },
+            width: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              pb: 5,
+              display: { xs: "none", sm: "block" },
+            }}
+          >
+            <Typography variant="h3">Oekaki App</Typography>
+          </Box>
+          <Box display="flex">
+            <Box sx={{ pr: 1 }}>
               <Button
                 variant="contained"
+                onClick={handleClickOpen}
                 size="large"
-                endIcon={<SendIcon />}
+                endIcon={<PersonAddAlt1Icon />}
                 sx={{
                   background: theme.palette.secondary.main,
                   "&:hover": {
@@ -101,14 +104,44 @@ const Lobby = () => (
                   },
                 }}
               >
-                スタート
+                招待
               </Button>
+              <Dialog open={open} onClose={handleClose}>
+                <Box display="flex" justifyContent="space-between">
+                  <DialogTitle>招待</DialogTitle>
+                  <DialogActions>
+                    <IconButton aria-label="close" onClick={handleClose}>
+                      <CloseIcon />
+                    </IconButton>
+                  </DialogActions>
+                </Box>
+                <DialogContent>
+                  <DialogContentText>下のリンクをコピーして共有しよう！</DialogContentText>
+                </DialogContent>
+              </Dialog>
             </Box>
-          </Link>
-        </Box>
+            <Link to="/main" style={{ textDecoration: "none" }}>
+              <Box sx={{ pl: 1 }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  endIcon={<SendIcon />}
+                  sx={{
+                    background: theme.palette.secondary.main,
+                    "&:hover": {
+                      background: theme.palette.secondary.dark,
+                    },
+                  }}
+                >
+                  スタート
+                </Button>
+              </Box>
+            </Link>
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
-  </ThemeProvider>
-);
+    </ThemeProvider>
+  );
+};
 
 export default Lobby;
