@@ -1,7 +1,7 @@
 {
   "name": "oekaki-app",
   "version": "0.1.0",
-  "homepage": "https://recursion-group-m.github.io/oekaki-app/",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.9.0",
