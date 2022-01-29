@@ -15,7 +15,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import theme from "../styles";
 import UserList from "../components/UserList";
 
@@ -119,7 +121,14 @@ const Lobby = () => {
                 </Box>
                 <DialogContent>
                   <DialogContentText>下のリンクをコピーして共有しよう！</DialogContentText>
-                  <SyntaxHighlighter language="url">{url}</SyntaxHighlighter>
+                  <Box sx={{ pt: 4 }}>
+                    <CopyToClipboard text={url}>
+                      <IconButton size="small">
+                        <ContentCopyIcon />
+                      </IconButton>
+                    </CopyToClipboard>
+                    <SyntaxHighlighter>{url}</SyntaxHighlighter>
+                  </Box>
                 </DialogContent>
               </Dialog>
             </Box>
