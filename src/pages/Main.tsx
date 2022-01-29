@@ -23,6 +23,8 @@ import theme from "../styles";
 import Pen from "../components/Pen";
 import Eraser from "../components/Eraser";
 import Dropper from "../components/Dropper";
+import Undo from "../components/Undo";
+import Redo from "../components/Redo";
 
 type stageType = Konva.Stage;
 
@@ -51,7 +53,11 @@ const Main = () => {
   // };
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [messageText, setMessageText] = useState<string>("");
+  const [history, setHistory] = useState<LineType[][]>([[]]);
+  const [historyStep, setHistoryStep] = useState(0);
+
   const client = useRef<W3CWebSocket>();
+
   // subは
   // const { user } = useAuth0;
   // で置換予定
@@ -109,6 +115,22 @@ const Main = () => {
 
   const handleChangeToolType = (type: ToolType) => setTool(type);
 
+  const handleUndo = () => {
+    if (historyStep === 0) {
+      return;
+    }
+    setHistoryStep(historyStep - 1);
+    setLines(history[historyStep - 1]);
+  };
+
+  const handleRedo = () => {
+    if (historyStep === history.length - 1) {
+      return;
+    }
+    setHistoryStep(historyStep + 1);
+    setLines(history[historyStep + 1]);
+  };
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       {/* <FileComboBox stageRef={stageRef} lines={lines} /> */}
@@ -128,6 +150,10 @@ const Main = () => {
           setMessageText={setMessageText}
           handleTextMessage={handleTextMessage}
           tool={tool}
+          history={history}
+          setHistory={setHistory}
+          historyStep={historyStep}
+          setHistoryStep={setHistoryStep}
         />
         {/* <ResumeModal
           confirmationState={confirmationState}
@@ -153,6 +179,10 @@ const Main = () => {
               handleChangeToolType("dropper");
             }}
           />
+        </Box>
+        <Box>
+          <Undo onClick={handleUndo} />
+          <Redo onClick={handleRedo} />
         </Box>
 
         <Grid sm={3} sx={{ pt: 2 }} item>

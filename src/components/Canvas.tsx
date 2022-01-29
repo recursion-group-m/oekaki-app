@@ -28,6 +28,10 @@ type Props = {
   setMessageText: React.Dispatch<React.SetStateAction<string>>;
   handleTextMessage: () => void;
   tool: ToolType;
+  history: LineType[][];
+  setHistory: React.Dispatch<React.SetStateAction<LineType[][]>>;
+  historyStep: number;
+  setHistoryStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 function getStageWidth(): number {
@@ -48,13 +52,25 @@ function getStageHeight(): number {
 }
 
 const Canvas: React.VFC<Props> = (props) => {
-  const { stageRef, lines, setLines, messageText, setMessageText, handleTextMessage, tool } = props;
+  const {
+    stageRef,
+    lines,
+    setLines,
+    messageText,
+    setMessageText,
+    handleTextMessage,
+    tool,
+    history,
+    setHistory,
+    historyStep,
+    setHistoryStep,
+  } = props;
   const [lineWidth, setLineWidth] = useState(5);
   const [lineColor, setLineColor] = useState("#000000");
   // const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
-  const [history, setHistory] = useState<LineType[][]>([[]]);
-  const [historyStep, setHistoryStep] = useState(0);
+  // const [history, setHistory] = useState<LineType[][]>([[]]);
+  // const [historyStep, setHistoryStep] = useState(0);
   const stageWidth = getStageWidth();
   const stageHeight = getStageHeight();
 
@@ -100,23 +116,21 @@ const Canvas: React.VFC<Props> = (props) => {
 
   // const handleChangeToolType = (type: ToolType) => setTool(type);
 
-  const handleUndo = () => {
-    if (historyStep === 0) {
-      return;
-    }
+  // const handleUndo = () => {
+  //   if (historyStep === 0) {
+  //     return;
+  //   }
+  //   setHistoryStep(historyStep - 1);
+  //   setLines(history[historyStep - 1]);
+  // };
 
-    setHistoryStep(historyStep - 1);
-    setLines(history[historyStep - 1]);
-  };
-
-  const handleRedo = () => {
-    if (historyStep === history.length - 1) {
-      return;
-    }
-
-    setHistoryStep(historyStep + 1);
-    setLines(history[historyStep + 1]);
-  };
+  // const handleRedo = () => {
+  //   if (historyStep === history.length - 1) {
+  //     return;
+  //   }
+  //   setHistoryStep(historyStep + 1);
+  //   setLines(history[historyStep + 1]);
+  // };
 
   const handleChangePalette = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool !== "dropper") {
@@ -200,10 +214,10 @@ const Canvas: React.VFC<Props> = (props) => {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
                 />
               </Box>
-              <Box>
+              {/* <Box>
                 <Undo onClick={handleUndo} />
                 <Redo onClick={handleRedo} />
-              </Box>
+              </Box> */}
             </Stack>
             <Box sx={{ width: "30%", pt: 3 }}>
               <LineWidth
