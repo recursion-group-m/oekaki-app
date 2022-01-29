@@ -15,11 +15,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import SyntaxHighlighter from "react-syntax-highlighter";
 import theme from "../styles";
 import UserList from "../components/UserList";
 
 const Lobby = () => {
   const [open, setOpen] = useState(false);
+  const url = "http://localhost:3000/oekaki-app/lobby";
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -117,6 +119,7 @@ const Lobby = () => {
                 </Box>
                 <DialogContent>
                   <DialogContentText>下のリンクをコピーして共有しよう！</DialogContentText>
+                  <SyntaxHighlighter language="url">{url}</SyntaxHighlighter>
                 </DialogContent>
               </Dialog>
             </Box>
