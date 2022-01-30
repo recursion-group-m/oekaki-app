@@ -24,14 +24,6 @@ type Props = {
   lineWidth: number;
 };
 
-// function getStageWidth(): number {
-//   const w = window.parent.screen.width;
-//   if (w < 600) {
-//     return w * 0.95;
-//   }
-//   return w * 0.6;
-// }
-
 function getStageHeight(): number {
   const w = window.parent.screen.width;
   const h = window.parent.screen.height;
@@ -55,15 +47,9 @@ const Canvas: React.VFC<Props> = (props) => {
     setLineColor,
     lineWidth,
   } = props;
-  // const [lineWidth, setLineWidth] = useState(5);
-  // const [lineColor, setLineColor] = useState("#000000");
-  // const [tool, setTool] = useState<ToolType>("pen");
   const [stageWidth, setStageWidth] = useState(1000);
   const isDrawing = useRef<boolean>(false);
   const parentContainer = useRef<HTMLElement | null>(null);
-  // const [history, setHistory] = useState<LineType[][]>([[]]);
-  // const [historyStep, setHistoryStep] = useState(0);
-  // const stageWidth = getStageWidth();
   const stageHeight = getStageHeight();
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
