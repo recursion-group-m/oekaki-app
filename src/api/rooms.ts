@@ -1,14 +1,12 @@
-const info = {
-  djangoUrl: process.env.REACT_APP_DJANGO_URL || "localhost",
-};
+import Config from "../configs";
 
-type RoomData = {
+type roomData = {
   room_id: string;
   posted_by: string;
 };
 
-const PostRoomId = async (sub: string): Promise<RoomData> => {
-  const res = await fetch(`${info.djangoUrl}/rooms/`, {
+const PostRoomId = async (sub: string): Promise<roomData> => {
+  const res = await fetch(`${Config.djangoUrl}/rooms/`, {
     method: "POST",
     mode: "cors",
     headers: {
@@ -18,7 +16,7 @@ const PostRoomId = async (sub: string): Promise<RoomData> => {
             "posted_by": "${sub}"
         }`,
   }).then((response) => response);
-  return res.json() as Promise<RoomData>;
+  return res.json() as Promise<roomData>;
 };
 
 export default PostRoomId;
