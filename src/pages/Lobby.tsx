@@ -6,109 +6,100 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import Typography from "@mui/material/Typography";
 import theme from "../styles";
 import UserList from "../components/UserList";
+import InviteButton from "../components/InviteButton";
 
-const Lobby = () => (
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Grid
-      container
-      component="main"
-      display="flex"
-      sx={{
-        alignItems: { sm: "center" },
-        height: "100vh",
-        p: 3,
-      }}
-    >
+const Lobby = () => {
+  const url = "oekaki-app/lobby";
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Grid
-        item
-        xs={12}
-        sm={6}
+        container
+        component="main"
+        display="flex"
         sx={{
-          height: { xs: "80%", sm: "100%" },
+          alignItems: { sm: "center" },
+          height: "100vh",
+          p: 3,
         }}
       >
-        <Box
+        <Grid
+          item
+          xs={12}
+          sm={6}
           sx={{
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
+            height: { xs: "80%", sm: "100%" },
           }}
         >
           <Box
             sx={{
-              pb: 2,
-              display: { xs: "block", sm: "none" },
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
             }}
           >
-            <Typography variant="h5">Oekaki App</Typography>
-          </Box>
-          <UserList />
-        </Box>
-      </Grid>
-      <Grid
-        item
-        sm={6}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-        sx={{
-          height: { xs: "20%", sm: "100%" },
-          width: "100%",
-        }}
-      >
-        <Box
-          sx={{
-            pb: 5,
-            display: { xs: "none", sm: "block" },
-          }}
-        >
-          <Typography variant="h3">Oekaki App</Typography>
-        </Box>
-        <Box display="flex">
-          <Box sx={{ pr: 1 }}>
-            <Button
-              variant="contained"
-              size="large"
-              endIcon={<PersonAddAlt1Icon />}
+            <Box
               sx={{
-                background: theme.palette.secondary.main,
-                "&:hover": {
-                  background: theme.palette.secondary.dark,
-                },
+                pb: 2,
+                display: { xs: "block", sm: "none" },
               }}
             >
-              招待
-            </Button>
-          </Box>
-          <Link to="/main" style={{ textDecoration: "none" }}>
-            <Box sx={{ pl: 1 }}>
-              <Button
-                variant="contained"
-                size="large"
-                endIcon={<SendIcon />}
-                sx={{
-                  background: theme.palette.secondary.main,
-                  "&:hover": {
-                    background: theme.palette.secondary.dark,
-                  },
-                }}
-              >
-                スタート
-              </Button>
+              <Typography variant="h5">Oekaki App</Typography>
             </Box>
-          </Link>
-        </Box>
+            <UserList />
+          </Box>
+        </Grid>
+        <Grid
+          item
+          sm={6}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          sx={{
+            height: { xs: "20%", sm: "100%" },
+            width: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              pb: 5,
+              display: { xs: "none", sm: "block" },
+            }}
+          >
+            <Typography variant="h3">Oekaki App</Typography>
+          </Box>
+          <Box display="flex">
+            <Box sx={{ pr: 1 }}>
+              <InviteButton url={url} />
+            </Box>
+            <Link to="/main" style={{ textDecoration: "none" }}>
+              <Box sx={{ pl: 1 }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  endIcon={<SendIcon />}
+                  sx={{
+                    background: theme.palette.secondary.main,
+                    "&:hover": {
+                      background: theme.palette.secondary.dark,
+                    },
+                  }}
+                >
+                  スタート
+                </Button>
+              </Box>
+            </Link>
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
-  </ThemeProvider>
-);
+    </ThemeProvider>
+  );
+};
 
 export default Lobby;
