@@ -17,6 +17,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { TwitterShareButton, TwitterIcon, LineShareButton, LineIcon } from "react-share";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import theme from "../styles";
 import UserList from "../components/UserList";
@@ -128,6 +129,16 @@ const Lobby = () => {
                       </IconButton>
                     </CopyToClipboard>
                     <SyntaxHighlighter>{url}</SyntaxHighlighter>
+                  </Box>
+                  <Box display="flex" justifyContent="flex-end">
+                    <Box sx={{ pr: 1 }}>
+                      <TwitterShareButton url={url} title="みんなで遊ぼう、お絵かきアプリ！" hashtags={["oekakiapp"]}>
+                        <TwitterIcon size={30} round />
+                      </TwitterShareButton>
+                    </Box>
+                    <LineShareButton url={url} title="みんなで遊ぼう、お絵かきアプリ！">
+                      <LineIcon size={30} round />
+                    </LineShareButton>
                   </Box>
                 </DialogContent>
               </Dialog>
