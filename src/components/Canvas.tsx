@@ -1,5 +1,5 @@
 import Konva from "konva";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
@@ -24,14 +24,6 @@ type Props = {
   lineWidth: number;
 };
 
-function getStageWidth(): number {
-  const w = window.parent.screen.width;
-  if (w < 600) {
-    return w * 0.95;
-  }
-  return w * 0.6;
-}
-
 function getStageHeight(): number {
   const w = window.parent.screen.width;
   const h = window.parent.screen.height;
@@ -55,13 +47,9 @@ const Canvas: React.VFC<Props> = (props) => {
     setLineColor,
     lineWidth,
   } = props;
-  // const [lineWidth, setLineWidth] = useState(5);
-  // const [lineColor, setLineColor] = useState("#000000");
-  // const [tool, setTool] = useState<ToolType>("pen");
+  const [stageWidth, setStageWidth] = useState(1000);
   const isDrawing = useRef<boolean>(false);
-  // const [history, setHistory] = useState<LineType[][]>([[]]);
-  // const [historyStep, setHistoryStep] = useState(0);
-  const stageWidth = getStageWidth();
+  const parentContainer = useRef<HTMLElement | null>(null);
   const stageHeight = getStageHeight();
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
@@ -112,8 +100,20 @@ const Canvas: React.VFC<Props> = (props) => {
     setLineColor(stroke);
   };
 
+  const checkSize = () => {
+    const div = parentContainer.current;
+    if (div) {
+      setStageWidth(div.offsetWidth);
+    }
+  };
+
+  useEffect(() => {
+    checkSize();
+    window.addEventListener("resize", checkSize);
+  });
+
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", width: "80%" }} ref={parentContainer}>
       <Stage
         ref={stageRef}
         onMouseDown={handleMouseDown}
