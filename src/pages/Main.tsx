@@ -17,7 +17,6 @@ import { GetUserId } from "../api/users";
 import Canvas from "../components/Canvas";
 import { DataTypeFromServer, LineType, MessageType, ToolType } from "../types";
 import CommentLeft from "../components/CommentLeft";
-import CommentRight from "../components/CommentRight";
 import theme from "../styles";
 
 import Pen from "../components/Pen";
@@ -241,7 +240,6 @@ const Main = () => {
               <CommentLeft />
               <CommentLeft />
               <CommentLeft />
-              <CommentRight />
             </Box>
             <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
               <Stack direction="row">
