@@ -160,6 +160,7 @@ const Main: React.VFC<Props> = (props) => {
           messageText={messageText}
           setMessageText={setMessageText}
           handleTextMessage={handleTextMessage}
+          messages={messages}
         />
       </Stack>
     </div>
