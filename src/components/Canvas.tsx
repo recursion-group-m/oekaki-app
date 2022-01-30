@@ -1,31 +1,12 @@
 import Konva from "konva";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
-
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
+import { ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-
 import theme from "../styles";
-
-import Undo from "./Undo";
-import Redo from "./Redo";
-import Pen from "./Pen";
-import Eraser from "./Eraser";
-import Dropper from "./Dropper";
-import LineWidth from "./LineWidth";
-import ColorPalette from "./ColorPalette";
 
 import { LineType, ToolType } from "../types";
 
@@ -33,9 +14,14 @@ type Props = {
   stageRef: React.RefObject<Konva.Stage>;
   lines: LineType[];
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
-  messageText: string;
-  setMessageText: React.Dispatch<React.SetStateAction<string>>;
-  handleTextMessage: () => void;
+  tool: ToolType;
+  history: LineType[][];
+  setHistory: React.Dispatch<React.SetStateAction<LineType[][]>>;
+  historyStep: number;
+  setHistoryStep: React.Dispatch<React.SetStateAction<number>>;
+  lineColor: string;
+  setLineColor: React.Dispatch<React.SetStateAction<string>>;
+  lineWidth: number;
 };
 
 function getStageWidth(): number {
@@ -56,13 +42,25 @@ function getStageHeight(): number {
 }
 
 const Canvas: React.VFC<Props> = (props) => {
-  const { stageRef, lines, setLines, messageText, setMessageText, handleTextMessage } = props;
-  const [lineWidth, setLineWidth] = useState(5);
-  const [lineColor, setLineColor] = useState("#000000");
-  const [tool, setTool] = useState<ToolType>("pen");
+  const {
+    stageRef,
+    lines,
+    setLines,
+    tool,
+    history,
+    setHistory,
+    historyStep,
+    setHistoryStep,
+    lineColor,
+    setLineColor,
+    lineWidth,
+  } = props;
+  // const [lineWidth, setLineWidth] = useState(5);
+  // const [lineColor, setLineColor] = useState("#000000");
+  // const [tool, setTool] = useState<ToolType>("pen");
   const isDrawing = useRef<boolean>(false);
-  const [history, setHistory] = useState<LineType[][]>([[]]);
-  const [historyStep, setHistoryStep] = useState(0);
+  // const [history, setHistory] = useState<LineType[][]>([[]]);
+  // const [historyStep, setHistoryStep] = useState(0);
   const stageWidth = getStageWidth();
   const stageHeight = getStageHeight();
 
@@ -106,26 +104,6 @@ const Canvas: React.VFC<Props> = (props) => {
     setHistoryStep(historyStep + 1);
   };
 
-  const handleChangeToolType = (type: ToolType) => setTool(type);
-
-  const handleUndo = () => {
-    if (historyStep === 0) {
-      return;
-    }
-
-    setHistoryStep(historyStep - 1);
-    setLines(history[historyStep - 1]);
-  };
-
-  const handleRedo = () => {
-    if (historyStep === history.length - 1) {
-      return;
-    }
-
-    setHistoryStep(historyStep + 1);
-    setLines(history[historyStep + 1]);
-  };
-
   const handleChangePalette = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool !== "dropper") {
       return;
@@ -135,156 +113,47 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Stack
-      direction={{ xs: "column", sm: "row" }}
-      sx={{ justifyContent: "space-between", minHeight: "100%", bgcolor: theme.palette.background.default }}
-    >
-      <Grid sm={9} item>
-        <Grid
+    <Box sx={{ display: "flex" }}>
+      <Stage
+        ref={stageRef}
+        onMouseDown={handleMouseDown}
+        onMousemove={handleMouseMove}
+        onMouseup={handleMouseUp}
+        width={stageWidth}
+        height={stageHeight}
+        style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
+        sx={{ position: "relative", zIndex: "tooltip" }}
+      >
+        <Layer>
+          {lines.map((line) => (
+            <Line
+              key={shortid.generate()}
+              points={line.points}
+              stroke={line.color}
+              strokeWidth={line.width}
+              tension={0.5}
+              lineCap="round"
+              globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+              onMouseDown={handleChangePalette}
+            />
+          ))}
+        </Layer>
+      </Stage>
+      <ThemeProvider theme={theme}>
+        <Typography
+          variant="h3"
           sx={{
-            minHeight: "100%",
-            justifyContent: "center",
-            alignItems: "center",
+            zIndex: "modal",
+            position: "absolute",
+            top: "5%",
+            left: "8%",
+            color: theme.palette.secondary.main,
           }}
-          container
         >
-          <Grid item>
-            <Stage
-              ref={stageRef}
-              onMouseDown={handleMouseDown}
-              onMousemove={handleMouseMove}
-              onMouseup={handleMouseUp}
-              width={stageWidth}
-              height={stageHeight}
-              style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
-            >
-              <Layer>
-                {lines.map((line) => (
-                  <Line
-                    key={shortid.generate()}
-                    points={line.points}
-                    stroke={line.color}
-                    strokeWidth={line.width}
-                    tension={0.5}
-                    lineCap="round"
-                    globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
-                    onMouseDown={handleChangePalette}
-                  />
-                ))}
-              </Layer>
-            </Stage>
-          </Grid>
-          <Grid sm={10} item>
-            <Grid sx={{ justifyContent: "space-evenly", alignItems: "center" }} container>
-              <Grid item>
-                <Pen
-                  onClick={() => {
-                    handleChangeToolType("pen");
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <Eraser
-                  onClick={() => {
-                    handleChangeToolType("eraser");
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <Dropper
-                  onClick={() => {
-                    handleChangeToolType("dropper");
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <LineWidth
-                  width={lineWidth}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineWidth(+e.target.value)}
-                />
-              </Grid>
-
-              <Grid item>
-                <div>
-                  <ColorPalette
-                    lineColor={lineColor}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-                  />
-                </div>
-              </Grid>
-              <Grid item>
-                <div>
-                  <Undo onClick={handleUndo} />
-                  <Redo onClick={handleRedo} />
-                </div>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Grid sm={3} sx={{ minHeight: "100%", pt: "1rem" }} item>
-        <Stack sx={{ height: "100%", px: "2rem" }}>
-          <Box>
-            <Typography variant="h2" color={theme.palette.secondary.main}>
-              ??????
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              height: "70%",
-              overflow: "auto",
-              bgcolor: "white",
-              mt: "2rem",
-              display: "flex",
-              p: "1rem",
-              borderRadius: "2%",
-            }}
-          >
-            <Box>
-              <Card sx={{ border: 1, borderColor: theme.palette.secondary.main }}>
-                <CardContent>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    koky
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                    answer
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Box>
-          </Box>
-          <Box sx={{ pt: "2rem", display: "flex", justifyContent: "center" }}>
-            <Stack direction="row">
-              <FormControl>
-                <InputLabel>ひらがな６文字</InputLabel>
-                <Input
-                  id="my-input"
-                  aria-describedby="my-helper-text"
-                  value={messageText}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
-                />
-                <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
-              </FormControl>
-              <Box sx={{ display: "flex", alignItems: "center", pl: "1rem" }}>
-                <Button
-                  sx={{
-                    bgcolor: theme.palette.secondary.main,
-                    color: "white",
-                    "&:hover": { color: theme.palette.secondary.dark },
-                  }}
-                  variant="outlined"
-                  startIcon={<SendIcon />}
-                  onClick={handleTextMessage}
-                >
-                  Send
-                </Button>
-              </Box>
-            </Stack>
-          </Box>
-        </Stack>
-      </Grid>
-    </Stack>
+          Oekaki App
+        </Typography>
+      </ThemeProvider>
+    </Box>
   );
 };
 
