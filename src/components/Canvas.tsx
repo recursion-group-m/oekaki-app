@@ -58,7 +58,7 @@ const Canvas: React.VFC<Props> = (props) => {
   // const [lineWidth, setLineWidth] = useState(5);
   // const [lineColor, setLineColor] = useState("#000000");
   // const [tool, setTool] = useState<ToolType>("pen");
-  const [stageWidth, setStageWidths] = useState(1000);
+  const [stageWidth, setStageWidth] = useState(1000);
   const isDrawing = useRef<boolean>(false);
   const parentContainer = useRef<HTMLElement | null>(null);
   // const [history, setHistory] = useState<LineType[][]>([[]]);
@@ -115,8 +115,9 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   const checkSize = () => {
-    if (parentContainer.current != null) {
-      setStageWidths(parentContainer.current.offsetWidth);
+    const div = parentContainer.current;
+    if (div) {
+      setStageWidth(div.offsetWidth);
     }
   };
 
