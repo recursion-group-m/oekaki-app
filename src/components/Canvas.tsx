@@ -122,6 +122,7 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   useEffect(() => {
+    checkSize();
     window.addEventListener("resize", checkSize);
   });
 
