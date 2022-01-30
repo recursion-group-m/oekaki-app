@@ -1,1 +1,1 @@
-# [Oekaki App](https://recursion-group-m.github.io/oekaki-app/)
+# [Oekaki App](https://oekaki-app.netlify.app/)
