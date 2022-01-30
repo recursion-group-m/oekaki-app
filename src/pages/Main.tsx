@@ -26,6 +26,7 @@ import Undo from "../components/Undo";
 import Redo from "../components/Redo";
 import ColorPalette from "../components/ColorPalette";
 import LineWidth from "../components/LineWidth";
+import RightContainer from "../components/RightContainer";
 
 type stageType = Konva.Stage;
 
@@ -169,6 +170,8 @@ const Main = () => {
               setLineColor={setLineColor}
               lineWidth={lineWidth}
             />
+
+            {/* ToolsContainer */}
             <Box sx={{ pt: 5, width: "75%" }}>
               <Stack>
                 <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
@@ -216,61 +219,13 @@ const Main = () => {
             </Box>
           </Stack>
         </Grid>
-        <Grid sm={3} sx={{ pt: 2 }} item>
-          <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
-            <Box>
-              <Typography variant="h3" color={theme.palette.secondary.main}>
-                ??????
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                height: { xs: "300px", sm: "65%" },
-                overflow: "scroll",
-                bgcolor: "white",
-                mt: "2rem",
-                display: "flex",
-                flexDirection: "column",
-                p: "1rem",
-                borderRadius: 5,
-                boxShadow: 3,
-              }}
-            >
-              <CommentLeft />
-              <CommentLeft />
-              <CommentLeft />
-              <CommentLeft />
-            </Box>
-            <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
-              <Stack direction="row">
-                <FormControl>
-                  <InputLabel>ひらがな６文字</InputLabel>
-                  <Input
-                    id="my-input"
-                    aria-describedby="my-helper-text"
-                    value={messageText}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
-                  />
-                  <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
-                </FormControl>
-                <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
-                  <Button
-                    sx={{
-                      bgcolor: theme.palette.secondary.main,
-                      color: "white",
-                      "&:hover": { color: theme.palette.secondary.dark },
-                    }}
-                    variant="outlined"
-                    startIcon={<SendIcon />}
-                    onClick={handleTextMessage}
-                  >
-                    Send
-                  </Button>
-                </Box>
-              </Stack>
-            </Box>
-          </Stack>
-        </Grid>
+
+        {/* RightSideContainer */}
+        <RightContainer
+          messageText={messageText}
+          setMessageText={setMessageText}
+          handleTextMessage={handleTextMessage}
+        />
       </Stack>
     </div>
   );
