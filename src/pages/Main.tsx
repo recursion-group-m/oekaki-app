@@ -5,8 +5,6 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
-import PostRoomId from "../api/rooms";
-import { GetUserId } from "../api/users";
 import Canvas from "../components/Canvas";
 import { DataTypeFromServer, LineType, MessageType, ToolType } from "../types";
 import theme from "../styles";
@@ -16,11 +14,12 @@ import ToolsContainer from "../components/ToolsContainer";
 
 type stageType = Konva.Stage;
 
-const info = {
-  djangoWsUrl: process.env.REACT_APP_DJANGO_WS_URL || "localhost",
+type Props = {
+  client: W3CWebSocket | undefined;
 };
 
-const Main = () => {
+const Main: React.VFC<Props> = (props) => {
+  const { client } = props;
   const stageRef = useRef<stageType>(null);
   const [lines, setLines] = useState<LineType[]>([]);
   const [tool, setTool] = useState<ToolType>("pen");
@@ -46,24 +45,18 @@ const Main = () => {
   //   setConfirmationState(false);
   // };
 
-  const client = useRef<W3CWebSocket>();
-
   // subは
   // const { user } = useAuth0;
   // で置換予定
   const sub = "test1111111111";
+
   useEffect(() => {
-    const openWebSocket = async () => {
-      // eslint-disable-next-line no-console
-      GetUserId(sub).catch((e) => console.log(e));
-      const postResponse = await PostRoomId(sub);
-      const roomId = postResponse.room_id;
-      client.current = new W3CWebSocket(`${info.djangoWsUrl}/${roomId}`);
-      client.current.onopen = () => {
+    if (client !== undefined) {
+      client.onopen = () => {
         // eslint-disable-next-line no-console
         console.log("WebSocket Client Connected");
       };
-      client.current.onmessage = (message) => {
+      client.onmessage = (message) => {
         if (typeof message.data === "string") {
           const dataFromServer = JSON.parse(message.data) as DataTypeFromServer;
           // eslint-disable-next-line no-console
@@ -79,15 +72,13 @@ const Main = () => {
           }
         }
       };
-    };
-    // eslint-disable-next-line no-console
-    openWebSocket().catch((e) => console.log(e));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleTextMessage = () => {
-    if (typeof client !== "undefined" && typeof client.current !== "undefined") {
-      client.current.send(
+    if (client !== undefined) {
+      client.send(
         JSON.stringify({
           type: "message",
           message: messageText,
