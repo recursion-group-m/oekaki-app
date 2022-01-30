@@ -147,94 +147,47 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Grid sm={9} sx={{ pt: "3rem" }} item>
-      <Stack sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ display: "flex" }}>
-          <Stage
-            ref={stageRef}
-            onMouseDown={handleMouseDown}
-            onMousemove={handleMouseMove}
-            onMouseup={handleMouseUp}
-            width={stageWidth}
-            height={stageHeight}
-            style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
-            sx={{ position: "relative", zIndex: "tooltip" }}
-          >
-            <Layer>
-              {lines.map((line) => (
-                <Line
-                  key={shortid.generate()}
-                  points={line.points}
-                  stroke={line.color}
-                  strokeWidth={line.width}
-                  tension={0.5}
-                  lineCap="round"
-                  globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
-                  onMouseDown={handleChangePalette}
-                />
-              ))}
-            </Layer>
-          </Stage>
-          <ThemeProvider theme={theme}>
-            <Typography
-              variant="h3"
-              sx={{
-                zIndex: "modal",
-                position: "absolute",
-                top: "5%",
-                left: "8%",
-                color: theme.palette.secondary.main,
-              }}
-            >
-              Oekaki App
-            </Typography>
-          </ThemeProvider>
-        </Box>
-        <Box sx={{ pt: 5, width: "75%" }}>
-          {/* <Stack>
-            <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-              <Box>
-                <Pen
-                  onClick={() => {
-                    handleChangeToolType("pen");
-                  }}
-                />
-              </Box>
-              <Box>
-                <Eraser
-                  onClick={() => {
-                    handleChangeToolType("eraser");
-                  }}
-                />
-              </Box>
-              <Box>
-                <Dropper
-                  onClick={() => {
-                    handleChangeToolType("dropper");
-                  }}
-                />
-              </Box>
-              <Box>
-                <ColorPalette
-                  lineColor={lineColor}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-                />
-              </Box>
-              <Box>
-                <Undo onClick={handleUndo} />
-                <Redo onClick={handleRedo} />
-              </Box>
-            </Stack>
-            <Box sx={{ width: "30%", pt: 3 }}>
-              <LineWidth
-                width={lineWidth}
-                onChange={(event: Event, value: number | number[], activeThumb: number) => setLineWidth(Number(value))}
-              />
-            </Box>
-          </Stack> */}
-        </Box>
-      </Stack>
-    </Grid>
+    <Box sx={{ display: "flex" }}>
+      <Stage
+        ref={stageRef}
+        onMouseDown={handleMouseDown}
+        onMousemove={handleMouseMove}
+        onMouseup={handleMouseUp}
+        width={stageWidth}
+        height={stageHeight}
+        style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
+        sx={{ position: "relative", zIndex: "tooltip" }}
+      >
+        <Layer>
+          {lines.map((line) => (
+            <Line
+              key={shortid.generate()}
+              points={line.points}
+              stroke={line.color}
+              strokeWidth={line.width}
+              tension={0.5}
+              lineCap="round"
+              globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+              onMouseDown={handleChangePalette}
+            />
+          ))}
+        </Layer>
+      </Stage>
+      <ThemeProvider theme={theme}>
+        <Typography
+          variant="h3"
+          sx={{
+            zIndex: "modal",
+            position: "absolute",
+            top: "5%",
+            left: "8%",
+            color: theme.palette.secondary.main,
+          }}
+        >
+          Oekaki App
+        </Typography>
+      </ThemeProvider>
+    </Box>
   );
 };
 

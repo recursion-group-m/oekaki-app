@@ -146,61 +146,77 @@ const Main = () => {
           bgcolor: theme.palette.background.default,
         }}
       >
-        <Canvas
-          stageRef={stageRef}
-          lines={lines}
-          setLines={setLines}
-          messageText={messageText}
-          setMessageText={setMessageText}
-          handleTextMessage={handleTextMessage}
-          tool={tool}
-          history={history}
-          setHistory={setHistory}
-          historyStep={historyStep}
-          setHistoryStep={setHistoryStep}
-          lineColor={lineColor}
-          setLineColor={setLineColor}
-          lineWidth={lineWidth}
-        />
         {/* <ResumeModal
           confirmationState={confirmationState}
           setConfirmationState={setConfirmationState}
           onClick={onClick}
         />
       */}
-        <Pen
-          onClick={() => {
-            handleChangeToolType("pen");
-          }}
-        />
-        <Box>
-          <Eraser
-            onClick={() => {
-              handleChangeToolType("eraser");
-            }}
-          />
-        </Box>
-        <Box>
-          <Dropper
-            onClick={() => {
-              handleChangeToolType("dropper");
-            }}
-          />
-        </Box>
-        <Box>
-          <ColorPalette
-            lineColor={lineColor}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-          />
-        </Box>
-        <Box>
-          <Undo onClick={handleUndo} />
-          <Redo onClick={handleRedo} />
-        </Box>
-        <LineWidth
-          width={lineWidth}
-          onChange={(event: Event, value: number | number[], activeThumb: number) => setLineWidth(Number(value))}
-        />
+        <Grid sm={9} sx={{ pt: "3rem" }} item>
+          <Stack sx={{ display: "flex", alignItems: "center" }}>
+            <Canvas
+              stageRef={stageRef}
+              lines={lines}
+              setLines={setLines}
+              messageText={messageText}
+              setMessageText={setMessageText}
+              handleTextMessage={handleTextMessage}
+              tool={tool}
+              history={history}
+              setHistory={setHistory}
+              historyStep={historyStep}
+              setHistoryStep={setHistoryStep}
+              lineColor={lineColor}
+              setLineColor={setLineColor}
+              lineWidth={lineWidth}
+            />
+            <Box sx={{ pt: 5, width: "75%" }}>
+              <Stack>
+                <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
+                  <Box>
+                    <Pen
+                      onClick={() => {
+                        handleChangeToolType("pen");
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <Eraser
+                      onClick={() => {
+                        handleChangeToolType("eraser");
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <Dropper
+                      onClick={() => {
+                        handleChangeToolType("dropper");
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <ColorPalette
+                      lineColor={lineColor}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
+                    />
+                  </Box>
+                  <Box>
+                    <Undo onClick={handleUndo} />
+                    <Redo onClick={handleRedo} />
+                  </Box>
+                </Stack>
+                <Box sx={{ width: "30%", pt: 3 }}>
+                  <LineWidth
+                    width={lineWidth}
+                    onChange={(event: Event, value: number | number[], activeThumb: number) =>
+                      setLineWidth(Number(value))
+                    }
+                  />
+                </Box>
+              </Stack>
+            </Box>
+          </Stack>
+        </Grid>
         <Grid sm={3} sx={{ pt: 2 }} item>
           <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
             <Box>
