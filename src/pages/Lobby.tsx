@@ -23,7 +23,7 @@ import UserList from "../components/UserList";
 
 const Lobby = () => {
   const [open, setOpen] = useState(false);
-  const url = "http://localhost:3000/oekaki-app/lobby";
+  const url = "http://localhost:3000/lobby";
 
   const handleClickOpen = () => {
     setOpen(true);
