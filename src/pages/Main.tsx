@@ -1,31 +1,16 @@
 import Konva from "konva";
 import React, { useEffect, useRef, useState } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import Stack from "@mui/material/Stack";
-// import Typography from "@mui/material/Typography";
+
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-// import FormControl from "@mui/material/FormControl";
-// import FormHelperText from "@mui/material/FormHelperText";
-// import InputLabel from "@mui/material/InputLabel";
-// import Button from "@mui/material/Button";
-// import Input from "@mui/material/Input";
-// import SendIcon from "@mui/icons-material/Send";
+import Stack from "@mui/material/Stack";
 
 import PostRoomId from "../api/rooms";
 import { GetUserId } from "../api/users";
 import Canvas from "../components/Canvas";
 import { DataTypeFromServer, LineType, MessageType, ToolType } from "../types";
-// import CommentLeft from "../components/CommentLeft";
 import theme from "../styles";
 
-// import Pen from "../components/Pen";
-// import Eraser from "../components/Eraser";
-// import Dropper from "../components/Dropper";
-// import Undo from "../components/Undo";
-// import Redo from "../components/Redo";
-// import ColorPalette from "../components/ColorPalette";
-// import LineWidth from "../components/LineWidth";
 import RightContainer from "../components/RightContainer";
 import ToolsContainer from "../components/ToolsContainer";
 
@@ -159,9 +144,6 @@ const Main = () => {
               stageRef={stageRef}
               lines={lines}
               setLines={setLines}
-              messageText={messageText}
-              setMessageText={setMessageText}
-              handleTextMessage={handleTextMessage}
               tool={tool}
               history={history}
               setHistory={setHistory}

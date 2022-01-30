@@ -4,19 +4,9 @@ import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
 import { ThemeProvider } from "@mui/material/styles";
-// import Stack from "@mui/material/Stack";
-// import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import theme from "../styles";
-
-// import Undo from "./Undo";
-// import Redo from "./Redo";
-// import Pen from "./Pen";
-// import Eraser from "./Eraser";
-// import Dropper from "./Dropper";
-// import LineWidth from "./LineWidth";
-// import ColorPalette from "./ColorPalette";
 
 import { LineType, ToolType } from "../types";
 
@@ -24,9 +14,6 @@ type Props = {
   stageRef: React.RefObject<Konva.Stage>;
   lines: LineType[];
   setLines: React.Dispatch<React.SetStateAction<LineType[]>>;
-  messageText: string;
-  setMessageText: React.Dispatch<React.SetStateAction<string>>;
-  handleTextMessage: () => void;
   tool: ToolType;
   history: LineType[][];
   setHistory: React.Dispatch<React.SetStateAction<LineType[][]>>;
@@ -116,24 +103,6 @@ const Canvas: React.VFC<Props> = (props) => {
     setHistory(history.slice(0, historyStep + 1).concat([lines.slice()]));
     setHistoryStep(historyStep + 1);
   };
-
-  // const handleChangeToolType = (type: ToolType) => setTool(type);
-
-  // const handleUndo = () => {
-  //   if (historyStep === 0) {
-  //     return;
-  //   }
-  //   setHistoryStep(historyStep - 1);
-  //   setLines(history[historyStep - 1]);
-  // };
-
-  // const handleRedo = () => {
-  //   if (historyStep === history.length - 1) {
-  //     return;
-  //   }
-  //   setHistoryStep(historyStep + 1);
-  //   setLines(history[historyStep + 1]);
-  // };
 
   const handleChangePalette = (event: Konva.KonvaEventObject<MouseEvent>) => {
     if (tool !== "dropper") {
