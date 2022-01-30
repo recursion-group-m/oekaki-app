@@ -2,31 +2,32 @@ import Konva from "konva";
 import React, { useEffect, useRef, useState } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+// import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import InputLabel from "@mui/material/InputLabel";
-import Button from "@mui/material/Button";
-import Input from "@mui/material/Input";
-import SendIcon from "@mui/icons-material/Send";
+// import FormControl from "@mui/material/FormControl";
+// import FormHelperText from "@mui/material/FormHelperText";
+// import InputLabel from "@mui/material/InputLabel";
+// import Button from "@mui/material/Button";
+// import Input from "@mui/material/Input";
+// import SendIcon from "@mui/icons-material/Send";
 
 import PostRoomId from "../api/rooms";
 import { GetUserId } from "../api/users";
 import Canvas from "../components/Canvas";
 import { DataTypeFromServer, LineType, MessageType, ToolType } from "../types";
-import CommentLeft from "../components/CommentLeft";
+// import CommentLeft from "../components/CommentLeft";
 import theme from "../styles";
 
-import Pen from "../components/Pen";
-import Eraser from "../components/Eraser";
-import Dropper from "../components/Dropper";
-import Undo from "../components/Undo";
-import Redo from "../components/Redo";
-import ColorPalette from "../components/ColorPalette";
-import LineWidth from "../components/LineWidth";
+// import Pen from "../components/Pen";
+// import Eraser from "../components/Eraser";
+// import Dropper from "../components/Dropper";
+// import Undo from "../components/Undo";
+// import Redo from "../components/Redo";
+// import ColorPalette from "../components/ColorPalette";
+// import LineWidth from "../components/LineWidth";
 import RightContainer from "../components/RightContainer";
+import ToolsContainer from "../components/ToolsContainer";
 
 type stageType = Konva.Stage;
 
@@ -170,57 +171,18 @@ const Main = () => {
               setLineColor={setLineColor}
               lineWidth={lineWidth}
             />
-
-            {/* ToolsContainer */}
-            <Box sx={{ pt: 5, width: "75%" }}>
-              <Stack>
-                <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-                  <Box>
-                    <Pen
-                      onClick={() => {
-                        handleChangeToolType("pen");
-                      }}
-                    />
-                  </Box>
-                  <Box>
-                    <Eraser
-                      onClick={() => {
-                        handleChangeToolType("eraser");
-                      }}
-                    />
-                  </Box>
-                  <Box>
-                    <Dropper
-                      onClick={() => {
-                        handleChangeToolType("dropper");
-                      }}
-                    />
-                  </Box>
-                  <Box>
-                    <ColorPalette
-                      lineColor={lineColor}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-                    />
-                  </Box>
-                  <Box>
-                    <Undo onClick={handleUndo} />
-                    <Redo onClick={handleRedo} />
-                  </Box>
-                </Stack>
-                <Box sx={{ width: "30%", pt: 3 }}>
-                  <LineWidth
-                    width={lineWidth}
-                    onChange={(event: Event, value: number | number[], activeThumb: number) =>
-                      setLineWidth(Number(value))
-                    }
-                  />
-                </Box>
-              </Stack>
-            </Box>
+            <ToolsContainer
+              handleChangeToolType={handleChangeToolType}
+              lineColor={lineColor}
+              setLineColor={setLineColor}
+              handleUndo={handleUndo}
+              handleRedo={handleRedo}
+              lineWidth={lineWidth}
+              setLineWidth={setLineWidth}
+            />
           </Stack>
         </Grid>
 
-        {/* RightSideContainer */}
         <RightContainer
           messageText={messageText}
           setMessageText={setMessageText}

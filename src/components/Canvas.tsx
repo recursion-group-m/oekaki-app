@@ -1,11 +1,11 @@
 import Konva from "konva";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Layer, Line, Stage } from "react-konva";
 import shortid from "shortid";
 // import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
 import { ThemeProvider } from "@mui/material/styles";
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
+// import Stack from "@mui/material/Stack";
+// import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import theme from "../styles";
@@ -15,8 +15,8 @@ import theme from "../styles";
 // import Pen from "./Pen";
 // import Eraser from "./Eraser";
 // import Dropper from "./Dropper";
-import LineWidth from "./LineWidth";
-import ColorPalette from "./ColorPalette";
+// import LineWidth from "./LineWidth";
+// import ColorPalette from "./ColorPalette";
 
 import { LineType, ToolType } from "../types";
 
@@ -59,9 +59,6 @@ const Canvas: React.VFC<Props> = (props) => {
     stageRef,
     lines,
     setLines,
-    messageText,
-    setMessageText,
-    handleTextMessage,
     tool,
     history,
     setHistory,
