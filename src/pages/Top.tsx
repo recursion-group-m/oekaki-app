@@ -39,7 +39,9 @@ const Top = () => (
           }}
         >
           <Box sx={{ pb: 5 }}>
-            <Typography variant="h2">Oekaki App</Typography>
+            <Typography variant="h2" sx={{ fontFamily: ["Neonderthaw", "cursive"].join(",") }}>
+              Oekaki App
+            </Typography>
             <Typography>みんなで遊ぼう！お絵かきアプリ！</Typography>
           </Box>
           <LoginButton />

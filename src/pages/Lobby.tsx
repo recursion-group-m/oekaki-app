@@ -59,12 +59,12 @@ const Lobby: React.VFC<Props> = (props) => {
   }, [roomId]);
 
   const userAccountList = [
-    { id: 1, userName: "ゲスト1" },
-    { id: 2, userName: "ゲスト2" },
-    { id: 3, userName: "ゲスト3" },
-    { id: 4, userName: "ゲスト4" },
-    { id: 5, userName: "ゲスト5" },
-    { id: 6, userName: "ゲスト6" },
+    { userName: "ゲスト1" },
+    { userName: "ゲスト2" },
+    { userName: "ゲスト3" },
+    { userName: "ゲスト4" },
+    { userName: "ゲスト5" },
+    { userName: "ゲスト6" },
   ];
   return (
     <ThemeProvider theme={theme}>
@@ -102,7 +102,9 @@ const Lobby: React.VFC<Props> = (props) => {
                 display: { xs: "block", sm: "none" },
               }}
             >
-              <Typography variant="h5">Oekaki App</Typography>
+              <Typography variant="h5" sx={{ fontFamily: ["Neonderthaw", "cursive"].join(",") }}>
+                Oekaki App
+              </Typography>
             </Box>
             <UserList userAccountList={userAccountList} />
           </Box>
@@ -125,7 +127,9 @@ const Lobby: React.VFC<Props> = (props) => {
               display: { xs: "none", sm: "block" },
             }}
           >
-            <Typography variant="h3">Oekaki App</Typography>
+            <Typography variant="h3" sx={{ fontFamily: ["Neonderthaw", "cursive"].join(",") }}>
+              Oekaki App
+            </Typography>
           </Box>
           <Box display="flex">
             <Box sx={{ pr: 1 }}>

@@ -1,9 +1,9 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
-  typography: {
-    fontFamily: ["Neonderthaw", "cursive"].join(","),
-  },
+  // typography: {
+  //   fontFamily: ["Neonderthaw", "cursive"].join(","),
+  // },
   palette: {
     background: {
       default: "#eafdb4",

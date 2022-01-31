@@ -12,7 +12,7 @@ import theme from "../styles";
 import UserAccount from "./UserAccount";
 
 type Props = {
-  userAccountList: { id: number; userName: string }[];
+  userAccountList: { userName: string }[];
 };
 
 const UserList: React.VFC<Props> = ({ userAccountList }) => (
