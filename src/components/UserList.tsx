@@ -5,8 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
+import PersonIcon from "@mui/icons-material/Person";
 import theme from "../styles";
 
 const UserList = () => (
@@ -22,40 +21,49 @@ const UserList = () => (
       boxShadow: 3,
     }}
   >
-    <Box sx={{ p: 1 }}>プレイヤー</Box>
     <Box
       sx={{
-        height: "100%",
+        height: "10%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "1.5rem",
+      }}
+    >
+      プレイヤーリスト
+    </Box>
+    <Box
+      sx={{
+        height: "90%",
         width: "90%",
-        borderRadius: "1rem",
         pb: 1,
       }}
     >
       <List
         sx={{
           height: "100%",
-          borderRadius: "1rem",
-          bgcolor: theme.palette.success.main,
           position: "relative",
           overflow: "auto",
         }}
       >
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar sx={{ color: "white" }}>
-              <ImageIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="ホスト" />
-        </ListItem>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar sx={{ color: "white" }}>
-              <WorkIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Work" />
-        </ListItem>
+        <Box
+          sx={{
+            bgcolor: theme.palette.success.main,
+            m: 1,
+            p: 1,
+            borderRadius: "1rem",
+            boxShadow: 3,
+          }}
+        >
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ color: "white" }}>
+                <PersonIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="ホスト" />
+          </ListItem>
+        </Box>
       </List>
     </Box>
   </Box>
