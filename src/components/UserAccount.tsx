@@ -8,10 +8,10 @@ import PersonIcon from "@mui/icons-material/Person";
 import theme from "../styles";
 
 type Props = {
-  primary: string;
+  userName: string;
 };
 
-const UserAccount: React.VFC<Props> = ({ primary }) => (
+const UserAccount: React.VFC<Props> = ({ userName }) => (
   <Box
     sx={{
       bgcolor: theme.palette.success.main,
@@ -27,7 +27,7 @@ const UserAccount: React.VFC<Props> = ({ primary }) => (
           <PersonIcon />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={primary} />
+      <ListItemText primary={userName} />
     </ListItem>
   </Box>
 );

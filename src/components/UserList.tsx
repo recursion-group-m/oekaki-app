@@ -7,8 +7,13 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
 import theme from "../styles";
+import UserAccount from "./UserAccount";
 
-const UserList = () => (
+type Props = {
+  userAccountList: { id: number; userName: string }[];
+};
+
+const UserList: React.VFC<Props> = ({ userAccountList }) => (
   <Box
     display="flex"
     justifyContent="center"
@@ -64,6 +69,9 @@ const UserList = () => (
             <ListItemText primary="ホスト" />
           </ListItem>
         </Box>
+        {userAccountList.map((user) => (
+          <UserAccount userName={user.userName} />
+        ))}
       </List>
     </Box>
   </Box>
