@@ -4,7 +4,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
+import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
+import StarsIcon from "@mui/icons-material/Stars";
 import PersonIcon from "@mui/icons-material/Person";
 import theme from "../styles";
 import UserAccount from "./UserAccount";
@@ -60,7 +62,13 @@ const UserList: React.VFC<Props> = ({ userAccountList }) => (
             boxShadow: 3,
           }}
         >
-          <ListItem>
+          <ListItem
+            secondaryAction={
+              <IconButton edge="end" disabled>
+                <StarsIcon />
+              </IconButton>
+            }
+          >
             <ListItemAvatar>
               <Avatar sx={{ color: "white" }}>
                 <PersonIcon />
