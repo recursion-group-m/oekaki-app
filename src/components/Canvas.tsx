@@ -148,6 +148,7 @@ const Canvas: React.VFC<Props> = (props) => {
             top: "5%",
             left: "8%",
             color: theme.palette.secondary.main,
+            fontFamily: ["Neonderthaw", "cursive"].join(","),
           }}
         >
           Oekaki App

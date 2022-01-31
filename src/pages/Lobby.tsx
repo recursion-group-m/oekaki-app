@@ -58,6 +58,14 @@ const Lobby: React.VFC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
+  const userAccountList = [
+    { userName: "ゲスト1" },
+    { userName: "ゲスト2" },
+    { userName: "ゲスト3" },
+    { userName: "ゲスト4" },
+    { userName: "ゲスト5" },
+    { userName: "ゲスト6" },
+  ];
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -94,9 +102,11 @@ const Lobby: React.VFC<Props> = (props) => {
                 display: { xs: "block", sm: "none" },
               }}
             >
-              <Typography variant="h5">Oekaki App</Typography>
+              <Typography variant="h5" sx={{ fontFamily: ["Neonderthaw", "cursive"].join(",") }}>
+                Oekaki App
+              </Typography>
             </Box>
-            <UserList />
+            <UserList userAccountList={userAccountList} />
           </Box>
         </Grid>
         <Grid
@@ -117,7 +127,9 @@ const Lobby: React.VFC<Props> = (props) => {
               display: { xs: "none", sm: "block" },
             }}
           >
-            <Typography variant="h3">Oekaki App</Typography>
+            <Typography variant="h3" sx={{ fontFamily: ["Neonderthaw", "cursive"].join(",") }}>
+              Oekaki App
+            </Typography>
           </Box>
           <Box display="flex">
             <Box sx={{ pr: 1 }}>
