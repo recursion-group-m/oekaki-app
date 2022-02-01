@@ -16,7 +16,7 @@ const CommentLeft: React.VFC<Props> = (props) => {
   return (
     <Stack direction="row" sx={{ width: "100%", py: 2 }}>
       <Avatar>{initialLetter}</Avatar>
-      <Stack direction="row" sx={{ width: "100%", py: 1, pl: 1, alignItems: "center" }}>
+      <Stack direction="row" sx={{ width: "100%", pl: 1, alignItems: "center" }}>
         <Box
           sx={{
             maxWidth: "60%",

@@ -4,7 +4,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
 
 const CorrectButton = () => (
-  <Box sx={{ width: "1rem", height: "1rem", ml: 1 }}>
+  <Box sx={{ width: "1rem", ml: 1 }}>
     <Button variant="contained" sx={{ borderRadius: "5em" }}>
       <CheckIcon />
     </Button>
