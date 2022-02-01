@@ -8,11 +8,14 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import BrushIcon from "@mui/icons-material/Brush";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import ColorizeIcon from "@mui/icons-material/Colorize";
+import { ThemeProvider } from "@mui/material/styles";
 
 import ColorPalette from "./ColorPalette";
 import LineWidth from "./LineWidth";
 import Redo from "./Redo";
 import Undo from "./Undo";
+
+import theme from "../styles";
 
 import { ToolType } from "../types";
 
@@ -40,33 +43,35 @@ const ToolsContainer: React.VFC<Props> = (props) => {
     <Box sx={{ pt: 5, width: "75%" }}>
       <Stack>
         <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-          <ToggleButtonGroup color="primary" value={alignment} exclusive onChange={handleChange}>
-            <ToggleButton
-              value="pen"
-              onClick={() => {
-                handleChangeToolType("pen");
-              }}
-            >
-              <BrushIcon /> ペン
-            </ToggleButton>
-            <ToggleButton
-              value="eraser"
-              onClick={() => {
-                handleChangeToolType("eraser");
-              }}
-            >
-              <AutoFixNormalIcon /> 消しゴム
-            </ToggleButton>
-            <ToggleButton
-              value="dropper"
-              onClick={() => {
-                handleChangeToolType("dropper");
-              }}
-            >
-              <ColorizeIcon />
-              スポイト
-            </ToggleButton>
-          </ToggleButtonGroup>
+          <ThemeProvider theme={theme}>
+            <ToggleButtonGroup color="secondary" value={alignment} exclusive onChange={handleChange}>
+              <ToggleButton
+                value="pen"
+                onClick={() => {
+                  handleChangeToolType("pen");
+                }}
+              >
+                <BrushIcon /> ペン
+              </ToggleButton>
+              <ToggleButton
+                value="eraser"
+                onClick={() => {
+                  handleChangeToolType("eraser");
+                }}
+              >
+                <AutoFixNormalIcon /> 消しゴム
+              </ToggleButton>
+              <ToggleButton
+                value="dropper"
+                onClick={() => {
+                  handleChangeToolType("dropper");
+                }}
+              >
+                <ColorizeIcon />
+                スポイト
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </ThemeProvider>
           <Box>
             <ColorPalette
               lineColor={lineColor}
