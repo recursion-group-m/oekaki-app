@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import BrushIcon from "@mui/icons-material/Brush";
+import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
+import ColorizeIcon from "@mui/icons-material/Colorize";
+
 import ColorPalette from "./ColorPalette";
-import Dropper from "./Dropper";
-import Eraser from "./Eraser";
 import LineWidth from "./LineWidth";
-import Pen from "./Pen";
 import Redo from "./Redo";
 import Undo from "./Undo";
 
@@ -25,32 +28,45 @@ type Props = {
 
 const ToolsContainer: React.VFC<Props> = (props) => {
   const { handleChangeToolType, lineColor, setLineColor, handleUndo, handleRedo, lineWidth, setLineWidth } = props;
+  const [alignment, setAlignment] = useState("pen");
+
+  const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string | null) => {
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
+  };
 
   return (
     <Box sx={{ pt: 5, width: "75%" }}>
       <Stack>
         <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-          <Box>
-            <Pen
+          <ToggleButtonGroup color="primary" value={alignment} exclusive onChange={handleChange}>
+            <ToggleButton
+              value="pen"
               onClick={() => {
                 handleChangeToolType("pen");
               }}
-            />
-          </Box>
-          <Box>
-            <Eraser
+            >
+              <BrushIcon /> ペン
+            </ToggleButton>
+            <ToggleButton
+              value="eraser"
               onClick={() => {
                 handleChangeToolType("eraser");
               }}
-            />
-          </Box>
-          <Box>
-            <Dropper
+            >
+              <AutoFixNormalIcon /> 消しゴム
+            </ToggleButton>
+            <ToggleButton
+              value="dropper"
               onClick={() => {
                 handleChangeToolType("dropper");
               }}
-            />
-          </Box>
+            >
+              <ColorizeIcon />
+              スポイト
+            </ToggleButton>
+          </ToggleButtonGroup>
           <Box>
             <ColorPalette
               lineColor={lineColor}
