@@ -42,7 +42,7 @@ const ToolsContainer: React.VFC<Props> = (props) => {
   return (
     <Box sx={{ pt: 5, width: "75%" }}>
       <Stack>
-        <Stack direction="row" sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
+        <Stack direction="row" sx={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
           <ThemeProvider theme={theme}>
             <ToggleButtonGroup color="secondary" value={alignment} exclusive onChange={handleChange}>
               <ToggleButton
@@ -72,13 +72,13 @@ const ToolsContainer: React.VFC<Props> = (props) => {
               </ToggleButton>
             </ToggleButtonGroup>
           </ThemeProvider>
-          <Box>
+          <Box sx={{ pl: 4 }}>
             <ColorPalette
               lineColor={lineColor}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
             />
           </Box>
-          <Box>
+          <Box sx={{ pl: 4 }}>
             <Undo onClick={handleUndo} />
             <Redo onClick={handleRedo} />
           </Box>
