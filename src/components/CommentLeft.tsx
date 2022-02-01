@@ -1,9 +1,9 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import CheckIcon from "@mui/icons-material/Check";
+import CorrectButton from "./CorrectButton";
+
 import theme from "../styles";
 
 type Props = {
@@ -32,11 +32,7 @@ const CommentLeft: React.VFC<Props> = (props) => {
         >
           {text}
         </Box>
-        <Box sx={{ width: "1rem", height: "1rem", ml: 1 }}>
-          <Button variant="contained" sx={{ borderRadius: "5em" }}>
-            <CheckIcon />
-          </Button>
-        </Box>
+        <CorrectButton />
       </Stack>
     </Stack>
   );
