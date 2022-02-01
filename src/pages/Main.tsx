@@ -118,7 +118,7 @@ const Main: React.VFC<Props> = (props) => {
       <Stack
         direction={{ xs: "column", sm: "row" }}
         sx={{
-          justifyContent: "space-between",
+          justifyContent: "center",
           height: { sx: "100%", sm: "100vh" },
           bgcolor: theme.palette.background.default,
         }}
@@ -156,12 +156,12 @@ const Main: React.VFC<Props> = (props) => {
           </Stack>
         </Grid>
 
-        <RightContainer
+        {/* <RightContainer
           messageText={messageText}
           setMessageText={setMessageText}
           handleTextMessage={handleTextMessage}
           messages={messages}
-        />
+        /> */}
       </Stack>
     </div>
   );
