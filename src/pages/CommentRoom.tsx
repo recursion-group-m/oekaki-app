@@ -10,7 +10,6 @@ import { DataTypeFromServer, LineType, MessageType, ToolType } from "../types";
 import theme from "../styles";
 
 import RightContainer from "../components/RightContainer";
-import ToolsContainer from "../components/ToolsContainer";
 
 type stageType = Konva.Stage;
 
@@ -93,24 +92,6 @@ const Main: React.VFC<Props> = (props) => {
     // eslint-disable-next-line no-console
     console.log(messages);
   }, [messages]);
-
-  const handleChangeToolType = (type: ToolType) => setTool(type);
-
-  const handleUndo = () => {
-    if (historyStep === 0) {
-      return;
-    }
-    setHistoryStep(historyStep - 1);
-    setLines(history[historyStep - 1]);
-  };
-
-  const handleRedo = () => {
-    if (historyStep === history.length - 1) {
-      return;
-    }
-    setHistoryStep(historyStep + 1);
-    setLines(history[historyStep + 1]);
-  };
 
   return (
     <div style={{ width: "100%", height: "100%" }}>

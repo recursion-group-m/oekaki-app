@@ -9,7 +9,6 @@ import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 
 import CommentLeft from "./CommentLeft";
 
