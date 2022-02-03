@@ -9,6 +9,7 @@ import BrushIcon from "@mui/icons-material/Brush";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import ColorizeIcon from "@mui/icons-material/Colorize";
 import { ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 import ColorPalette from "./ColorPalette";
 import LineWidth from "./LineWidth";
@@ -87,6 +88,9 @@ const ToolsContainer: React.VFC<Props> = (props) => {
           </Stack>
           <Box>
             <InviteButton url={url} />
+            <Link to="/commentroom" style={{ textDecoration: "none" }}>
+              <Box>CommentRoomへGo!!</Box>
+            </Link>
           </Box>
         </Stack>
         <Box sx={{ width: "30%", pt: 3 }}>
