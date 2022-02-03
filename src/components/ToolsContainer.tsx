@@ -43,8 +43,8 @@ const ToolsContainer: React.VFC<Props> = (props) => {
 
   return (
     <Box sx={{ pt: 5, width: "75%" }}>
-      <Stack>
-        <Stack direction="row" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Stack direction={{ xs: "column", sm: "row" }} sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Stack>
           <Stack direction="row" sx={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
             <ThemeProvider theme={theme}>
               <ToggleButtonGroup color="secondary" value={alignment} exclusive onChange={handleChange}>
@@ -86,18 +86,19 @@ const ToolsContainer: React.VFC<Props> = (props) => {
               <Redo onClick={handleRedo} />
             </Box>
           </Stack>
-          <Box>
-            <InviteButton url={url} />
-            <Link to="/commentroom" style={{ textDecoration: "none" }}>
-              <Box>CommentRoomへGo!!</Box>
-            </Link>
+
+          <Box sx={{ width: "30%", pt: 3 }}>
+            <LineWidth
+              width={lineWidth}
+              onChange={(event: Event, value: number | number[], activeThumb: number) => setLineWidth(Number(value))}
+            />
           </Box>
         </Stack>
-        <Box sx={{ width: "30%", pt: 3 }}>
-          <LineWidth
-            width={lineWidth}
-            onChange={(event: Event, value: number | number[], activeThumb: number) => setLineWidth(Number(value))}
-          />
+        <Box>
+          <InviteButton url={url} />
+          <Link to="/commentroom" style={{ textDecoration: "none" }}>
+            <Box>CommentRoomへGo!!</Box>
+          </Link>
         </Box>
       </Stack>
     </Box>
