@@ -9,7 +9,7 @@ import Canvas from "../components/Canvas";
 import { DataTypeFromServer, LineType, MessageType, ToolType } from "../types";
 import theme from "../styles";
 
-// import RightContainer from "../components/RightContainer";
+import RightContainer from "../components/RightContainer";
 import ToolsContainer from "../components/ToolsContainer";
 
 type stageType = Konva.Stage;
@@ -118,8 +118,8 @@ const Main: React.VFC<Props> = (props) => {
       <Stack
         direction={{ xs: "column", sm: "row" }}
         sx={{
-          justifyContent: "center",
-          height: "100vh",
+          justifyContent: "space-between",
+          height: { sx: "100%", sm: "100vh" },
           bgcolor: theme.palette.background.default,
         }}
       >
@@ -144,24 +144,15 @@ const Main: React.VFC<Props> = (props) => {
               setLineColor={setLineColor}
               lineWidth={lineWidth}
             />
-            <ToolsContainer
-              handleChangeToolType={handleChangeToolType}
-              lineColor={lineColor}
-              setLineColor={setLineColor}
-              handleUndo={handleUndo}
-              handleRedo={handleRedo}
-              lineWidth={lineWidth}
-              setLineWidth={setLineWidth}
-            />
           </Stack>
         </Grid>
 
-        {/* <RightContainer
+        <RightContainer
           messageText={messageText}
           setMessageText={setMessageText}
           handleTextMessage={handleTextMessage}
           messages={messages}
-        /> */}
+        />
       </Stack>
     </div>
   );

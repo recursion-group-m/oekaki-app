@@ -14,6 +14,7 @@ import ColorPalette from "./ColorPalette";
 import LineWidth from "./LineWidth";
 import Redo from "./Redo";
 import Undo from "./Undo";
+import InviteButton from "./InviteButton";
 
 import theme from "../styles";
 
@@ -32,7 +33,7 @@ type Props = {
 const ToolsContainer: React.VFC<Props> = (props) => {
   const { handleChangeToolType, lineColor, setLineColor, handleUndo, handleRedo, lineWidth, setLineWidth } = props;
   const [alignment, setAlignment] = useState("pen");
-
+  const url = "oekaki-app/lobby";
   const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string | null) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
@@ -42,45 +43,50 @@ const ToolsContainer: React.VFC<Props> = (props) => {
   return (
     <Box sx={{ pt: 5, width: "75%" }}>
       <Stack>
-        <Stack direction="row" sx={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
-          <ThemeProvider theme={theme}>
-            <ToggleButtonGroup color="secondary" value={alignment} exclusive onChange={handleChange}>
-              <ToggleButton
-                value="pen"
-                onClick={() => {
-                  handleChangeToolType("pen");
-                }}
-              >
-                <BrushIcon /> ペン
-              </ToggleButton>
-              <ToggleButton
-                value="eraser"
-                onClick={() => {
-                  handleChangeToolType("eraser");
-                }}
-              >
-                <AutoFixNormalIcon /> 消しゴム
-              </ToggleButton>
-              <ToggleButton
-                value="dropper"
-                onClick={() => {
-                  handleChangeToolType("dropper");
-                }}
-              >
-                <ColorizeIcon />
-                スポイト
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </ThemeProvider>
-          <Box sx={{ pl: 4 }}>
-            <ColorPalette
-              lineColor={lineColor}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ pl: 4 }}>
-            <Undo onClick={handleUndo} />
-            <Redo onClick={handleRedo} />
+        <Stack direction="row" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Stack direction="row" sx={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
+            <ThemeProvider theme={theme}>
+              <ToggleButtonGroup color="secondary" value={alignment} exclusive onChange={handleChange}>
+                <ToggleButton
+                  value="pen"
+                  onClick={() => {
+                    handleChangeToolType("pen");
+                  }}
+                >
+                  <BrushIcon /> ペン
+                </ToggleButton>
+                <ToggleButton
+                  value="eraser"
+                  onClick={() => {
+                    handleChangeToolType("eraser");
+                  }}
+                >
+                  <AutoFixNormalIcon /> 消しゴム
+                </ToggleButton>
+                <ToggleButton
+                  value="dropper"
+                  onClick={() => {
+                    handleChangeToolType("dropper");
+                  }}
+                >
+                  <ColorizeIcon />
+                  スポイト
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </ThemeProvider>
+            <Box sx={{ pl: 4 }}>
+              <ColorPalette
+                lineColor={lineColor}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
+              />
+            </Box>
+            <Box sx={{ pl: 4 }}>
+              <Undo onClick={handleUndo} />
+              <Redo onClick={handleRedo} />
+            </Box>
+          </Stack>
+          <Box>
+            <InviteButton url={url} />
           </Box>
         </Stack>
         <Box sx={{ width: "30%", pt: 3 }}>
