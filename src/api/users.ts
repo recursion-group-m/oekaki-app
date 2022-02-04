@@ -1,9 +1,7 @@
-const info = {
-  djangoUrl: process.env.REACT_APP_DJANGO_URL || "localhost",
-};
+import Config from "../configs";
 
 export const GetUserId = async (sub: string): Promise<Response> => {
-  const res = await fetch(`${info.djangoUrl}/users/${sub}`, {
+  const res = await fetch(`${Config.djangoUrl}/users/${sub}`, {
     method: "GET",
     mode: "cors",
     headers: {
@@ -19,7 +17,7 @@ export const GetUserId = async (sub: string): Promise<Response> => {
 };
 
 export const PostUserId = async (sub: string): Promise<Response> => {
-  const res = await fetch(`${info.djangoUrl}/users/`, {
+  const res = await fetch(`${Config.djangoUrl}/users/`, {
     method: "POST",
     mode: "cors",
     headers: {
