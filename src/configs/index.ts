@@ -1,6 +1,5 @@
 const Config = {
-  djangoUrl: process.env.REACT_APP_DJANGO_URL || "localhost",
-  djangoWsUrl: process.env.REACT_APP_DJANGO_WS_URL || "localhost",
+  djangoUrl: process.env.REACT_APP_DJANGO_URL || "http://localhost/api",
 };
 
 export default Config;

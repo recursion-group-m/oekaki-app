@@ -10,24 +10,16 @@ import InputLabel from "@mui/material/InputLabel";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
 
-import CommentLeft from "./CommentLeft";
-
 import theme from "../styles";
-import { MessageType } from "../types";
 
 type Props = {
   messageText: string;
   setMessageText: React.Dispatch<React.SetStateAction<string>>;
   handleTextMessage: () => void;
-  messages: MessageType[];
 };
 
 const RightContainer: React.VFC<Props> = (props) => {
-  const { messageText, setMessageText, handleTextMessage, messages } = props;
-  // subは
-  // const { user } = useAuth0;
-  // で置換予定
-  const sub = "test1111111112";
+  const { messageText, setMessageText, handleTextMessage } = props;
 
   return (
     <Grid sm={3} sx={{ pt: 2 }} item>
@@ -44,13 +36,7 @@ const RightContainer: React.VFC<Props> = (props) => {
             borderRadius: 5,
             boxShadow: 3,
           }}
-        >
-          {messages
-            .filter((message) => message.name !== sub)
-            .map((message) => (
-              <CommentLeft initialLetter={message.name.substring(0, 1)} text={message.text} />
-            ))}
-        </Box>
+        />
         <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
           <Stack direction="row">
             <FormControl>
