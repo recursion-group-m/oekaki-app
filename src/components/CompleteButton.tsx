@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -19,7 +19,7 @@ type Props = {
   url: string;
 };
 
-const InviteButton: React.VFC<Props> = ({ url }) => {
+const CompleteButton: React.VFC<Props> = ({ url }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -36,7 +36,7 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
         variant="contained"
         onClick={handleClickOpen}
         size="large"
-        endIcon={<PersonAddAlt1Icon />}
+        endIcon={<LibraryAddCheckIcon />}
         sx={{
           background: theme.palette.secondary.main,
           "&:hover": {
@@ -44,11 +44,11 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
           },
         }}
       >
-        招待
+        完成！
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <Box display="flex" justifyContent="space-between">
-          <DialogTitle>招待</DialogTitle>
+          <DialogTitle>共有</DialogTitle>
           <DialogActions>
             <IconButton aria-label="close" onClick={handleClose}>
               <CloseIcon />
@@ -56,7 +56,7 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
           </DialogActions>
         </Box>
         <DialogContent>
-          <DialogContentText>下のリンクをコピーして共有しよう！</DialogContentText>
+          <DialogContentText>下のURLをコピー、共有して、書いた絵をみんなに見てもらおう！</DialogContentText>
           <Box sx={{ pt: 4 }}>
             <CopyToClipboard text={url}>
               <IconButton size="small">
@@ -67,11 +67,11 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
           </Box>
           <Box display="flex" justifyContent="flex-end">
             <Box sx={{ pr: 1 }}>
-              <TwitterShareButton url={url} title="みんなで遊ぼう、お絵かきアプリ！" hashtags={["oekakiapp"]}>
+              <TwitterShareButton url={url} title="絵を描いたから、見てみてね！" hashtags={["oekakiapp"]}>
                 <TwitterIcon size={30} round />
               </TwitterShareButton>
             </Box>
-            <LineShareButton url={url} title="みんなで遊ぼう、お絵かきアプリ！">
+            <LineShareButton url={url} title="絵を描いたから、見てみてね！">
               <LineIcon size={30} round />
             </LineShareButton>
           </Box>
@@ -81,4 +81,4 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
   );
 };
 
-export default InviteButton;
+export default CompleteButton;

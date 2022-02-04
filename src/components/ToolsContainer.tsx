@@ -15,7 +15,7 @@ import ColorPalette from "./ColorPalette";
 import LineWidth from "./LineWidth";
 import Redo from "./Redo";
 import Undo from "./Undo";
-import InviteButton from "./InviteButton";
+import CompleteButton from "./CompleteButton";
 
 import theme from "../styles";
 
@@ -95,7 +95,7 @@ const ToolsContainer: React.VFC<Props> = (props) => {
           </Box>
         </Stack>
         <Box>
-          <InviteButton url={url} />
+          <CompleteButton url={url} />
           <Link to="/commentroom" style={{ textDecoration: "none" }}>
             <Box>CommentRoomへGo!!</Box>
           </Link>
