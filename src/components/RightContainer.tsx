@@ -45,14 +45,14 @@ const RightContainer: React.VFC<Props> = (props) => {
           <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
             <Stack direction="row">
               <FormControl>
-                <InputLabel>ひらがな６文字</InputLabel>
+                <InputLabel>ステキ♡</InputLabel>
                 <Input
                   id="my-input"
                   aria-describedby="my-helper-text"
                   value={messageText}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
                 />
-                <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
+                <FormHelperText id="my-helper-text">描いた人にコメントしよう！</FormHelperText>
               </FormControl>
               <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
                 <Button
@@ -72,7 +72,8 @@ const RightContainer: React.VFC<Props> = (props) => {
           </Box>
         ) : (
           <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
-            <LoginButton url="commentroom" />
+            <Typography>ログインしてコメントを送ろう!</Typography>
+            <LoginButton buttonName="コメントする！" url="commentroom" />
           </Box>
         )}
       </Stack>

@@ -5,11 +5,12 @@ import SendIcon from "@mui/icons-material/Send";
 import theme from "../styles";
 
 type Props = {
+  buttonName: string;
   url: string;
 };
 
 const LoginButton: React.VFC<Props> = (props) => {
-  const { url } = props;
+  const { buttonName, url } = props;
   const { loginWithRedirect } = useAuth0();
   return (
     <Button
@@ -28,7 +29,7 @@ const LoginButton: React.VFC<Props> = (props) => {
         })
       }
     >
-      はじめる！
+      {buttonName}
     </Button>
   );
 };
