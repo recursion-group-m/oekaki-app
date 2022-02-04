@@ -4,7 +4,12 @@ import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import theme from "../styles";
 
-const LoginButton = () => {
+type Props = {
+  url: string;
+};
+
+const LoginButton: React.VFC<Props> = (props) => {
+  const { url } = props;
   const { loginWithRedirect } = useAuth0();
   return (
     <Button
@@ -17,7 +22,11 @@ const LoginButton = () => {
           background: theme.palette.secondary.dark,
         },
       }}
-      onClick={() => loginWithRedirect()}
+      onClick={() =>
+        loginWithRedirect({
+          redirectUri: `${window.location.origin}/${url}`,
+        })
+      }
     >
       はじめる！
     </Button>
