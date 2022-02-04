@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Konva from "konva";
+import { useAuth0 } from "@auth0/auth0-react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
@@ -14,15 +16,27 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TwitterShareButton, TwitterIcon, LineShareButton, LineIcon } from "react-share";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import theme from "../styles";
+import { PostPaintData } from "../api/paints";
 
 type Props = {
   url: string;
+  stageRef: React.RefObject<Konva.Stage>;
 };
 
-const CompleteButton: React.VFC<Props> = ({ url }) => {
+const CompleteButton: React.VFC<Props> = ({ url, stageRef }) => {
   const [open, setOpen] = useState(false);
+  const [imageId, setImageId] = useState("");
+  const { user } = useAuth0();
 
   const handleClickOpen = () => {
+    const imageUrl = stageRef.current?.toDataURL();
+    if (user !== undefined && user.sub !== undefined && imageUrl !== undefined) {
+      PostPaintData(user.sub, imageUrl)
+        .then((data) => {
+          setImageId(data.id);
+        })
+        .catch((e) => console.log(e));
+    }
     setOpen(true);
   };
 

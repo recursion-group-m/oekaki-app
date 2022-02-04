@@ -34,7 +34,7 @@ type Props = {
 const ToolsContainer: React.VFC<Props> = (props) => {
   const { handleChangeToolType, lineColor, setLineColor, handleUndo, handleRedo, lineWidth, setLineWidth } = props;
   const [alignment, setAlignment] = useState("pen");
-  const url = "oekaki-app/lobby";
+  // const url = "oekaki-app/lobby";
   const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string | null) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
@@ -95,7 +95,7 @@ const ToolsContainer: React.VFC<Props> = (props) => {
           </Box>
         </Stack>
         <Box>
-          <CompleteButton url={url} />
+          {/* <CompleteButton url={url} /> */}
           {/* <Link to="/commentroom" style={{ textDecoration: "none" }}>
             <Box>CommentRoomへGo!!</Box>
           </Link> */}

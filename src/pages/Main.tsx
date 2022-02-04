@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 import Canvas from "../components/Canvas";
 import { LineType, ToolType } from "../types";
 import theme from "../styles";
+import CompleteButton from "../components/CompleteButton";
 
 import ToolsContainer from "../components/ToolsContainer";
 
@@ -20,6 +21,7 @@ const Main = () => {
   const [historyStep, setHistoryStep] = useState(0);
   const [lineColor, setLineColor] = useState("#000000");
   const [lineWidth, setLineWidth] = useState(5);
+  const url = "oekaki-app/lobby";
 
   const handleChangeToolType = (type: ToolType) => setTool(type);
 
@@ -73,6 +75,7 @@ const Main = () => {
               lineWidth={lineWidth}
               setLineWidth={setLineWidth}
             />
+            <CompleteButton url={url} stageRef={stageRef} />
           </Stack>
         </Grid>
       </Stack>

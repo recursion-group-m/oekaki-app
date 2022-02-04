@@ -91,9 +91,7 @@ const Lobby = () => {
             </Typography>
           </Box>
           <Box display="flex">
-            <Box sx={{ pr: 1 }}>
-              <InviteButton url={url} />
-            </Box>
+            <Box sx={{ pr: 1 }}>{/* <InviteButton url={url} /> */}</Box>
             <Link to="/main" style={{ textDecoration: "none" }}>
               <Box sx={{ pl: 1 }}>
                 <Button
