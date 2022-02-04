@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Link } from "react-router-dom";
@@ -7,56 +7,12 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import Typography from "@mui/material/Typography";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import theme from "../styles";
 import UserList from "../components/UserList";
 import InviteButton from "../components/InviteButton";
-import PostRoomId from "../api/rooms";
-import { GetUserId } from "../api/users";
-import Config from "../configs";
 
-type Props = {
-  client: W3CWebSocket | undefined;
-  setClient: React.Dispatch<React.SetStateAction<W3CWebSocket | undefined>>;
-};
-
-const Lobby: React.VFC<Props> = (props) => {
+const Lobby = () => {
   const url = "oekaki-app/lobby";
-  const { client, setClient } = props;
-  const [roomId, setRoomId] = useState<string>("");
-  // subは
-  // const { user } = useAuth0;
-  // で置換予定
-  const sub = "test1111111111";
-
-  useEffect(() => {
-    const getRoomId = async () => {
-      // eslint-disable-next-line no-console
-      console.log(`User: ${sub}`);
-      // eslint-disable-next-line no-console
-      GetUserId(sub).catch((e) => console.log(e));
-      const postResponse = await PostRoomId(sub);
-      setRoomId(postResponse.room_id);
-    };
-    // eslint-disable-next-line no-console
-    getRoomId().catch((e) => console.log(e));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (roomId !== "") {
-      // eslint-disable-next-line no-console
-      console.log(`roomId: ${roomId}`);
-      setClient(new W3CWebSocket(`${Config.djangoWsUrl}/${roomId}`));
-      if (client !== undefined) {
-        client.onopen = () => {
-          // eslint-disable-next-line no-console
-          console.log("WebSocket Client Connected");
-        };
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [roomId]);
 
   const userAccountList = [
     { userName: "ゲスト1" },

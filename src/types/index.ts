@@ -7,17 +7,6 @@ export type LineType = {
   width: number;
 };
 
-export type MessageType = {
-  text: string;
-  name: string;
-};
-
-export type DataTypeFromServer = {
-  type: string;
-  message: string;
-  user: string;
-};
-
 export type ImageData = {
   id: string;
   image_url: string;
