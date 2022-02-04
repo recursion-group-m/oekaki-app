@@ -9,7 +9,6 @@ import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 
 import CommentLeft from "./CommentLeft";
 
@@ -33,14 +32,9 @@ const RightContainer: React.VFC<Props> = (props) => {
   return (
     <Grid sm={3} sx={{ pt: 2 }} item>
       <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
-        <Box>
-          <Typography variant="h3" color={theme.palette.secondary.main}>
-            ??????
-          </Typography>
-        </Box>
         <Box
           sx={{
-            height: { xs: "300px", sm: "65%" },
+            height: { xs: "300px", sm: "70%" },
             overflow: "scroll",
             bgcolor: "white",
             mt: "2rem",

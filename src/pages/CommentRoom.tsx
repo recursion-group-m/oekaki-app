@@ -9,8 +9,7 @@ import Canvas from "../components/Canvas";
 import { DataTypeFromServer, LineType, MessageType, ToolType } from "../types";
 import theme from "../styles";
 
-// import RightContainer from "../components/RightContainer";
-import ToolsContainer from "../components/ToolsContainer";
+import RightContainer from "../components/RightContainer";
 
 type stageType = Konva.Stage;
 
@@ -22,13 +21,13 @@ const Main: React.VFC<Props> = (props) => {
   const { client } = props;
   const stageRef = useRef<stageType>(null);
   const [lines, setLines] = useState<LineType[]>([]);
-  const [tool, setTool] = useState<ToolType>("pen");
+  const [tool, setTool] = useState<ToolType>("pen"); // eslint-disable-line
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const [messageText, setMessageText] = useState<string>(""); // eslint-disable-line
+  const [messageText, setMessageText] = useState<string>("");
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
   const [lineColor, setLineColor] = useState("#000000");
-  const [lineWidth, setLineWidth] = useState(5);
+  const [lineWidth, setLineWidth] = useState(5); // eslint-disable-line
 
   // const [confirmationState, setConfirmationState] = useState<boolean>(false);
   // const [savedJsonStringData, setSavedJsonStringData] = useState<string>("");
@@ -48,7 +47,7 @@ const Main: React.VFC<Props> = (props) => {
   // subは
   // const { user } = useAuth0;
   // で置換予定
-  const sub = "test1111111111"; // eslint-disable-line
+  const sub = "test1111111111";
 
   useEffect(() => {
     if (client !== undefined) {
@@ -76,41 +75,23 @@ const Main: React.VFC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const handleTextMessage = () => {
-  //   if (client !== undefined) {
-  //     client.send(
-  //       JSON.stringify({
-  //         type: "message",
-  //         message: messageText,
-  //         user: sub,
-  //       })
-  //     );
-  //   }
-  //   setMessageText("");
-  // };
+  const handleTextMessage = () => {
+    if (client !== undefined) {
+      client.send(
+        JSON.stringify({
+          type: "message",
+          message: messageText,
+          user: sub,
+        })
+      );
+    }
+    setMessageText("");
+  };
 
   useEffect(() => {
     // eslint-disable-next-line no-console
     console.log(messages);
   }, [messages]);
-
-  const handleChangeToolType = (type: ToolType) => setTool(type);
-
-  const handleUndo = () => {
-    if (historyStep === 0) {
-      return;
-    }
-    setHistoryStep(historyStep - 1);
-    setLines(history[historyStep - 1]);
-  };
-
-  const handleRedo = () => {
-    if (historyStep === history.length - 1) {
-      return;
-    }
-    setHistoryStep(historyStep + 1);
-    setLines(history[historyStep + 1]);
-  };
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -118,8 +99,8 @@ const Main: React.VFC<Props> = (props) => {
       <Stack
         direction={{ xs: "column", sm: "row" }}
         sx={{
-          justifyContent: "center",
-          height: "100vh",
+          justifyContent: "space-between",
+          height: { sx: "100%", sm: "100vh" },
           bgcolor: theme.palette.background.default,
         }}
       >
@@ -144,24 +125,15 @@ const Main: React.VFC<Props> = (props) => {
               setLineColor={setLineColor}
               lineWidth={lineWidth}
             />
-            <ToolsContainer
-              handleChangeToolType={handleChangeToolType}
-              lineColor={lineColor}
-              setLineColor={setLineColor}
-              handleUndo={handleUndo}
-              handleRedo={handleRedo}
-              lineWidth={lineWidth}
-              setLineWidth={setLineWidth}
-            />
           </Stack>
         </Grid>
 
-        {/* <RightContainer
+        <RightContainer
           messageText={messageText}
           setMessageText={setMessageText}
           handleTextMessage={handleTextMessage}
           messages={messages}
-        /> */}
+        />
       </Stack>
     </div>
   );

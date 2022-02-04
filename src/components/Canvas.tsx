@@ -145,10 +145,11 @@ const Canvas: React.VFC<Props> = (props) => {
           sx={{
             zIndex: "modal",
             position: "absolute",
-            top: "5%",
-            left: "8%",
+            top: "7%",
+            left: { xs: "15%", sm: "22%" },
             color: theme.palette.secondary.main,
             fontFamily: ["Neonderthaw", "cursive"].join(","),
+            fontSize: { xs: "2rem", md: "3rem" },
           }}
         >
           Oekaki App
