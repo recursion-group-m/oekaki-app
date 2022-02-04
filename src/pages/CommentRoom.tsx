@@ -21,13 +21,13 @@ const Main: React.VFC<Props> = (props) => {
   const { client } = props;
   const stageRef = useRef<stageType>(null);
   const [lines, setLines] = useState<LineType[]>([]);
-  const [tool, setTool] = useState<ToolType>("pen");
+  const [tool, setTool] = useState<ToolType>("pen"); // eslint-disable-line
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [messageText, setMessageText] = useState<string>("");
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
   const [lineColor, setLineColor] = useState("#000000");
-  const [lineWidth, setLineWidth] = useState(5);
+  const [lineWidth, setLineWidth] = useState(5); // eslint-disable-line
 
   // const [confirmationState, setConfirmationState] = useState<boolean>(false);
   // const [savedJsonStringData, setSavedJsonStringData] = useState<string>("");
