@@ -17,3 +17,16 @@ export type DataTypeFromServer = {
   message: string;
   user: string;
 };
+
+export type ImageData = {
+  id: string;
+  image_url: string;
+  sub: string;
+};
+
+export type CommentData = {
+  id: string;
+  comment: string;
+  paint_id: string;
+  sub: string;
+};
