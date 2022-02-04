@@ -1,5 +1,6 @@
 import Konva from "konva";
 import React, { useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -14,6 +15,7 @@ type stageType = Konva.Stage;
 
 const CommentRoom = () => {
   const stageRef = useRef<stageType>(null);
+  const { roomId } = useParams();
   const [lines, setLines] = useState<LineType[]>([]);
   const [tool, setTool] = useState<ToolType>("pen"); // eslint-disable-line
   const [messageText, setMessageText] = useState<string>("");
@@ -34,6 +36,7 @@ const CommentRoom = () => {
           bgcolor: theme.palette.background.default,
         }}
       >
+        <div>This Page ID: {roomId}</div>
         <Grid sm={9} sx={{ pt: "3rem" }} item>
           <Stack sx={{ display: "flex", alignItems: "center" }}>
             <Canvas

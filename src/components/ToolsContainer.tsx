@@ -96,9 +96,9 @@ const ToolsContainer: React.VFC<Props> = (props) => {
         </Stack>
         <Box>
           <CompleteButton url={url} />
-          <Link to="/commentroom" style={{ textDecoration: "none" }}>
+          {/* <Link to="/commentroom" style={{ textDecoration: "none" }}>
             <Box>CommentRoomへGo!!</Box>
-          </Link>
+          </Link> */}
         </Box>
       </Stack>
     </Box>
