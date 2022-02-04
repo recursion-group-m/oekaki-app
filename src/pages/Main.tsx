@@ -24,7 +24,7 @@ const Main: React.VFC<Props> = (props) => {
   const [lines, setLines] = useState<LineType[]>([]);
   const [tool, setTool] = useState<ToolType>("pen");
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const [messageText, setMessageText] = useState<string>("");
+  const [messageText, setMessageText] = useState<string>(""); // eslint-disable-line
   const [history, setHistory] = useState<LineType[][]>([[]]);
   const [historyStep, setHistoryStep] = useState(0);
   const [lineColor, setLineColor] = useState("#000000");
@@ -48,7 +48,7 @@ const Main: React.VFC<Props> = (props) => {
   // subは
   // const { user } = useAuth0;
   // で置換予定
-  const sub = "test1111111111";
+  const sub = "test1111111111"; // eslint-disable-line
 
   useEffect(() => {
     if (client !== undefined) {
@@ -76,18 +76,18 @@ const Main: React.VFC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleTextMessage = () => {
-    if (client !== undefined) {
-      client.send(
-        JSON.stringify({
-          type: "message",
-          message: messageText,
-          user: sub,
-        })
-      );
-    }
-    setMessageText("");
-  };
+  // const handleTextMessage = () => {
+  //   if (client !== undefined) {
+  //     client.send(
+  //       JSON.stringify({
+  //         type: "message",
+  //         message: messageText,
+  //         user: sub,
+  //       })
+  //     );
+  //   }
+  //   setMessageText("");
+  // };
 
   useEffect(() => {
     // eslint-disable-next-line no-console
