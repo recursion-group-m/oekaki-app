@@ -72,20 +72,24 @@ const CompleteButton: React.VFC<Props> = ({ url, stageRef }) => {
         <DialogContent>
           <DialogContentText>下のURLをコピー、共有して、書いた絵をみんなに見てもらおう！</DialogContentText>
           <Box sx={{ pt: 4 }}>
-            <CopyToClipboard text={url}>
+            <CopyToClipboard text={`${url}/${imageId}`}>
               <IconButton size="small">
                 <ContentCopyIcon />
               </IconButton>
             </CopyToClipboard>
-            <SyntaxHighlighter>{url}</SyntaxHighlighter>
+            <SyntaxHighlighter>{`${url}/${imageId}`}</SyntaxHighlighter>
           </Box>
           <Box display="flex" justifyContent="flex-end">
             <Box sx={{ pr: 1 }}>
-              <TwitterShareButton url={url} title="絵を描いたから、見てみてね！" hashtags={["oekakiapp"]}>
+              <TwitterShareButton
+                url={`${url}/${imageId}`}
+                title="絵を描いたから、見てみてね！"
+                hashtags={["oekakiapp"]}
+              >
                 <TwitterIcon size={30} round />
               </TwitterShareButton>
             </Box>
-            <LineShareButton url={url} title="絵を描いたから、見てみてね！">
+            <LineShareButton url={`${url}/${imageId}`} title="絵を描いたから、見てみてね！">
               <LineIcon size={30} round />
             </LineShareButton>
           </Box>

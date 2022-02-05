@@ -1,6 +1,6 @@
 import Konva from "konva";
-import React, { useRef, useState } from "react";
-
+import React, { useEffect, useRef, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
@@ -10,6 +10,8 @@ import theme from "../styles";
 import CompleteButton from "../components/CompleteButton";
 
 import ToolsContainer from "../components/ToolsContainer";
+import { GetUserId } from "../api/users";
+import Config from "../configs";
 
 type stageType = Konva.Stage;
 
@@ -21,7 +23,15 @@ const Main = () => {
   const [historyStep, setHistoryStep] = useState(0);
   const [lineColor, setLineColor] = useState("#000000");
   const [lineWidth, setLineWidth] = useState(5);
-  const url = "oekaki-app/lobby";
+  const url = `${Config.reactUrl}/comment-room`;
+  const { user } = useAuth0();
+
+  useEffect(() => {
+    if (user !== undefined && user.sub !== undefined) {
+      GetUserId(user.sub).catch((e) => console.log(e));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChangeToolType = (type: ToolType) => setTool(type);
 
