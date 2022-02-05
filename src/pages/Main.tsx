@@ -31,8 +31,7 @@ const Main = () => {
       // eslint-disable-next-line no-console
       GetUserId(user.sub).catch((e) => console.log(e));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   const handleChangeToolType = (type: ToolType) => setTool(type);
 
