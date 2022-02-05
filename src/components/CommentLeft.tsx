@@ -8,15 +8,28 @@ import theme from "../styles";
 type Props = {
   initialLetter: string;
   text: string;
+  createdDate: string;
   userName: string;
 };
 
 const CommentLeft: React.VFC<Props> = (props) => {
-  const { initialLetter, text, userName } = props;
+  const { initialLetter, text, createdDate, userName } = props;
+
+  const shapeTheData = (data: string) => {
+    const baseData = data;
+    const atIndex = baseData.indexOf("T");
+    // let frontDataStr = baseData.substring(0, atIndex);
+    // frontDataStr = frontDataStr.replace(/-/g, "/");
+    const backDataStr = baseData.substring(atIndex + 1, atIndex + 6);
+    return backDataStr;
+  };
+
+  const resultDataStr = shapeTheData(createdDate);
+
   return (
     <Stack direction="row" sx={{ width: "100%", py: 2 }}>
       <Avatar>{initialLetter}</Avatar>
-      <Stack direction="row" sx={{ width: "100%", pl: 1, alignItems: "center" }}>
+      <Stack direction="row" sx={{ width: "100%", pl: 1, alignItems: "end" }}>
         <Box>
           {userName}
           <Box
@@ -35,6 +48,7 @@ const CommentLeft: React.VFC<Props> = (props) => {
             {text}
           </Box>
         </Box>
+        <Box sx={{ fontSize: "2px", pb: "5px", pl: "2px" }}>{resultDataStr}</Box>
       </Stack>
     </Stack>
   );
