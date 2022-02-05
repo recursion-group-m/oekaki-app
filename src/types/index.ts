@@ -11,6 +11,7 @@ export type ImageData = {
   id: string;
   image_url: string;
   sub: string;
+  created_at: string;
 };
 
 export type CommentData = {
