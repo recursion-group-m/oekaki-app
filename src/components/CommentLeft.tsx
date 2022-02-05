@@ -8,13 +8,13 @@ import theme from "../styles";
 type Props = {
   initialLetter: string;
   text: string;
-  createdData: string;
+  createdDate: string;
 };
 
 const CommentLeft: React.VFC<Props> = (props) => {
-  const { initialLetter, text, createdData } = props;
+  const { initialLetter, text, createdDate } = props;
 
-  const fixData = (data: string) => {
+  const shapeTheData = (data: string) => {
     const baseData = data;
     const atIndex = baseData.indexOf("T");
     let frontDataStr = baseData.substring(0, atIndex);
@@ -23,7 +23,7 @@ const CommentLeft: React.VFC<Props> = (props) => {
     return backDataStr;
   };
 
-  const resultDataStr = fixData(createdData);
+  const resultDataStr = shapeTheData(createdDate);
   console.log(resultDataStr);
 
   return (

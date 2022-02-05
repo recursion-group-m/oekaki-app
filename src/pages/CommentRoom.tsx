@@ -24,7 +24,7 @@ const CommentRoom = () => {
       GetImageData(imageIdString)
         .then((data) => {
           setImageUrl(data.image_url);
-          const resultDataStr = fixData(data.created_at);
+          const resultDataStr = shapeTheData(data.created_at);
           setImageCreateData(resultDataStr);
         })
         // eslint-disable-next-line no-console
@@ -32,7 +32,7 @@ const CommentRoom = () => {
     }
   }, [imageIdString]);
 
-  const fixData = (data: string) => {
+  const shapeTheData = (data: string) => {
     const baseData = data;
     const atIndex = baseData.indexOf("T");
     let frontDataStr = baseData.substring(0, atIndex);
