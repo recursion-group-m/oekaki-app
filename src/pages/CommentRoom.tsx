@@ -1,28 +1,23 @@
-import Konva from "konva";
-import React, { useRef, useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
-import Canvas from "../components/Canvas";
-import { LineType, ToolType } from "../types";
 import theme from "../styles";
-
 import RightContainer from "../components/RightContainer";
-
-type stageType = Konva.Stage;
+import { GetImageData } from "../api/paints";
 
 const CommentRoom = () => {
-  const stageRef = useRef<stageType>(null);
-  const [lines, setLines] = useState<LineType[]>([]);
-  const [tool, setTool] = useState<ToolType>("pen"); // eslint-disable-line
-  const [messageText, setMessageText] = useState<string>("");
-  const [history, setHistory] = useState<LineType[][]>([[]]);
-  const [historyStep, setHistoryStep] = useState(0);
-  const [lineColor, setLineColor] = useState("#000000");
-  const [lineWidth, setLineWidth] = useState(5); // eslint-disable-line
+  const imageId = "97ba1955-863d-4426-b5b9-887d76ed5633";
+  const { user } = useAuth0();
+  const [imageUrl, setImageUrl] = useState<string>("");
 
-  const handleTextMessage = () => console.log(""); // eslint-disable-line
+  useEffect(() => {
+    GetImageData(imageId)
+      .then((data) => setImageUrl(data.image_url))
+      // eslint-disable-next-line no-console
+      .catch((e) => console.log(e));
+  }, [user]);
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -36,27 +31,10 @@ const CommentRoom = () => {
       >
         <Grid sm={9} sx={{ pt: "3rem" }} item>
           <Stack sx={{ display: "flex", alignItems: "center" }}>
-            <Canvas
-              stageRef={stageRef}
-              lines={lines}
-              setLines={setLines}
-              tool={tool}
-              history={history}
-              setHistory={setHistory}
-              historyStep={historyStep}
-              setHistoryStep={setHistoryStep}
-              lineColor={lineColor}
-              setLineColor={setLineColor}
-              lineWidth={lineWidth}
-            />
+            <img src={imageUrl} alt="" />
           </Stack>
         </Grid>
-
-        <RightContainer
-          messageText={messageText}
-          setMessageText={setMessageText}
-          handleTextMessage={handleTextMessage}
-        />
+        <RightContainer />
       </Stack>
     </div>
   );
