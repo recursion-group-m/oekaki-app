@@ -36,7 +36,6 @@ const CommentRoom = () => {
           bgcolor: theme.palette.background.default,
         }}
       >
-        <div>This Page ID: {roomId}</div>
         <Grid sm={9} sx={{ pt: "3rem" }} item>
           <Stack sx={{ display: "flex", alignItems: "center" }}>
             <Canvas
