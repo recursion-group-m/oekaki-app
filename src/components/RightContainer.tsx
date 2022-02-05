@@ -100,8 +100,10 @@ const RightContainer: React.VFC<Props> = (props) => {
             </Stack>
           </Box>
         ) : (
-          <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
-            <Typography>ログインしてコメントを送ろう!</Typography>
+          <Box sx={{ pt: { xs: 5, lg: 8 }, display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Box sx={{ pr: 2 }}>
+              <Typography>ログインしてコメントを送ろう!</Typography>
+            </Box>
             <LoginButton buttonName="コメントする！" url="comment-room" />
           </Box>
         )}
