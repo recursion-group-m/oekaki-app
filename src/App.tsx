@@ -9,7 +9,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Top />} />
       <Route path="/main" element={<Main />} />
-      <Route path="/commentroom" element={<CommentRoom />} />
+      <Route path="/comment-room/:imageId" element={<CommentRoom />} />
     </Routes>
   </div>
 );

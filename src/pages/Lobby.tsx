@@ -9,11 +9,8 @@ import SendIcon from "@mui/icons-material/Send";
 import Typography from "@mui/material/Typography";
 import theme from "../styles";
 import UserList from "../components/UserList";
-import InviteButton from "../components/InviteButton";
 
 const Lobby = () => {
-  const url = "oekaki-app/lobby";
-
   const userAccountList = [
     { userName: "ゲスト1" },
     { userName: "ゲスト2" },
@@ -88,9 +85,7 @@ const Lobby = () => {
             </Typography>
           </Box>
           <Box display="flex">
-            <Box sx={{ pr: 1 }}>
-              <InviteButton url={url} />
-            </Box>
+            <Box sx={{ pr: 1 }}>{/* <InviteButton url={url} /> */}</Box>
             <Link to="/main" style={{ textDecoration: "none" }}>
               <Box sx={{ pl: 1 }}>
                 <Button
