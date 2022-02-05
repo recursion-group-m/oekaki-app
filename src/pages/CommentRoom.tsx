@@ -22,7 +22,7 @@ const CommentRoom = () => {
         // eslint-disable-next-line no-console
         .catch((e) => console.log(e));
     }
-  }, [imageId]);
+  }, [imageIdString]);
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
