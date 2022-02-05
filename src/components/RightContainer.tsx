@@ -9,8 +9,11 @@ import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Typography } from "@mui/material";
 
 import theme from "../styles";
+import LoginButton from "./LoginButton";
 
 type Props = {
   messageText: string;
@@ -20,6 +23,7 @@ type Props = {
 
 const RightContainer: React.VFC<Props> = (props) => {
   const { messageText, setMessageText, handleTextMessage } = props;
+  const { isAuthenticated } = useAuth0();
 
   return (
     <Grid sm={3} sx={{ pt: 2 }} item>
@@ -37,34 +41,41 @@ const RightContainer: React.VFC<Props> = (props) => {
             boxShadow: 3,
           }}
         />
-        <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
-          <Stack direction="row">
-            <FormControl>
-              <InputLabel>ひらがな６文字</InputLabel>
-              <Input
-                id="my-input"
-                aria-describedby="my-helper-text"
-                value={messageText}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
-              />
-              <FormHelperText id="my-helper-text">答えを投稿しましょう</FormHelperText>
-            </FormControl>
-            <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
-              <Button
-                sx={{
-                  bgcolor: theme.palette.secondary.main,
-                  color: "white",
-                  "&:hover": { color: theme.palette.secondary.dark },
-                }}
-                variant="outlined"
-                startIcon={<SendIcon />}
-                onClick={handleTextMessage}
-              >
-                Send
-              </Button>
-            </Box>
-          </Stack>
-        </Box>
+        {isAuthenticated ? (
+          <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
+            <Stack direction="row">
+              <FormControl>
+                <InputLabel>ステキ♡</InputLabel>
+                <Input
+                  id="my-input"
+                  aria-describedby="my-helper-text"
+                  value={messageText}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
+                />
+                <FormHelperText id="my-helper-text">描いた人にコメントしよう！</FormHelperText>
+              </FormControl>
+              <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
+                <Button
+                  sx={{
+                    bgcolor: theme.palette.secondary.main,
+                    color: "white",
+                    "&:hover": { color: theme.palette.secondary.dark },
+                  }}
+                  variant="outlined"
+                  startIcon={<SendIcon />}
+                  onClick={handleTextMessage}
+                >
+                  Send
+                </Button>
+              </Box>
+            </Stack>
+          </Box>
+        ) : (
+          <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
+            <Typography>ログインしてコメントを送ろう!</Typography>
+            <LoginButton buttonName="コメントする！" url="commentroom" />
+          </Box>
+        )}
       </Stack>
     </Grid>
   );

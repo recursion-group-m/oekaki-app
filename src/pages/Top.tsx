@@ -44,7 +44,7 @@ const Top = () => (
             </Typography>
             <Typography>みんなで遊ぼう！お絵かきアプリ！</Typography>
           </Box>
-          <LoginButton />
+          <LoginButton buttonName="はじめる！" url="main" />
         </Box>
       </Grid>
       <Grid item sm={6}>

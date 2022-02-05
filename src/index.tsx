@@ -13,7 +13,7 @@ const info = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider domain={info.domain} clientId={info.clientId} redirectUri={`${window.location.origin}/lobby`}>
+    <Auth0Provider domain={info.domain} clientId={info.clientId}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
