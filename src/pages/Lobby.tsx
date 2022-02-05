@@ -9,14 +9,8 @@ import SendIcon from "@mui/icons-material/Send";
 import Typography from "@mui/material/Typography";
 import theme from "../styles";
 import UserList from "../components/UserList";
-import InviteButton from "../components/CompleteButton";
-import PostRoomId from "../api/rooms";
-import { GetUserId } from "../api/users";
-import Config from "../configs";
 
 const Lobby = () => {
-  const url = "oekaki-app/lobby";
-
   const userAccountList = [
     { userName: "ゲスト1" },
     { userName: "ゲスト2" },

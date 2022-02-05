@@ -35,6 +35,7 @@ const CompleteButton: React.VFC<Props> = ({ url, stageRef }) => {
         .then((data) => {
           setImageId(data.id);
         })
+        // eslint-disable-next-line no-console
         .catch((e) => console.log(e));
     }
     setOpen(true);

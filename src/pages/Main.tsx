@@ -28,6 +28,7 @@ const Main = () => {
 
   useEffect(() => {
     if (user !== undefined && user.sub !== undefined) {
+      // eslint-disable-next-line no-console
       GetUserId(user.sub).catch((e) => console.log(e));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

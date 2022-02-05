@@ -9,13 +9,11 @@ import BrushIcon from "@mui/icons-material/Brush";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import ColorizeIcon from "@mui/icons-material/Colorize";
 import { ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
 
 import ColorPalette from "./ColorPalette";
 import LineWidth from "./LineWidth";
 import Redo from "./Redo";
 import Undo from "./Undo";
-import CompleteButton from "./CompleteButton";
 
 import theme from "../styles";
 
