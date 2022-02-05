@@ -58,8 +58,10 @@ const CommentRoom = () => {
             <Box sx={{ width: "80%", bgcolor: "white", boxShadow: 5 }}>
               <img src={imageUrl} style={{ width: "100%", height: "100%" }} alt="" />
             </Box>
-            <Box sx={{ width: "100%", display: "flex", justifyContent: "end", position: "relative", right: "10%" }}>
-              <Typography>{imageCreateData}</Typography>
+            <Box
+              sx={{ width: "100%", display: "flex", justifyContent: "end", position: "relative", right: "10%", pt: 1 }}
+            >
+              <Typography fontFamily="Raleway">{imageCreateData}</Typography>
             </Box>
           </Stack>
         </Grid>
