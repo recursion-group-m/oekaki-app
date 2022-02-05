@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { useParams } from "react-router-dom";
@@ -27,16 +28,20 @@ const CommentRoom = () => {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Stack
-        direction={{ xs: "column", sm: "row" }}
+        direction={{ xs: "column", lg: "row" }}
         sx={{
-          justifyContent: "space-between",
-          height: { sx: "100%", sm: "100vh" },
+          // justifyContent: "center",
+          alignItems: { xs: "center", lg: "stretch" },
+          minHeight: "100vh",
+          height: { lg: "100vh" },
           bgcolor: theme.palette.background.default,
         }}
       >
-        <Grid sm={9} sx={{ pt: "3rem" }} item>
-          <Stack sx={{ display: "flex", alignItems: "center" }}>
-            <img src={imageUrl} alt="" />
+        <Grid lg={8} sx={{ pt: "3rem" }} item>
+          <Stack sx={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ width: "80%", bgcolor: "white", boxShadow: 5 }}>
+              <img src={imageUrl} style={{ width: "100%", height: "100%" }} alt="" />
+            </Box>
           </Stack>
         </Grid>
         <RightContainer imageId={imageIdString} />
