@@ -12,6 +12,7 @@ import CompleteButton from "../components/CompleteButton";
 import ToolsContainer from "../components/ToolsContainer";
 import { GetUserId } from "../api/users";
 import Config from "../configs";
+import LogoutButton from "../components/LogoutButton";
 
 type stageType = Konva.Stage;
 
@@ -86,6 +87,7 @@ const Main = () => {
               setLineWidth={setLineWidth}
             />
             <CompleteButton url={url} stageRef={stageRef} />
+            <LogoutButton />
           </Stack>
         </Grid>
       </Stack>
