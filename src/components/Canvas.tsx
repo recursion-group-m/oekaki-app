@@ -69,6 +69,7 @@ const Canvas: React.VFC<Props> = (props) => {
     if (!isDrawing.current) {
       return;
     }
+    event.evt.preventDefault();
     const stage = event.target.getStage();
     const point = stage?.getPointerPosition();
     const lastLine = lines[lines.length - 1];
@@ -83,6 +84,47 @@ const Canvas: React.VFC<Props> = (props) => {
   };
 
   const handleMouseUp = () => {
+    if (tool === "dropper") {
+      return;
+    }
+    isDrawing.current = false;
+    setLines(lines.slice(0, historyStep + 1));
+    setHistory(history.slice(0, historyStep + 1).concat([lines.slice()]));
+    setHistoryStep(historyStep + 1);
+  };
+
+  const handleTouchStart = (event: Konva.KonvaEventObject<TouchEvent>) => {
+    if (tool === "dropper") {
+      return;
+    }
+    isDrawing.current = true;
+    const stage = event.target.getStage();
+    const point = stage?.getPointerPosition();
+    if (point !== null && point !== undefined) {
+      setLines([...lines, { tool, points: [point.x, point.y], color: lineColor, width: lineWidth }]);
+    }
+  };
+
+  const handleTouchMove = (event: Konva.KonvaEventObject<TouchEvent>) => {
+    // no drawing - skipping
+    if (!isDrawing.current) {
+      return;
+    }
+    event.evt.preventDefault();
+    const stage = event.target.getStage();
+    const point = stage?.getPointerPosition();
+    const lastLine = lines[lines.length - 1];
+    // add point
+    if (point !== null && point !== undefined) {
+      lastLine.points = lastLine.points.concat([point.x, point.y]);
+    }
+
+    // replace last
+    lines.splice(lines.length - 1, 1, lastLine);
+    setLines(lines.concat());
+  };
+
+  const handleTouchEnd = () => {
     if (tool === "dropper") {
       return;
     }
@@ -119,6 +161,9 @@ const Canvas: React.VFC<Props> = (props) => {
         onMouseDown={handleMouseDown}
         onMousemove={handleMouseMove}
         onMouseup={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         width={stageWidth}
         height={stageHeight}
         style={{ boxShadow: "10px 5px 5px gray", border: "1px solid #f5f5f5", background: "white" }}
