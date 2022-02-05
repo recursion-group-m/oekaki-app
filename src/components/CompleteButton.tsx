@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import Konva from "konva";
+import { useAuth0 } from "@auth0/auth0-react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -14,15 +16,28 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TwitterShareButton, TwitterIcon, LineShareButton, LineIcon } from "react-share";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import theme from "../styles";
+import { PostPaintData } from "../api/paints";
 
 type Props = {
   url: string;
+  stageRef: React.RefObject<Konva.Stage>;
 };
 
-const InviteButton: React.VFC<Props> = ({ url }) => {
+const CompleteButton: React.VFC<Props> = ({ url, stageRef }) => {
   const [open, setOpen] = useState(false);
+  const [imageId, setImageId] = useState("");
+  const { user } = useAuth0();
 
   const handleClickOpen = () => {
+    const imageUrl = stageRef.current?.toDataURL();
+    if (user !== undefined && user.sub !== undefined && imageUrl !== undefined) {
+      PostPaintData(user.sub, imageUrl)
+        .then((data) => {
+          setImageId(data.id);
+        })
+        // eslint-disable-next-line no-console
+        .catch((e) => console.log(e));
+    }
     setOpen(true);
   };
 
@@ -36,7 +51,7 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
         variant="contained"
         onClick={handleClickOpen}
         size="large"
-        endIcon={<PersonAddAlt1Icon />}
+        endIcon={<LibraryAddCheckIcon />}
         sx={{
           background: theme.palette.secondary.main,
           "&:hover": {
@@ -44,11 +59,11 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
           },
         }}
       >
-        招待
+        完成！
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <Box display="flex" justifyContent="space-between">
-          <DialogTitle>招待</DialogTitle>
+          <DialogTitle>共有</DialogTitle>
           <DialogActions>
             <IconButton aria-label="close" onClick={handleClose}>
               <CloseIcon />
@@ -56,22 +71,26 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
           </DialogActions>
         </Box>
         <DialogContent>
-          <DialogContentText>下のリンクをコピーして共有しよう！</DialogContentText>
+          <DialogContentText>下のURLをコピー、共有して、書いた絵をみんなに見てもらおう！</DialogContentText>
           <Box sx={{ pt: 4 }}>
-            <CopyToClipboard text={url}>
+            <CopyToClipboard text={`${url}/${imageId}`}>
               <IconButton size="small">
                 <ContentCopyIcon />
               </IconButton>
             </CopyToClipboard>
-            <SyntaxHighlighter>{url}</SyntaxHighlighter>
+            <SyntaxHighlighter>{`${url}/${imageId}`}</SyntaxHighlighter>
           </Box>
           <Box display="flex" justifyContent="flex-end">
             <Box sx={{ pr: 1 }}>
-              <TwitterShareButton url={url} title="みんなで遊ぼう、お絵かきアプリ！" hashtags={["oekakiapp"]}>
+              <TwitterShareButton
+                url={`${url}/${imageId}`}
+                title="絵を描いたから、見てみてね！"
+                hashtags={["oekakiapp"]}
+              >
                 <TwitterIcon size={30} round />
               </TwitterShareButton>
             </Box>
-            <LineShareButton url={url} title="みんなで遊ぼう、お絵かきアプリ！">
+            <LineShareButton url={`${url}/${imageId}`} title="絵を描いたから、見てみてね！">
               <LineIcon size={30} round />
             </LineShareButton>
           </Box>
@@ -81,4 +100,4 @@ const InviteButton: React.VFC<Props> = ({ url }) => {
   );
 };
 
-export default InviteButton;
+export default CompleteButton;

@@ -42,9 +42,9 @@ const Top = () => (
             <Typography variant="h2" sx={{ fontFamily: ["Neonderthaw", "cursive"].join(",") }}>
               Oekaki App
             </Typography>
-            <Typography>みんなで遊ぼう！お絵かきアプリ！</Typography>
+            <Typography>自由に描こう！お絵かきアプリ！</Typography>
           </Box>
-          <LoginButton />
+          <LoginButton buttonName="はじめる！" url="main" />
         </Box>
       </Grid>
       <Grid item sm={6}>

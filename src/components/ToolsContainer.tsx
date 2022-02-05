@@ -9,13 +9,11 @@ import BrushIcon from "@mui/icons-material/Brush";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import ColorizeIcon from "@mui/icons-material/Colorize";
 import { ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
 
 import ColorPalette from "./ColorPalette";
 import LineWidth from "./LineWidth";
 import Redo from "./Redo";
 import Undo from "./Undo";
-import InviteButton from "./InviteButton";
 
 import theme from "../styles";
 
@@ -34,7 +32,7 @@ type Props = {
 const ToolsContainer: React.VFC<Props> = (props) => {
   const { handleChangeToolType, lineColor, setLineColor, handleUndo, handleRedo, lineWidth, setLineWidth } = props;
   const [alignment, setAlignment] = useState("pen");
-  const url = "oekaki-app/lobby";
+  // const url = "oekaki-app/lobby";
   const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string | null) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
@@ -92,10 +90,10 @@ const ToolsContainer: React.VFC<Props> = (props) => {
           </Box>
         </Stack>
         <Box>
-          <InviteButton url={url} />
-          <Link to="/commentroom" style={{ textDecoration: "none" }}>
+          {/* <CompleteButton url={url} /> */}
+          {/* <Link to="/commentroom" style={{ textDecoration: "none" }}>
             <Box>CommentRoomへGo!!</Box>
-          </Link>
+          </Link> */}
         </Box>
       </Stack>
     </Box>
