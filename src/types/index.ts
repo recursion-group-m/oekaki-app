@@ -18,6 +18,9 @@ export type CommentData = {
   id: string;
   comment: string;
   paint_id: string;
-  sub: string;
+  sub: {
+    sub: string;
+    user_name: string;
+  };
   created_at: string;
 };
