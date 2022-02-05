@@ -51,7 +51,7 @@ const RightContainer: React.VFC<Props> = (props) => {
   };
 
   return (
-    <Grid lg={4} sx={{ pt: 2 }} pb={{ sm: 3, lg: 0 }} item>
+    <Grid lg={4} sx={{ width: { sx: "70%", sm: "70%" }, pt: 2 }} pb={{ sm: 3, lg: 0 }} item>
       <Stack sx={{ height: "100%", px: 2, pr: { sm: 5 } }}>
         <Box
           sx={{
