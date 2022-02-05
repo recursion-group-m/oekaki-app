@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import { useParams } from "react-router-dom";
+import chat from "../images/chat.svg";
 
 import theme from "../styles";
 import RightContainer from "../components/RightContainer";
@@ -42,7 +43,7 @@ const CommentRoom = () => {
   };
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div style={{ width: "100%", height: "100%", backgroundImage: `${chat}` }}>
       <Stack
         direction={{ xs: "column", lg: "row" }}
         sx={{
@@ -62,6 +63,13 @@ const CommentRoom = () => {
               sx={{ width: "100%", display: "flex", justifyContent: "end", position: "relative", right: "10%", pt: 1 }}
             >
               <Typography fontFamily="Raleway">{imageCreateData}</Typography>
+            </Box>
+            <Box display={{ xs: "none", lg: "block" }} sx={{ width: "50%", height: "50%" }}>
+              <img
+                style={{ width: "30%", height: "30%", position: "absolute", bottom: "2%", left: "0%", zIndex: 1 }}
+                src={chat}
+                alt="drawing img"
+              />
             </Box>
           </Stack>
         </Grid>
