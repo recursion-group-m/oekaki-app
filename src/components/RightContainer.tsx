@@ -67,7 +67,7 @@ const RightContainer: React.VFC<Props> = (props) => {
           }}
         >
           {comments.map((commentData) => (
-            <CommentLeft initialLetter="T" text={commentData.comment} />
+            <CommentLeft initialLetter="T" text={commentData.comment} createdData={commentData.created_at} />
           ))}
         </Box>
         {isAuthenticated ? (

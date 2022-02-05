@@ -19,4 +19,5 @@ export type CommentData = {
   comment: string;
   paint_id: string;
   sub: string;
+  created_at: string;
 };
