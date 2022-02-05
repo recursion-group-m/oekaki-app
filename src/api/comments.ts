@@ -2,7 +2,7 @@ import Config from "../configs";
 import { CommentData } from "../types";
 
 export const GetComments = async (imageId: string): Promise<CommentData[]> => {
-  const res = await fetch(`${Config.djangoUrl}/comments/?paint_id=${imageId}`, {
+  const res = await fetch(`${Config.djangoUrl}/read-comments/?paint_id=${imageId}`, {
     method: "GET",
     mode: "cors",
     headers: {
@@ -14,7 +14,7 @@ export const GetComments = async (imageId: string): Promise<CommentData[]> => {
 };
 
 export const PostComment = async (sub: string, paintId: string, comment: string): Promise<CommentData> => {
-  const res = await fetch(`${Config.djangoUrl}/comments/`, {
+  const res = await fetch(`${Config.djangoUrl}/write-comments/`, {
     method: "POST",
     mode: "cors",
     headers: {

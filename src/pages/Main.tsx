@@ -30,8 +30,9 @@ const Main = () => {
 
   useEffect(() => {
     if (user !== undefined && user.sub !== undefined) {
+      const userName = user.nickname || user.given_name || user.family_name || "名無しさん";
       // eslint-disable-next-line no-console
-      GetUserId(user.sub).catch((e) => console.log(e));
+      GetUserId(user.sub, userName).catch((e) => console.log(e));
     }
   }, [user]);
 

@@ -42,7 +42,7 @@ const RightContainer: React.VFC<Props> = (props) => {
   }, [shouldGetComments]);
 
   const handleSendComment = () => {
-    if (user !== undefined && user.sub !== undefined) {
+    if (user !== undefined && user.sub !== undefined && commentText !== "") {
       // eslint-disable-next-line no-console
       PostComment(user.sub, imageId, commentText).catch((e) => console.log(e));
       setCommentText("");
@@ -67,7 +67,11 @@ const RightContainer: React.VFC<Props> = (props) => {
           }}
         >
           {comments.map((commentData) => (
-            <CommentLeft initialLetter="T" text={commentData.comment} />
+            <CommentLeft
+              initialLetter={commentData.sub.user_name.substring(0, 1)}
+              text={commentData.comment}
+              userName={commentData.sub.user_name}
+            />
           ))}
         </Box>
         {isAuthenticated ? (

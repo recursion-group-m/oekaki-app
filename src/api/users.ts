@@ -1,6 +1,6 @@
 import Config from "../configs";
 
-export const GetUserId = async (sub: string): Promise<Response> => {
+export const GetUserId = async (sub: string, userName: string): Promise<Response> => {
   const res = await fetch(`${Config.djangoUrl}/users/${sub}`, {
     method: "GET",
     mode: "cors",
@@ -11,12 +11,12 @@ export const GetUserId = async (sub: string): Promise<Response> => {
 
   if (!res.ok) {
     // eslint-disable-next-line no-console
-    PostUserId(sub).catch((e) => console.log(e));
+    PostUserId(sub, userName).catch((e) => console.log(e));
   }
   return res;
 };
 
-export const PostUserId = async (sub: string): Promise<Response> => {
+export const PostUserId = async (sub: string, userName: string): Promise<Response> => {
   const res = await fetch(`${Config.djangoUrl}/users/`, {
     method: "POST",
     mode: "cors",
@@ -24,7 +24,8 @@ export const PostUserId = async (sub: string): Promise<Response> => {
       "Content-Type": "application/json",
     },
     body: `{
-            "sub": "${sub}"
+            "sub": "${sub}",
+            "user_name": "${userName}"
         }`,
   }).then((response) => response);
   return res;
