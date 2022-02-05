@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import PaintImage from "../images/drawing.svg";
 import theme from "../styles";
 import LoginButton from "../components/LoginButton";
+import HowToPlayModal from "../components/HowToPlayModal";
 
 const Top = () => (
   <ThemeProvider theme={theme}>
@@ -45,6 +46,9 @@ const Top = () => (
             <Typography>自由に描こう！お絵かきアプリ！</Typography>
           </Box>
           <LoginButton buttonName="はじめる！" url="main" />
+          <Box sx={{ pt: 3 }}>
+            <HowToPlayModal />
+          </Box>
         </Box>
       </Grid>
       <Grid item sm={6}>
