@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -14,16 +14,36 @@ import { Typography } from "@mui/material";
 
 import theme from "../styles";
 import LoginButton from "./LoginButton";
+import { GetComments, PostComment } from "../api/comments";
+import { CommentData } from "../types";
+import CommentLeft from "./CommentLeft";
 
-type Props = {
-  messageText: string;
-  setMessageText: React.Dispatch<React.SetStateAction<string>>;
-  handleTextMessage: () => void;
-};
+const RightContainer = () => {
+  const [comments, setComments] = useState<CommentData[]>([]);
+  const [commentText, setCommentText] = useState<string>("");
+  const { user, isAuthenticated } = useAuth0();
+  const [shouldGetComments, setShouldGetComments] = useState<boolean>(true);
+  // const { imageId } = useParams();
+  const imageId = "1d65da7c-f291-4a69-b002-bb712e2366b4";
 
-const RightContainer: React.VFC<Props> = (props) => {
-  const { messageText, setMessageText, handleTextMessage } = props;
-  const { isAuthenticated } = useAuth0();
+  useEffect(() => {
+    if (shouldGetComments) {
+      GetComments(imageId)
+        .then((data) => setComments(data))
+        // eslint-disable-next-line no-console
+        .catch((e) => console.log(e));
+      setShouldGetComments(false);
+    }
+  }, [shouldGetComments]);
+
+  const handleSendComment = () => {
+    if (user !== undefined && user.sub !== undefined) {
+      // eslint-disable-next-line no-console
+      PostComment(user.sub, imageId, commentText).catch((e) => console.log(e));
+      setCommentText("");
+      setShouldGetComments(true);
+    }
+  };
 
   return (
     <Grid sm={3} sx={{ pt: 2 }} item>
@@ -40,7 +60,11 @@ const RightContainer: React.VFC<Props> = (props) => {
             borderRadius: 5,
             boxShadow: 3,
           }}
-        />
+        >
+          {comments.map((commentData) => (
+            <CommentLeft initialLetter="T" text={commentData.comment} />
+          ))}
+        </Box>
         {isAuthenticated ? (
           <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
             <Stack direction="row">
@@ -49,8 +73,8 @@ const RightContainer: React.VFC<Props> = (props) => {
                 <Input
                   id="my-input"
                   aria-describedby="my-helper-text"
-                  value={messageText}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMessageText(event.target.value)}
+                  value={commentText}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setCommentText(event.target.value)}
                 />
                 <FormHelperText id="my-helper-text">描いた人にコメントしよう！</FormHelperText>
               </FormControl>
@@ -63,7 +87,7 @@ const RightContainer: React.VFC<Props> = (props) => {
                   }}
                   variant="outlined"
                   startIcon={<SendIcon />}
-                  onClick={handleTextMessage}
+                  onClick={handleSendComment}
                 >
                   Send
                 </Button>
@@ -73,7 +97,7 @@ const RightContainer: React.VFC<Props> = (props) => {
         ) : (
           <Box sx={{ pt: 5, display: "flex", justifyContent: "center" }}>
             <Typography>ログインしてコメントを送ろう!</Typography>
-            <LoginButton buttonName="コメントする！" url="commentroom" />
+            <LoginButton buttonName="コメントする！" url="comment-room" />
           </Box>
         )}
       </Stack>
