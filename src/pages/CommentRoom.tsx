@@ -54,9 +54,11 @@ const CommentRoom = () => {
         }}
       >
         <Grid lg={8} sx={{ pt: "3rem" }} item>
-          <Stack sx={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Stack sx={{ width: "100%", display: "flex", alignItems: "center" }}>
             <Box sx={{ width: "80%", bgcolor: "white", boxShadow: 5 }}>
               <img src={imageUrl} style={{ width: "100%", height: "100%" }} alt="" />
+            </Box>
+            <Box sx={{ width: "100%", display: "flex", justifyContent: "end", position: "relative", right: "10%" }}>
               <Typography>{imageCreateData}</Typography>
             </Box>
           </Stack>
