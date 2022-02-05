@@ -2,7 +2,6 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import CorrectButton from "./CorrectButton";
 
 import theme from "../styles";
 
@@ -32,7 +31,6 @@ const CommentLeft: React.VFC<Props> = (props) => {
         >
           {text}
         </Box>
-        <CorrectButton />
       </Stack>
     </Stack>
   );
