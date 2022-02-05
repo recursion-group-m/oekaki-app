@@ -19,12 +19,11 @@ import { CommentData } from "../types";
 import CommentLeft from "./CommentLeft";
 
 type Props = {
-  imageIdParam: string | undefined;
+  imageId: string;
 };
 
 const RightContainer: React.VFC<Props> = (props) => {
-  const { imageIdParam } = props;
-  const imageId = imageIdParam || (localStorage.getItem("imageId") ?? "");
+  const { imageId } = props;
   const [comments, setComments] = useState<CommentData[]>([]);
   const [commentText, setCommentText] = useState<string>("");
   const { user, isAuthenticated } = useAuth0();

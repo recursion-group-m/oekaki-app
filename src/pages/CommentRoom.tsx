@@ -9,15 +9,15 @@ import { GetImageData } from "../api/paints";
 
 const CommentRoom = () => {
   const [imageUrl, setImageUrl] = useState<string>("");
-  const { imageIdParam } = useParams();
-  const imageId = imageIdParam || (localStorage.getItem("imageId") ?? "");
-  if (imageIdParam !== undefined) {
+  const { imageId } = useParams();
+  const imageIdString = imageId || (localStorage.getItem("imageId") ?? "");
+  if (imageId !== undefined) {
     localStorage.setItem("imageId", imageId);
   }
 
   useEffect(() => {
-    if (imageId !== "") {
-      GetImageData(imageId)
+    if (imageIdString !== "") {
+      GetImageData(imageIdString)
         .then((data) => setImageUrl(data.image_url))
         // eslint-disable-next-line no-console
         .catch((e) => console.log(e));
@@ -39,7 +39,7 @@ const CommentRoom = () => {
             <img src={imageUrl} alt="" />
           </Stack>
         </Grid>
-        <RightContainer imageIdParam={imageIdParam} />
+        <RightContainer imageId={imageIdString} />
       </Stack>
     </div>
   );
