@@ -145,7 +145,7 @@ const Canvas: React.VFC<Props> = (props) => {
           sx={{
             zIndex: "modal",
             position: "absolute",
-            top: "7%",
+            top: "9%",
             left: { xs: "15%", sm: "22%" },
             color: theme.palette.secondary.main,
             fontFamily: ["Neonderthaw", "cursive"].join(","),

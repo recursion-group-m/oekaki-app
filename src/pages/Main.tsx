@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 import Canvas from "../components/Canvas";
 import { LineType, ToolType } from "../types";
@@ -58,11 +59,12 @@ const Main = () => {
         direction={{ xs: "column", sm: "row" }}
         sx={{
           justifyContent: "center",
-          height: "100vh",
+          minHeight: "100vh",
           bgcolor: theme.palette.background.default,
         }}
       >
         <Grid sm={9} sx={{ pt: "3rem" }} item>
+          <LogoutButton />
           <Stack sx={{ display: "flex", alignItems: "center" }}>
             <Canvas
               stageRef={stageRef}
@@ -77,17 +79,23 @@ const Main = () => {
               setLineColor={setLineColor}
               lineWidth={lineWidth}
             />
-            <ToolsContainer
-              handleChangeToolType={handleChangeToolType}
-              lineColor={lineColor}
-              setLineColor={setLineColor}
-              handleUndo={handleUndo}
-              handleRedo={handleRedo}
-              lineWidth={lineWidth}
-              setLineWidth={setLineWidth}
-            />
-            <CompleteButton url={url} stageRef={stageRef} />
-            <LogoutButton />
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              sx={{ width: "75%", alignItems: "center", justifyContent: "space-between" }}
+            >
+              <ToolsContainer
+                handleChangeToolType={handleChangeToolType}
+                lineColor={lineColor}
+                setLineColor={setLineColor}
+                handleUndo={handleUndo}
+                handleRedo={handleRedo}
+                lineWidth={lineWidth}
+                setLineWidth={setLineWidth}
+              />
+              <Box py={{ xs: 3 }}>
+                <CompleteButton url={url} stageRef={stageRef} />
+              </Box>
+            </Stack>
           </Stack>
         </Grid>
       </Stack>

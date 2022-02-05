@@ -8,7 +8,7 @@ import RightContainer from "../components/RightContainer";
 import { GetImageData } from "../api/paints";
 
 const CommentRoom = () => {
-  const imageId = "97ba1955-863d-4426-b5b9-887d76ed5633";
+  const imageId = "97742d1c-b796-4581-b9d7-b71e62a918e5";
   const { user } = useAuth0();
   const [imageUrl, setImageUrl] = useState<string>("");
 
