@@ -74,10 +74,7 @@ const ToolsContainer: React.VFC<Props> = (props) => {
               </ToggleButtonGroup>
             </ThemeProvider>
             <Box sx={{ pl: 4 }}>
-              <ColorPalette
-                lineColor={lineColor}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLineColor(e.target.value)}
-              />
+              <ColorPalette lineColor={lineColor} onChange={(e: string) => setLineColor(e)} />
             </Box>
             <Box sx={{ pl: 4 }}>
               <Undo onClick={handleUndo} />
