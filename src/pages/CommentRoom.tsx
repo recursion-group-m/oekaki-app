@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import { useParams } from "react-router-dom";
 
 import theme from "../styles";
 import RightContainer from "../components/RightContainer";
 import { GetImageData } from "../api/paints";
 
 const CommentRoom = () => {
-  const imageId = "97742d1c-b796-4581-b9d7-b71e62a918e5";
-  const { user } = useAuth0();
   const [imageUrl, setImageUrl] = useState<string>("");
+  const { imageId } = useParams();
+  const imageIdString = imageId || (localStorage.getItem("imageId") ?? "");
+  if (imageId !== undefined) {
+    localStorage.setItem("imageId", imageId);
+  }
 
   useEffect(() => {
-    GetImageData(imageId)
-      .then((data) => setImageUrl(data.image_url))
-      // eslint-disable-next-line no-console
-      .catch((e) => console.log(e));
-  }, [user]);
+    if (imageIdString !== "") {
+      GetImageData(imageIdString)
+        .then((data) => setImageUrl(data.image_url))
+        // eslint-disable-next-line no-console
+        .catch((e) => console.log(e));
+    }
+  }, [imageIdString]);
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -34,7 +39,7 @@ const CommentRoom = () => {
             <img src={imageUrl} alt="" />
           </Stack>
         </Grid>
-        <RightContainer />
+        <RightContainer imageId={imageIdString} />
       </Stack>
     </div>
   );

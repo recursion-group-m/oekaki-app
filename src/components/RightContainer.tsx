@@ -18,22 +18,27 @@ import { GetComments, PostComment } from "../api/comments";
 import { CommentData } from "../types";
 import CommentLeft from "./CommentLeft";
 
-const RightContainer = () => {
+type Props = {
+  imageId: string;
+};
+
+const RightContainer: React.VFC<Props> = (props) => {
+  const { imageId } = props;
   const [comments, setComments] = useState<CommentData[]>([]);
   const [commentText, setCommentText] = useState<string>("");
   const { user, isAuthenticated } = useAuth0();
   const [shouldGetComments, setShouldGetComments] = useState<boolean>(true);
-  // const { imageId } = useParams();
-  const imageId = "1d65da7c-f291-4a69-b002-bb712e2366b4";
-
+  // eslint-disable-next-line no-console
+  console.log(imageId);
   useEffect(() => {
-    if (shouldGetComments) {
+    if (shouldGetComments && imageId !== "") {
       GetComments(imageId)
         .then((data) => setComments(data))
         // eslint-disable-next-line no-console
         .catch((e) => console.log(e));
       setShouldGetComments(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldGetComments]);
 
   const handleSendComment = () => {
